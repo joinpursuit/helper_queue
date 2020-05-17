@@ -5,6 +5,7 @@ import {login} from '../util/firebaseFunctions';
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const history = useHistory();
 
   const handleSubmit = async (e) => {
@@ -13,13 +14,14 @@ export default function Login() {
       await login(email, password);
       history.push("/");
     } catch (err) {
-      console.log("ERRR", err);
+      setError(err.message)
     }
   };
 
   return (
     <div>
       <h1>Login Page</h1>
+      {error ? <div>{error}</div> : null}
       <form onSubmit={handleSubmit}>
         <input
           onChange={(e) => setEmail(e.target.value)}

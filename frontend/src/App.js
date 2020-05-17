@@ -3,9 +3,10 @@ import './App.css';
 import Home from './componets/Home';
 import NavBar from './componets/NavBar';
 import AuthProvider from './providers/AuthProvider';
-import { AuthRoute } from './util/auth_routes';
+import { AuthRoute, ProtectedRoute } from './util/auth_routes';
 import SignUp from './componets/SignUp';
 import Login from './componets/Login';
+import RequestHelp from './componets/RequestHelp';
 import { Route } from 'react-router-dom';
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
         <AuthRoute path="/login">
           <Login />
         </AuthRoute>
+        <ProtectedRoute path="/help">
+            <RequestHelp/>
+        </ProtectedRoute>
       </AuthProvider>
     </div>
   );
