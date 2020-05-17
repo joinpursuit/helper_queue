@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {login} from '../util/firebaseFunctions';
+import "../css/Auth.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,10 +20,10 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="authContainer">
       <h1>Login Page</h1>
-      {error ? <div>{error}</div> : null}
-      <form onSubmit={handleSubmit}>
+      {error ? <div className="error">{error}</div> : <div className="error"></div>}
+      <form onSubmit={handleSubmit} className="authForm">
         <input
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"

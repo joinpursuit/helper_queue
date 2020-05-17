@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { apiURL } from '../util/apiURL';
 import { signUp } from '../util/firebaseFunctions';
+import "../css/Auth.css";
+
 
 export default function SignUp() {
     const [email, setEmail] = useState("");
@@ -24,10 +26,10 @@ export default function SignUp() {
     }
     
     return (
-      <div>
+      <div className="authContainer">
         <h1>Sign Up Page</h1>
-        {error ? <div>{error}</div> : null}
-        <form onSubmit={handleSubmit}>
+        {error ? <div className="error">{error}</div> : <div className="error"></div>}
+        <form onSubmit={handleSubmit} className="authForm">
           <input
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"

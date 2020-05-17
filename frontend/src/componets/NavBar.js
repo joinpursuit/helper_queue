@@ -19,8 +19,7 @@ export default function NavBar() {
     }
     return(
         <nav>
-            {display()}
-            
+            {display()}         
         </nav>
     )
 };
