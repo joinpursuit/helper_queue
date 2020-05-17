@@ -8,7 +8,7 @@ export default function NavBar(params) {
     const { currentUser } = useContext(AuthContext);
     const display = () => {
         if(currentUser) {
-            return <button onClick={logout}>Log Out</button>;
+            return <button className="logoutButton" onClick={logout}>Log Out</button>;
         } else {
             return (
               <>
