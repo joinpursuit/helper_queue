@@ -33,19 +33,15 @@ export default function RequestHelp() {
         }
         
     }
-    socket.on("ticketClose", fetchOpenTicket)
     useEffect(() => {
         fetchOpenTicket().then(() => {
             setIsLoading(false)
         })
     }, [])
-
-    // useEffect(() => {
-    //     const socket = socketIOClient(API);
-    //     socket.on("FromAPI", data => {
-    //       console.log("connection");
-    //     });
-    // })
+    
+    useEffect(() => {
+        socket.on("ticketClose", fetchOpenTicket)
+    }, [])
 
     const makeRequest = async () => {
         try {
