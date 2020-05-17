@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const usersRouter = require('./routes/users');
+const ticketsRouter = require('./routes/tickets');
 
 const PORT = process.env.PORT;
 const app = express();
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use("/api/users", usersRouter)
+app.use("/api/tickets", ticketsRouter)
 
 app.use((err, req, res, next) => {
   console.log(err);
