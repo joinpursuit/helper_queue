@@ -24,3 +24,26 @@ nav {
     border: 2px solid lightgrey;
     cursor: pointer;
 }
+
+.signUpAndLogin {
+    color: black;
+    cursor: pointer;
+    width: 100px;
+    margin: 50px;
+    border-radius: 5px;
+    border: 2px solid white;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    background-color: white;
+    text-decoration: none;
+    padding: 10px;
+
+}
+
+.signUpAndLogin:hover {
+    background: lightgray;
+    border: 2px solid lightgrey;
+    cursor: pointer;
+}
