@@ -1,12 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Home from './componets/Home';
+import NavBar from './componets/NavBar';
+import AuthProvider from './providers/AuthProvider';
 
 function App() {
   return (
     <div className="App">
-      <Home />
+      <AuthProvider >
+        <NavBar />
+        <Home />
+      </AuthProvider>
     </div>
   );
 }

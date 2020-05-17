@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { getFirebaseIdToken } from '../util/firebaseFunctions';
 import firebase from '../firebase';
+
 export const AuthContext = createContext();
 
-const AuthProvder = ({children}) => {
+const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState(null);
     const [token, setToken] = useState(null);
@@ -37,4 +38,4 @@ const AuthProvder = ({children}) => {
     )
 }
 
-export default AuthProvder; 
+export default AuthProvider; 
