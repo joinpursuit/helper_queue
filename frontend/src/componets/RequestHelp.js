@@ -4,8 +4,6 @@ import { apiURL } from '../util/apiURL';
 import { AuthContext } from "../providers/AuthProvider";
 import socketIOClient from "socket.io-client";
 
-
-
 export default function RequestHelp() {
     const [isLoading, setIsLoading] = useState(true)
     const [isWaitingForHelp, setIsWaitingForHelp] = useState(false);
