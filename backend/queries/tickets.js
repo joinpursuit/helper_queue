@@ -1,6 +1,8 @@
 const db = require("../db/index");
 
 const createTicket = async (req, res, next) => {
+  // const io = req.app.get('socketio');
+  // io.emit('hi!');
   req.body.owner_id = req.user.id
  
   try {
@@ -29,6 +31,9 @@ const findOpenTicket = async (req, res, next) => {
 }
 
 const deleteOpenTicket = async (req, res, next) => {
+    // const io = req.app.get('socketio');
+    // io.on('hi!');
+
   try {
     await db.none("UPDATE tickets SET complete = true WHERE id = $1", req.params.id)
     res.json({

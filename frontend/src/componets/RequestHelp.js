@@ -2,6 +2,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { apiURL } from '../util/apiURL';
 import { AuthContext } from "../providers/AuthProvider";
+import socketIOClient from "socket.io-client";
+
+
 
 export default function RequestHelp() {
     const [isLoading, setIsLoading] = useState(true)
@@ -9,7 +12,7 @@ export default function RequestHelp() {
     const [openTicket, setOpenTicket] = useState(null)
     const { token } = useContext(AuthContext);
     const API = apiURL();
-    
+    const socket = socketIOClient(API);
     const fetchOpenTicket = async () => {
         try {
             let res = await axios({
@@ -30,13 +33,21 @@ export default function RequestHelp() {
             setIsWaitingForHelp(false);
             setOpenTicket(null)
         }
-            
+        
     }
+    socket.on("ticketClose", fetchOpenTicket)
     useEffect(() => {
         fetchOpenTicket().then(() => {
             setIsLoading(false)
         })
     }, [])
+
+    // useEffect(() => {
+    //     const socket = socketIOClient(API);
+    //     socket.on("FromAPI", data => {
+    //       console.log("connection");
+    //     });
+    // })
 
     const makeRequest = async () => {
         try {
@@ -50,14 +61,16 @@ export default function RequestHelp() {
                     body: ""
                 }
             })
+            socket.emit("openTicket", "new ticket" )
             fetchOpenTicket()
         } catch (error) {
             fetchOpenTicket()
         }
-
+        
     }
-
+    
     const cancelRequest = async () => {
+        socket.emit("closeTicket", "remove ticket" )
         try {
             let res = await axios({
                 method: 'delete', 

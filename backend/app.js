@@ -1,13 +1,37 @@
-const express = require('express');
+const http = require('http');
+const app = require('express')();
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const socket = require('socket.io')
 require('dotenv').config();
+
 
 const usersRouter = require('./routes/users');
 const ticketsRouter = require('./routes/tickets');
 
 const PORT = process.env.PORT;
-const app = express();
+
+const server = app.listen(PORT, () => {
+  console.log("listing on port ", PORT);
+})
+const io = socket(server);
+io.on('connection', (socket) => {
+  socket.on("openTicket", (data) => {
+    io.sockets.emit("updateTickets", data)
+  })
+  socket.on("closeTicket", (data) => {
+    io.sockets.emit("updateTickets", data)
+  })
+
+  socket.on("ticketClosed", () => {
+    io.sockets.emit("ticketClose")
+  })
+  
+})
+
+
+
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,7 +49,3 @@ app.use((err, req, res, next) => {
   }
 });
 
-
-app.listen(PORT, () => {
-    console.log("listing on port ", PORT);
-})

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios';
+import socketIOClient from "socket.io-client";
 import { apiURL } from '../../util/apiURL'
 import { AuthContext } from '../../providers/AuthProvider';
 import TicketIndexItem from './TicketIndexItem';
@@ -8,6 +9,7 @@ export default function TicketIndex() {
     const [tickets, setTickets] = useState([])
     const API = apiURL();
     const { token } = useContext(AuthContext);
+    const socket = socketIOClient(API);
     const fetchOpenTickets = async () => {
         try {
             let res = await axios({
@@ -24,6 +26,8 @@ export default function TicketIndex() {
         }
 
     }
+
+    socket.on("updateTickets", fetchOpenTickets)
     useEffect(() => {
         fetchOpenTickets();
     }, [])
@@ -37,6 +41,7 @@ export default function TicketIndex() {
                     'AuthToken': token
                 }
             })
+            socket.emit("ticketClosed")
             fetchOpenTickets()
         } catch (error) {
             fetchOpenTickets()
