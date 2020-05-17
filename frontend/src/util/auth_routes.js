@@ -26,3 +26,15 @@ export const ProtectedRoute = ({ children, ...rest }) => {
     />
   );
 };
+
+export const AdminRoute = ({ children, ...rest }) => {
+  const { currentUser } = useContext(AuthContext);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) => {
+        return currentUser && currentUser.email === "admin@admin.com" ? children : <Redirect to={"/login"} />;
+      }}
+    />
+  );
+};

@@ -1,15 +1,15 @@
   
--- DROP DATABASE IF EXISTS helper_queue;
--- CREATE DATABASE helper_queue;
+DROP DATABASE IF EXISTS helper_queue;
+CREATE DATABASE helper_queue;
 
--- \c helper_queue;
+\c helper_queue;
 
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users
 (
     id VARCHAR PRIMARY KEY,
-    email VARCHAR
+    email VARCHAR UNIQUE
 );
 
 DROP TABLE IF EXISTS tickets;
