@@ -1,0 +1,45 @@
+
+.adminContainer {
+    background-color: white;
+    width: 50%;
+    min-height: 50%;
+    border-radius: 15px;
+    margin: auto;
+    margin-top: 70px;
+    font-family: sans-serif;
+}
+
+.adminContainer h1 {
+    font-weight: bold;
+    font-size: 35px;
+    padding: 20px;
+}
+
+.adminContainer ol {
+    list-style: decimal;
+    width: fit-content;
+    margin: auto;
+}
+
+.ticketIndexItem {
+    padding: 10px;
+}
+
+.ticketIndexItem div {
+    display: flex;
+}
+
+.ticketIndexItem button {
+    padding: 3px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.ticketIndexItem button:hover {
+    cursor: pointer;
+    background-color: #EBFF00;
+    color: #4242EA;
+}

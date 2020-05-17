@@ -4,6 +4,7 @@ import socketIOClient from "socket.io-client";
 import { apiURL } from '../../util/apiURL'
 import { AuthContext } from '../../providers/AuthProvider';
 import TicketIndexItem from './TicketIndexItem';
+import '../../css/TicketIndex.css';
 
 export default function TicketIndex() {
     const [tickets, setTickets] = useState([])
@@ -49,7 +50,7 @@ export default function TicketIndex() {
         }
     }
     return(
-        <div>
+        <div className="adminContainer">
             <h1>Admin Only</h1>
             <ol>
                 {tickets.map(ticket => 
