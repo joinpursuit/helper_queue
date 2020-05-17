@@ -12,6 +12,7 @@ export default function RequestHelp() {
     const API = apiURL();
     const socket = socketIOClient(API);
     const fetchOpenTicket = async () => {
+        setIsLoading(true)
         try {
             let res = await axios({
                 method: 'get', 
@@ -26,8 +27,10 @@ export default function RequestHelp() {
             } else {
                 setIsWaitingForHelp(false);
                 setOpenTicket(null)
-            }       
+            }    
+            setIsLoading(false)   
         } catch (error) {
+            setIsLoading(false)   
             setIsWaitingForHelp(false);
             setOpenTicket(null)
         }
@@ -41,6 +44,8 @@ export default function RequestHelp() {
     
     useEffect(() => {
         socket.on("ticketClose", fetchOpenTicket)
+        // return () => socket.close()
+        return () => socket.off("ticketClose", fetchOpenTicket)
     }, [])
 
     const makeRequest = async () => {
@@ -64,7 +69,6 @@ export default function RequestHelp() {
     }
     
     const cancelRequest = async () => {
-        socket.emit("closeTicket", "remove ticket" )
         try {
             let res = await axios({
                 method: 'delete', 
@@ -73,6 +77,7 @@ export default function RequestHelp() {
                     'AuthToken': token
                 }
             })
+            socket.emit("closeTicket", "remove ticket" )
             fetchOpenTicket()
         } catch (error) {
             fetchOpenTicket()

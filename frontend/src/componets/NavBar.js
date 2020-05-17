@@ -20,8 +20,6 @@ export default function NavBar(params) {
     }
     return(
         <nav>
-            <NavLink to={"/"}>Home</NavLink>
-            <NavLink to={"/help"}>Help Page</NavLink>
             {display()}
             
         </nav>

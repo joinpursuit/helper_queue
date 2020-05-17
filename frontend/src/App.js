@@ -9,26 +9,25 @@ import Login from './componets/Login';
 import RequestHelp from './componets/RequestHelp';
 import { Route } from 'react-router-dom';
 import TicketIndex from './componets/tickets/TicketIndex';
+import Student from './componets/views/Student';
+import Admin from './componets/views/Admin';
 
 function App() {
   return (
     <div className="App">
       <AuthProvider >
-        <NavBar />
-        <Route exact path="/">
-          <Home />
-        </Route>
+      <NavBar />
+        <ProtectedRoute exact path="/">
+          <Student />
+        </ProtectedRoute>
         <AuthRoute path="/signup">
           <SignUp />
         </AuthRoute>
         <AuthRoute path="/login">
           <Login />
         </AuthRoute>
-        <ProtectedRoute path="/help">
-            <RequestHelp/>
-        </ProtectedRoute>
-        <AdminRoute path="/tickets" >
-          <TicketIndex />
+        <AdminRoute path="/admin" >
+          <Admin />
         </AdminRoute>
       </AuthProvider>
     </div>

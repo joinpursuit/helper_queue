@@ -30,6 +30,7 @@ export default function TicketIndex() {
     useEffect(() => {
         fetchOpenTickets();
         socket.on("updateTickets", fetchOpenTickets)
+        return () => socket.off("updateTickets", fetchOpenTickets)
     }, [])
 
     const removeTicket = async (id) => {
