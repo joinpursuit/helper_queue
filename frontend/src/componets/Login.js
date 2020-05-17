@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'
 import { useHistory } from "react-router-dom";
 import {login} from '../util/firebaseFunctions';
 import "../css/Auth.css";
@@ -38,6 +39,7 @@ export default function Login() {
         />
         <button type="submit">Login</button>
       </form>
+      <Link to="/signup" className="switchAuth">Need to sign up?</Link>
     </div>
   );
 }

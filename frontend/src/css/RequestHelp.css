@@ -1,0 +1,22 @@
+
+
+.request {
+    height: 35px;
+    min-width: 150px;
+    margin: 50px;
+    border-radius: 5px;
+    background-color: #EBFF00;
+    color: #4242EA;
+    border: 2px solid #4242EA;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+
+}
+
+.request:hover {
+    cursor: pointer;
+    background-color: #4242EA;
+    color:#EBFF00;
+}

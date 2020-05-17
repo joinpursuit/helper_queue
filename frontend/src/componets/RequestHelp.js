@@ -3,6 +3,7 @@ import axios from 'axios';
 import { apiURL } from '../util/apiURL';
 import { AuthContext } from "../providers/AuthProvider";
 import socketIOClient from "socket.io-client";
+import "../css/RequestHelp.css";
 
 export default function RequestHelp() {
     const [isLoading, setIsLoading] = useState(true)
@@ -44,7 +45,6 @@ export default function RequestHelp() {
     
     useEffect(() => {
         socket.on("ticketClose", fetchOpenTicket)
-        // return () => socket.close()
         return () => socket.off("ticketClose", fetchOpenTicket)
     }, [])
 
@@ -88,9 +88,9 @@ export default function RequestHelp() {
     return(
         <div>
             {isWaitingForHelp ? 
-            <button onClick={cancelRequest}>Cancel Request</button> 
+            <button onClick={cancelRequest} className="cancelRequest request">Cancel Request</button> 
             :
-            <button onClick={makeRequest}>Request Help</button>
+            <button onClick={makeRequest} className="makeRequest request">Request Help</button>
             }
         </div>
     )
