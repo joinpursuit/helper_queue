@@ -18,6 +18,7 @@ const io = socket(server);
 io.on('connection', (socket) => {
   socket.on("openTicket", (data) => {
     io.sockets.emit("updateTickets", data)
+    io.sockets.emit("newTicket")
   })
   socket.on("closeTicket", (data) => {
     io.sockets.emit("updateTickets", data)

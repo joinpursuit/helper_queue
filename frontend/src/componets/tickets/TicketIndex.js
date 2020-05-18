@@ -4,6 +4,7 @@ import socketIOClient from "socket.io-client";
 import { apiURL } from '../../util/apiURL'
 import { AuthContext } from '../../providers/AuthProvider';
 import TicketIndexItem from './TicketIndexItem';
+import alertSound from '../../assets/that-was-quick.mp3'
 import '../../css/TicketIndex.css';
 
 export default function TicketIndex() {
@@ -22,7 +23,7 @@ export default function TicketIndex() {
             })
             setTickets(res.data.tickets);
         } catch (err) {
-           console.log(err);
+        //    console.log(err);
            setTickets([]);
         }
 
@@ -32,6 +33,16 @@ export default function TicketIndex() {
         fetchOpenTickets();
         socket.on("updateTickets", fetchOpenTickets)
         return () => socket.off("updateTickets", fetchOpenTickets)
+    }, [])
+
+    useEffect(() => {
+        const playSound = () => {
+            let src = alertSound;
+            let audio = new Audio(src);
+            audio.play();
+        }
+        socket.on("newTicket", playSound)
+        return () => socket.off("newTicket", playSound)
     }, [])
 
     const removeTicket = async (id) => {
@@ -49,14 +60,25 @@ export default function TicketIndex() {
             fetchOpenTickets()
         }
     }
-    return(
-        <div className="adminContainer">
-            <h1>Admin Only</h1>
+
+    const showTickets = () => {
+        if(tickets.length) {
+            return(
             <ol>
                 {tickets.map(ticket => 
                  <TicketIndexItem key={ticket.id} ticket={ticket} removeTicket={removeTicket} />
                 )}
             </ol>
+            )
+        } else {
+            return <div>No Students Waiting</div>
+        }
+    }
+
+    return(
+        <div className="adminContainer">
+            <h1>Admin Only</h1>
+            {showTickets()}
         </div>
     )
 };
