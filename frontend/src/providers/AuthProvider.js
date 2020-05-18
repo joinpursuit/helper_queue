@@ -10,6 +10,7 @@ const AuthProvider = ({children}) => {
     const [token, setToken] = useState(null);
 
     const updateUser = (user) => {
+        setLoading(true)
          if (user) {
             const { email, uid } = user;
             const lastLogin = user.metadata.lastSignInTime;

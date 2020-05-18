@@ -23,6 +23,7 @@ export default function TicketIndex() {
             })
             setTickets(res.data.tickets);
         } catch (err) {
+            debugger
         //    console.log(err);
            setTickets([]);
         }
