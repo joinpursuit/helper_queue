@@ -36,6 +36,12 @@ export default function TicketIndex() {
     }, [])
 
     useEffect(() => {
+        socket.on("ticketClose",  fetchOpenTickets )
+        return () => socket.off("ticketClose", fetchOpenTickets)
+
+    })
+
+    useEffect(() => {
         const playSound = () => {
             let src = alertSound;
             let audio = new Audio(src);
