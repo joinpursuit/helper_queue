@@ -14,7 +14,7 @@ const checkFirebaseToken = async (req, res, next) => {
     }
     next();
   } catch (error) {
-    console.log("code broke!", error);
+    console.log("code broke in auth middleware!", error);
     res.status(401).json({ message: "No user authenticated!" });
   }
 };

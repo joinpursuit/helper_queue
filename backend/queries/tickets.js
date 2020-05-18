@@ -4,6 +4,7 @@ const createTicket = async (req, res, next) => {
   req.body.owner_id = req.user.id
  
   try {
+    await db.none("UPDATE tickets SET complete = true WHERE owner_id = $1", req.user.id)
     const user = await db.none(
       "INSERT INTO tickets (body, owner_id) VALUES(${body}, ${owner_id})",
       req.body
@@ -29,11 +30,10 @@ const findOpenTicket = async (req, res, next) => {
 }
 
 const deleteOpenTicket = async (req, res, next) => {
-    // const io = req.app.get('socketio');
-    // io.on('hi!');
 
   try {
-    await db.none("UPDATE tickets SET complete = true WHERE id = $1", req.params.id)
+    let owner = await db.one("SELECT owner_id FROM tickets WHERE id = $1 LIMIT 1", req.params.id)
+    await db.none("UPDATE tickets SET complete = true WHERE owner_id = $1", owner.owner_id)
     res.json({
       message: "success"
     })
@@ -54,6 +54,7 @@ const getAllOpenTickets = async (req, res, next) => {
       message: "ALL OPEN TICKETS!"
     })
   } catch (err) {
+    console.log("ERROR IN GET TICKETS")
     next(err);
   }
 }
