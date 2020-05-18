@@ -1,7 +1,8 @@
 
 .adminContainer {
     background-color: white;
-    width: 50%;
+    min-width: 50%;
+    max-width: 80%;
     min-height: 50%;
     border-radius: 15px;
     margin: auto;
@@ -42,4 +43,10 @@
     cursor: pointer;
     background-color: #EBFF00;
     color: #4242EA;
+}
+
+time {
+    font-size: 10px;
+    color: gray;
+    margin-left: 11px;
 }
