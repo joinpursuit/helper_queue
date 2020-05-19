@@ -4,11 +4,9 @@ import Home from './componets/Home';
 import NavBar from './componets/NavBar';
 import AuthProvider from './providers/AuthProvider';
 import { AuthRoute, ProtectedRoute, AdminRoute } from './util/auth_routes';
-import SignUp from './componets/SignUp';
-import Login from './componets/Login';
-import RequestHelp from './componets/RequestHelp';
+import SignUp from './componets/auth/SignUp';
+import Login from './componets/auth/Login';
 import { Route } from 'react-router-dom';
-import TicketIndex from './componets/tickets/TicketIndex';
 import Student from './componets/views/Student';
 import Admin from './componets/views/Admin';
 
@@ -17,9 +15,9 @@ function App() {
     <div className="App">
       <AuthProvider >
       <NavBar />
-        <ProtectedRoute exact path="/">
+        <Route exact path="/">
           <Student />
-        </ProtectedRoute>
+        </Route>
         <AuthRoute path="/signup">
           <SignUp />
         </AuthRoute>

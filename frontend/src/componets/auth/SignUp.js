@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory, Link } from 'react-router-dom';
-import { apiURL } from '../util/apiURL';
-import { signUp } from '../util/firebaseFunctions';
-import "../css/Auth.css";
+import { apiURL } from '../../util/apiURL';
+import { signUp } from '../../util/firebaseFunctions';
+import "../../css/Auth.css";
 
 
 export default function SignUp() {

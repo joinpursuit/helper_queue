@@ -1,0 +1,48 @@
+.navLoginContainer {
+    font-family: sans-serif;
+}
+
+
+.navError {
+    color: red;
+    font-size: 14px;
+    text-align: left;
+}
+
+.navAuthForm input {
+    border-radius: 5px;
+    width: 250px;
+    margin: 5px;
+    font-size: 20px;
+}
+
+.navAuthForm button {
+    background-color: #EBFF00;
+    color: #4242EA;
+    border: 2px solid #4242EA;
+    height: 36px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    margin-right: 100px;
+
+}
+
+.navAuthForm button:hover {
+    cursor: pointer;
+    background-color: #4242EA;
+    color:#EBFF00;
+    border:2px solid #EBFF00;
+}
+
+.navSwitchAuth {
+    color: white;
+    text-decoration: none;
+}
+
+.navSwitchAuth:hover {
+    text-decoration: underline;
+}

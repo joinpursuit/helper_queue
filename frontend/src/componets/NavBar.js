@@ -5,6 +5,7 @@ import { AuthContext } from '../providers/AuthProvider';
 import { logout } from '../util/firebaseFunctions';
 import { useLocation } from 'react-router-dom'
 import RequestHelp from './RequestHelp';
+import NavLogin from './auth/NavLogin';
 
 export default function NavBar() {
     const { currentUser } = useContext(AuthContext);
@@ -27,7 +28,9 @@ export default function NavBar() {
                    </>
                )
             }
-        } else if(location.pathname === "/login") {
+        } else if(location.pathname === "/") {
+            return <NavLogin />
+         } else if(location.pathname === "/login") {
             return  <NavLink className="signUpAndLogin" to={"/signup"}>Sign Up</NavLink>
         } else {
            return <NavLink to={"/login"} className="signUpAndLogin" >Login</NavLink>
