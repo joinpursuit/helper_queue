@@ -1,0 +1,36 @@
+.resourceListContainerOfIndex {
+    background-color: #4242EA;
+    padding: 25px;
+    border-radius: 7px;
+    height: min-content;
+    min-width: 285px;
+}
+.resourceListContainerOfIndex h1 {
+    font-size: 25px;
+    font-weight: bold;
+    background: darkblue;
+    padding: 10px;
+    border-radius: 7px;
+    color: white;
+    
+}
+
+.resourceListIndex {
+   display: flex; 
+   flex-direction: column;
+   padding: 10px;
+}
+
+.resourceListIndex a{
+    text-align: left;
+    padding: 8px;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.resourceListIndex a:hover {
+    background-color: darkblue;
+    border-radius: 7px;
+    color: #EBFF00;
+}

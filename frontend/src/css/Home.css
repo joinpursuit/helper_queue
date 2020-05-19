@@ -1,0 +1,22 @@
+.homeContainer {
+    background-color: white;
+    width: 90%;
+    height: 80%;
+    border-radius: 15px;
+    margin: auto;
+    margin-top: 70px;
+    font-family: sans-serif;
+}
+
+.homeHeader{
+    font-weight: bold;
+    font-size: 35px;
+    padding: 25px; 
+
+}
+
+.resourceListContainer {
+    display: flex;
+    justify-content: space-around;
+  
+}

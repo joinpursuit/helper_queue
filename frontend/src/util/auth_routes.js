@@ -21,9 +21,9 @@ export const ProtectedRoute = ({ children, ...rest }) => {
     <Route
       {...rest}
       render={({ location }) => {
-      if( currentUser && currentUser.email === "admin@admin.com") {
-        return <Redirect to={"/admin"} />
-      }
+      // if( currentUser && currentUser.email === "admin@admin.com") {
+      //   return <Redirect to={"/admin"} />
+      // }
         return currentUser ? children : <Redirect to={"/login"} />;
       }}
     />

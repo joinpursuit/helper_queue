@@ -1,0 +1,37 @@
+{
+    "header": "Documentation", 
+    "list": [
+        {
+            "name": "JavaScript",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+        },
+        {
+            "name": "Node",
+            "url": "https://nodejs.org/en/docs/"
+        },
+        {
+            "name": "Express",
+            "url": "https://expressjs.com/"
+        },
+        {
+            "name": "PostgreSQL",
+            "url": "https://www.postgresql.org/docs/"
+        },
+        {
+            "name": "Pg-Promise",
+            "url": "https://github.com/vitaly-t/pg-promise"
+        },
+        {
+            "name": "React",
+            "url": "https://reactjs.org/docs/getting-started.html"
+        },
+        {
+            "name": "Redux",
+            "url": "https://redux.js.org/"
+        },
+        {
+            "name": "Redux Toolkit",
+            "url": "https://redux-toolkit.js.org/"
+        }
+    ]
+}

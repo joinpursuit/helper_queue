@@ -1,0 +1,25 @@
+{
+    "header": "Curriculum", 
+    "list": [
+        {
+            "name": "Unit 1 - Fundamentals",
+            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/fundamentals/README.md"
+        },
+        {
+            "name": "Unit 2 - HTML / CSS / DOM",
+            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/html_css_dom/README.md"
+        },
+        {
+            "name": "Unit 3 - Node / Express / SQL",
+            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/node/README.md"
+        },
+        {
+            "name": "Unit 4 - React",
+            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/react/README.md"
+        },
+        {
+            "name": "Unit 5 - React / Redux",
+            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/react_2/README.md"
+        }
+    ]
+}
