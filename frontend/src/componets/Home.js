@@ -4,6 +4,7 @@ import codePractice from '../assets/resources/practiceCoding.json';
 import documentation from '../assets/resources/documentation.json';
 import curriculum from '../assets/resources/curriculum.json';
 import "../css/Home.css"
+import Timer from './widgets/Timer';
 
 export default () => {
     return(
@@ -14,6 +15,9 @@ export default () => {
                 <ResourceListIndex header={documentation.header} list={documentation.list}/>
                 <ResourceListIndex header={curriculum.header} list={curriculum.list}/>
             </ul>
+
+
+            <Timer />
         </div>
     )
 }
