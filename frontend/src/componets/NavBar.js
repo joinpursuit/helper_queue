@@ -21,11 +21,11 @@ export default function NavBar() {
                 )
             } else {
                return(
-                   <>
-                    <NavLink to="/">Home</NavLink>
+                   <div className="navAdmin">
+                    <NavLink exact to="/">Home</NavLink>
                     <NavLink to="/admin">Student Queue</NavLink>
                     <button className="logoutButton" onClick={logout}>Log Out</button> 
-                   </>
+                   </div>
                )
             }
         } else if(location.pathname === "/") {

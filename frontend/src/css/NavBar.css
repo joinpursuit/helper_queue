@@ -47,3 +47,20 @@ nav {
     border: 2px solid lightgrey;
     cursor: pointer;
 }
+
+.navAdmin {
+    width: 100%;
+    display: flex; 
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navAdmin a {
+    color: white;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+.active {
+    font-weight: bold;
+}
