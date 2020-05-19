@@ -4,6 +4,7 @@
     border-radius: 7px;
     height: min-content;
     min-width: 285px;
+    margin-top: 10px;
 }
 .resourceListContainerOfIndex h1 {
     font-size: 25px;
