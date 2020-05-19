@@ -1,11 +1,13 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
+import alertSound from '../../assets/alarm.mp3'
+
 import '../../css/Timer.css';
 
 export default function Timer() {
-    const [interval, setInterval] = useState(1)
+    const [interval, setInterval] = useState(1);
     const [isCountingDown, setIsCountingDown] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
-    const [timeRemaining, setTimeRemaining] = useState(60)
+    const [timeRemaining, setTimeRemaining] = useState(60);
     const cancelTime = useRef()
 
     const displayTimes = () => {
@@ -48,11 +50,17 @@ export default function Timer() {
         setTimeRemaining(interval * 60)
     }
 
-    const divStyle = {
+    let divStyle = {
         backgroundImage: "linear-gradient(to left, white " + (timeRemaining / (interval * 60)) * 100 + "%, #EBFF00 " + 0 + "%)"
     };
 
-    console.log(divStyle)
+    if(timeRemaining === 0) {
+        stopTime()
+        let src = alertSound;
+        let audio = new Audio(src);
+        audio.play();
+    }
+
 
     if(isCountingDown || isPaused) {
         return(
