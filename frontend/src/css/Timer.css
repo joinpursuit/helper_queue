@@ -1,0 +1,44 @@
+.timerContainer {
+    width: 98%;
+    height: 25px;
+    border: 3px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 7px;
+    color: darkblue;
+}
+
+.timerContainer select {
+    background-color: lightgray;
+    width: 50px;
+    font-size: 15px;
+    margin: 10px;
+}
+
+.timerContainer select:hover {
+    cursor: pointer;
+}
+
+.timerContainer button {
+    margin: 5px;
+    min-width: 90px;
+    border-radius: 5px;
+    background-color: #EBFF00;
+    color: #4242EA;
+    border: 2px solid #4242EA;
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+
+}
+.timerContainer button:hover {
+    cursor: pointer;
+    background-color: #4242EA;
+    color:#EBFF00;
+    border: 2px solid #EBFF00;
+}

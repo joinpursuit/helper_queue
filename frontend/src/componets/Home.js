@@ -10,6 +10,7 @@ export default () => {
     return(
         <div className="homeContainer">
             <h1 className="homeHeader">Helpful Resources And Links</h1>
+            <Timer />
             <ul className="resourceListContainer">
                 <ResourceListIndex header={codePractice.header} list={codePractice.list}/>
                 <ResourceListIndex header={documentation.header} list={documentation.list}/>
@@ -17,7 +18,6 @@ export default () => {
             </ul>
 
 
-            <Timer />
         </div>
     )
 }

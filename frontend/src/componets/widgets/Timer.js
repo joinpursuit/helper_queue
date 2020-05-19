@@ -1,4 +1,5 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, {useState, useRef, useEffect} from 'react';
+import '../../css/Timer.css';
 
 export default function Timer() {
     const [interval, setInterval] = useState(1)
@@ -16,47 +17,46 @@ export default function Timer() {
         )
     }
 
-    useEffect(() => {
-        console.log("useeffect")
-        if(isCountingDown) {
-            cancelTime.current = setInterval(() => {
-                setTimeRemaining(prevTimeRemaining => prevTimeRemaining - 1)
-            }, 1000)
-        }
-    }, [isCountingDown, isPaused])
+
 
     const updateTime = (e) => {
          setInterval(e.target.value)
-         if(!isCountingDown) {
+        //  if(!isCountingDown) {
             setTimeRemaining(e.target.value * 60)
-         }
+        //  }
     }
     const togglePause = () => {
-        // if(!isPaused) {
-        //     clearInterval(cancelTime.current)
-        // }
-        //  setIsPaused(prevPause => !prevPause)
+        if(!isPaused) {
+            clearInterval(cancelTime.current)
+        } else {
+            startTime()
+        }
+         setIsPaused(prevPause => !prevPause)
     }
-
+  
     const startTime = (e) => {
         setIsCountingDown(true);
+        cancelTime.current = window.setInterval(() => {
+            setTimeRemaining(prevTime => prevTime - 1); 
+        }, 1000)
     }
 
     const stopTime = (e) => {
         setIsCountingDown(false);
+        setIsPaused(false);
         clearInterval(cancelTime.current)
-        setTimeRemaining(interval)
+        setTimeRemaining(interval * 60)
     }
 
-    console.log("interval", interval)
-    console.log("isCountingDown", isCountingDown)
-    console.log("paused", isPaused)
-    console.log("timeRemaing", timeRemaining)
-    console.log("cancel", cancelTime.current)
+    const divStyle = {
+        backgroundImage: "linear-gradient(to left, white " + (timeRemaining / (interval * 60)) * 100 + "%, #EBFF00 " + 0 + "%)"
+    };
+
+    console.log(divStyle)
 
     if(isCountingDown || isPaused) {
         return(
-            <div>
+            <div className="timerContainer" style={{backgroundImage: divStyle.backgroundImage}} >
                 <div>{timeRemaining}</div>
                 <button onClick={stopTime}>Stop</button>   
                 <button onClick={togglePause}>{isPaused ? "Resume" : "Pause"}</button> 
@@ -64,11 +64,12 @@ export default function Timer() {
         )
     } 
     return(
-        <div>
-            Select Time: 
+        <div className="timerContainer" style={{backgroundImage: divStyle.backgroundImage}}>
+            <label>Select Time: </label>
             <select value={interval} onChange={updateTime}>
                 {displayTimes()}
             </select>
+
              <button onClick={startTime}>Start</button> 
         </div>
     )
