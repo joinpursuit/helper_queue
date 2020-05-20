@@ -48,7 +48,7 @@ const getAllOpenTickets = async (req, res, next) => {
       status: 401, 
       message: "Admin Access Only"
     })
-    const tickets = await db.any("SELECT tickets.id, tickets.created_at, users.email FROM tickets JOIN users ON users.id = tickets.owner_id WHERE complete = false ORDER BY created_at")
+    const tickets = await db.any("SELECT tickets.id, tickets.created_at, users.email, users.class FROM tickets JOIN users ON users.id = tickets.owner_id WHERE complete = false ORDER BY created_at")
     res.json({
       tickets, 
       message: "ALL OPEN TICKETS!"

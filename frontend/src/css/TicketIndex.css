@@ -50,3 +50,33 @@ time {
     color: gray;
     margin-left: 11px;
 }
+
+.checked {
+    background-color: #EBFF00;
+    color: #4242EA;
+    padding: 5px;
+    border: 2px solid #4242EA;
+}
+
+.notChecked {
+    background-color: #4242EA;
+    color: #EBFF00;
+    padding: 5px;
+    border: 2px solid #4242EA;
+    /* border-top: 2px solid #4242EA;
+    border-bottom: 2px solid #4242EA;
+    border-left: 1px solid #4242EA;
+    border-right: 1px solid #4242EA; */
+}
+
+.checked:hover, .checked input:hover  {
+    cursor: pointer;
+}
+
+.notChecked:hover, .notChecked input:hover {
+    cursor: pointer;
+}
+
+.classListContainer {
+    margin: 10px;
+}
