@@ -9,7 +9,15 @@ import Timer from './widgets/Timer';
 export default () => {
     return(
         <div className="homeContainer">
+        <div className="headerContainer">
+            <div className="gitHubLink localHostLink">
+                <a href="https://github.com/joinpursuit" target="__blank">GitHub</a>
+            </div>
             <h1 className="homeHeader">Helpful Resources And Links</h1>
+            <div className="localHostLink">
+                <a href="http://localhost:3000" target="__blank">Localhost:3000</a>
+            </div>
+        </div>
             <Timer />
             <ul className="resourceListContainer">
                 <ResourceListIndex header={codePractice.header} list={codePractice.list}/>

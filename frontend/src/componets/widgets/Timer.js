@@ -1,13 +1,13 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import alertSound from '../../assets/alarm.mp3'
 
 import '../../css/Timer.css';
 
 export default function Timer() {
-    const [interval, setInterval] = useState(1);
+    const [interval, setInterval] = useState(15);
     const [isCountingDown, setIsCountingDown] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
-    const [timeRemaining, setTimeRemaining] = useState(60);
+    const [timeRemaining, setTimeRemaining] = useState(900);
     const cancelTime = useRef()
 
     const displayTimes = () => {
@@ -19,6 +19,11 @@ export default function Timer() {
         )
     }
 
+    useEffect(() => {
+        return () => {
+            clearInterval(cancelTime.current)
+        }
+    }, [])
 
 
     const updateTime = (e) => {

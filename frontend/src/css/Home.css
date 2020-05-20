@@ -8,10 +8,41 @@
     font-family: sans-serif;
 }
 
+.headerContainer {
+    display: grid;
+   grid-template-columns: 1fr 2fr 1fr;
+   align-items: center;
+}
+
+
+.localHostLink {
+    grid-column: 3;
+}
+.gitHubLink {
+    grid-column: 1;
+}
+
+.localHostLink a {
+    padding: 5px;
+     border: 2px solid darkblue;
+     border-radius: 5px;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 20px;
+    color: darkblue;
+}
+
+.localHostLink a:hover {
+    color: #4242EA;
+    border: 2px solid #4242EA;
+
+}
+
 .homeHeader{
     font-weight: bold;
     font-size: 35px;
     padding: 25px; 
+    grid-column: 2;
 
 }
 
