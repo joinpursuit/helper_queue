@@ -9,11 +9,29 @@ import "../../css/TicketIndex.css";
 
 export default function TicketIndex() {
   const [tickets, setTickets] = useState([]);
-  const [classes, setClasses] = useState([]);
-  const [sixFour, setSixFour] = useState(true);
-  const [sixThree, setSixThree] = useState(true);
-  const [sixTwo, setSixTwo] = useState(true);
-  const [sixOne, setSixOne] = useState(true);
+  // const [classes, setClasses] = useState([]);
+  let initialFour = window.localStorage.getItem("sixFour");
+  let initialThree = window.localStorage.getItem("sixThree");
+  let initialTwo = window.localStorage.getItem("sixTwo");
+  let initialOne = window.localStorage.getItem("sixOne");
+  
+  const [sixFour, setSixFour] = useState(initialFour === "true" || initialFour === null);
+  const [sixThree, setSixThree] = useState(initialThree === "true" || initialThree === null);
+  const [sixTwo, setSixTwo] = useState(initialTwo === "true" || initialTwo === null);
+  const [sixOne, setSixOne] = useState(initialOne === "true" || initialOne === null);
+
+  useEffect(() => {
+    window.localStorage.setItem("sixFour", sixFour)
+    window.localStorage.setItem("sixThree", sixThree)
+    window.localStorage.setItem("sixTwo", sixTwo)
+    window.localStorage.setItem("sixOne", sixOne)
+    return () => {
+      window.localStorage.setItem("sixFour", sixFour)
+      window.localStorage.setItem("sixThree", sixThree)
+      window.localStorage.setItem("sixTwo", sixTwo)
+      window.localStorage.setItem("sixOne", sixOne)
+    }
+  }, [sixOne, sixTwo, sixThree, sixFour])
 
   const legend = {
     "6.4": sixFour,
@@ -35,9 +53,9 @@ export default function TicketIndex() {
         },
       });
       setTickets(res.data.tickets);
-      setClasses(
-        [...new Set(res.data.tickets.map((ticket) => ticket.class))].sort()
-      );
+      // setClasses(
+      //   [...new Set(res.data.tickets.map((ticket) => ticket.class))].sort()
+      // );
     } catch (err) {
       //    console.log(err);
       setTickets([]);
@@ -110,9 +128,6 @@ export default function TicketIndex() {
   const showCheckBoxes = () => {
     return (
       <form className="classListContainer">
-        {/* {classes.map(classType => {
-                  return <li key={classType}>{classType}</li>
-              })} */}
         <label className={sixOne ? "checked" : "notChecked"}>
         6.1
           <input
