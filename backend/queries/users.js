@@ -14,4 +14,18 @@ const createUser = async (req, res, next) => {
   }
 };
 
-module.exports = { createUser };
+const fetchCurrentUser = async (req, res, next) => {
+  try {
+    const user = await db.one(
+      "SELECT * FROM users WHERE id=$1", req.user.id
+    )
+    res.json({
+      user, 
+      message: "One User"
+    })
+  } catch(err) {
+    next(err);
+  }
+}
+
+module.exports = { createUser, fetchCurrentUser };

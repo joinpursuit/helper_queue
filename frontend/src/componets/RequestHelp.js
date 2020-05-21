@@ -9,7 +9,7 @@ export default function RequestHelp() {
     const [isLoading, setIsLoading] = useState(true)
     const [isWaitingForHelp, setIsWaitingForHelp] = useState(false);
     const [openTicket, setOpenTicket] = useState(null)
-    const { token } = useContext(AuthContext);
+    const { token, currentUser } = useContext(AuthContext);
     const API = apiURL();
     const socket = socketIOClient(API);
     const fetchOpenTicket = async () => {
@@ -60,7 +60,7 @@ export default function RequestHelp() {
                     body: ""
                 }
             })
-            socket.emit("openTicket", "new ticket" )
+            socket.emit("openTicket", currentUser )
             fetchOpenTicket()
         } catch (error) {
             fetchOpenTicket()

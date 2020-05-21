@@ -74,14 +74,16 @@ export default function TicketIndex() {
   });
 
   useEffect(() => {
-    const playSound = () => {
-      let src = alertSound;
-      let audio = new Audio(src);
-      audio.play();
+    const playSound = (data) => {
+      if(legend[data.class]) {
+        let src = alertSound;
+        let audio = new Audio(src);
+        audio.play();
+      }
     };
     socket.on("newTicket", playSound);
     return () => socket.off("newTicket", playSound);
-  }, []);
+  }, [sixOne, sixTwo, sixThree, sixFour]);
 
   const removeTicket = async (id) => {
     try {
