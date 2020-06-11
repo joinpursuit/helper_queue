@@ -27,6 +27,10 @@ io.on('connection', (socket) => {
   socket.on("ticketClosed", () => {
     io.sockets.emit("ticketClose")
   })
+
+  socket.on("ringGong", () => {
+    io.sockets.emit("gong ring");
+  });
   
 })
 
