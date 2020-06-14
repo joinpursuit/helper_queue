@@ -39,7 +39,7 @@ export default function Gong(params) {
           width={width}
           height={height}
           recycle={recycle}
-          numberOfPieces={200}
+          numberOfPieces={300}
         />
       ) : null}
       <img onMouseEnter={startParty} className={style} src={gong} alt="gong" />
