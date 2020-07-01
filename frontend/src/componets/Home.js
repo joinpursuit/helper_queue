@@ -10,12 +10,12 @@ export default () => {
     return(
         <div className="homeContainer">
         <div className="headerContainer">
-            <div className="gitHubLink localHostLink">
-                <a href="https://github.com/joinpursuit" target="__blank">GitHub</a>
+                <div className="gitHubLink localHostLink" data-testid="githubLinkContainer">
+                <a href="https://github.com/joinpursuit" data-testid="githubLink" target="__blank">GitHub</a>
             </div>
-            <h1 className="homeHeader">Helpful Resources And Links</h1>
-            <div className="localHostLink">
-                <a href="http://localhost:3000" target="__blank">Localhost:3000</a>
+            <h1 className="homeHeader" data-testid="homeHeader">Helpful Resources And Links</h1>
+            <div className="localHostLink" data-testid="localhostLinkContainer">
+                    <a href="http://localhost:3000" target="__blank" data-testid="localhostLink">Localhost:3000</a>
             </div>
         </div>
             <Timer />

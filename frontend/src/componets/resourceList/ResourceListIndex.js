@@ -6,10 +6,10 @@ export default function ResourceListIndex({header, list}) {
     const displayList = () => {
         if(!showList) return null;
         return(
-            <ul className="resourceListIndex">
+            <ul className="resourceListIndex" data-testid="resourceListUL">
                 {list.map((listItem, i) => {
                     return(
-                            <a key={i} href={listItem.url} target="__blank">{listItem.name}</a>
+                            <a key={i} href={listItem.url} target="__blank" data-testid="resourceListItem">{listItem.name}</a>
                     )
                 })}
             </ul>
@@ -18,10 +18,10 @@ export default function ResourceListIndex({header, list}) {
     }
     return(
         <div className="resourceListContainerOfIndex"
-        
+            data-testid="resourceListIndexContainer"
         onMouseEnter={() => setShowList(true)}
             onMouseLeave={() => setShowList(false)}>
-            <h1>{header}</h1>
+            <h1 data-testid="resourceListHeader">{header}</h1>
             {displayList()}
         </div>
     )
