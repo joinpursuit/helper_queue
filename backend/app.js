@@ -8,6 +8,7 @@ require('dotenv').config();
 
 const usersRouter = require('./routes/users');
 const ticketsRouter = require('./routes/tickets');
+const jobsRouter = require('./routes/jobs');
 
 const PORT = process.env.PORT;
 
@@ -40,6 +41,7 @@ app.use(bodyParser.json());
 
 app.use("/api/users", usersRouter)
 app.use("/api/tickets", ticketsRouter)
+app.use("/api/jobs", jobsRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);
