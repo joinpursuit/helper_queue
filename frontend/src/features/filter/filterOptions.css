@@ -1,0 +1,45 @@
+.filterOptions {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.filterOptions .selected {
+    border: 3px solid #4242EA;
+    padding: 10px;
+    margin-top: 25px;
+    border-radius: 5px;
+    color: #4242EA;
+    background-color: #EBFF00;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.filterOptions .selected:hover {
+    cursor: pointer;
+    border: 3px solid #EBFF00;
+    color: #EBFF00;
+    background-color: #4242EA;
+}
+.filterOptions .hidden {
+    border: 3px solid #EBFF00;
+    padding: 10px;
+    margin-top: 25px;
+    border-radius: 5px;
+    color: #EBFF00;
+    background-color: #4242EA;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.filterOptions .hidden:hover {
+    color: #4242EA;
+    cursor: pointer;
+    border: 3px solid #4242EA;
+    background-color: #EBFF00;
+}
+
+
+.filterOptions label input {
+    display: none;
+}

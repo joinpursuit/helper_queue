@@ -1,0 +1,40 @@
+.jobForm h1 {
+  text-align: center;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+.jobForm section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px;
+}
+
+.jobForm section input {
+  margin-left: 5px;
+  min-width: 250px;
+  padding: 5px;
+}
+
+.jobForm section select {
+  margin-left: 5px;
+  min-width: 250px;
+  padding: 5px;
+}
+
+.ql-editor {
+    min-height: 150px;
+    overflow-y: scroll;
+    max-height: 250px;
+}
+
+
+.createJobButton {
+
+}
+
+.createJobButton:hover {
+    cursor: pointer;
+}
