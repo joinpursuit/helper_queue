@@ -2,4 +2,5 @@
     display: grid;
    grid-template-rows: 1fr 7fr 1fr;
    /* align-items: center; */
+   background-color: lightgray;
 }
