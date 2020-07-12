@@ -104,7 +104,7 @@ nav {
   text-decoration: underline;
 }
 
-.homeNav div {
+.homeNav .rightSide {
   display: flex;
   width: 25%;
   justify-content: space-between;
