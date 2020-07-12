@@ -1,90 +1,137 @@
 nav {
-    display: flex; 
-    justify-content: flex-end;
-    align-items: center;
-    background: #4242EA;
-    height: 75px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: #4242ea;
+  height: 75px;
 }
 
 .logoutButton {
-    height: 35px;
-    width: 100px;
-    margin: 50px;
-    border-radius: 5px;
-    border: 2px solid white;
-    font-size: 20px;
-    font-family: sans-serif;
-    font-weight: bold;
-    transition: all 0.2s ease-in-out;
-
+  height: 35px;
+  width: 100px;
+  border-radius: 5px;
+  border: 2px solid white;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
 }
 
 .logoutButton:hover {
-    background: lightgray;
-    border: 2px solid lightgrey;
-    cursor: pointer;
+  background: lightgray;
+  border: 2px solid lightgrey;
+  cursor: pointer;
 }
 
 .signUpAndLogin {
-    color: black;
-    cursor: pointer;
-    width: 100px;
-    margin: 50px;
-    border-radius: 5px;
-    border: 2px solid white;
-    font-size: 20px;
-    font-family: sans-serif;
-    font-weight: bold;
-    transition: all 0.2s ease-in-out;
-    background-color: white;
-    text-decoration: none;
-    padding: 10px;
-
+  color: black;
+  cursor: pointer;
+  width: 100px;
+  margin: 50px;
+  border-radius: 5px;
+  border: 2px solid white;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+  background-color: white;
+  text-decoration: none;
+  padding: 10px;
 }
 
 .signUpAndLogin:hover {
-    background: lightgray;
-    border: 2px solid lightgrey;
-    cursor: pointer;
+  background: lightgray;
+  border: 2px solid lightgrey;
+  cursor: pointer;
 }
 
 .navAdmin {
-    width: 100%;
-    display: flex; 
-    justify-content: space-around;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .navAdmin a {
-    color: white;
-    font-size: 25px;
-    text-decoration: none;
+  color: white;
+  font-size: 25px;
+  text-decoration: none;
 }
 
 .active {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .jobTrackerNav {
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr;
+  align-items: center;
+}
 
+.jobTrackerNav a {
+  grid-column: 1 2;
+}
+
+.jobSearchAddContainer {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navRequestAndLogOut {
+  grid-column: -2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .homeNav {
-    justify-content: space-around;
+  justify-content: space-around;
 }
 
-.homeNav a {
-    color: white;
-    font-weight: bold;
-    font-family: sans-serif;
-    font-size: 23px;
-    text-decoration: none;
+.homeNav a,
+.jobTrackerNav a {
+  color: white;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 23px;
+  text-decoration: none;
 }
 
-.homeNav a:hover {
-    text-decoration: underline;
+.homeNav a:hover,
+.jobTrackerNav a:hover {
+  text-decoration: underline;
 }
 
 .homeNav div {
-    display: flex;
+  display: flex;
+  width: 25%;
+  justify-content: space-between;
+}
+
+.addJob {
+  height: 35px;
+  min-width: 150px;
+  border-radius: 5px;
+  background-color: #ebff00;
+  color: #4242ea;
+  border: 2px solid #4242ea;
+  font-size: 20px;
+  font-family: sans-serif;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+.addJob:hover {
+  cursor: pointer;
+  background-color: #4242ea;
+  color: #ebff00;
+  border: 2px solid #ebff00;
+}
+
+.jobCount {
+    font-family: sans-serif;
+    color: white;
+    font-size: 14px;
 }

@@ -6,10 +6,17 @@ import { logout } from "../util/firebaseFunctions";
 import { useLocation } from "react-router-dom";
 import RequestHelp from "./RequestHelp";
 import NavLogin from "./auth/NavLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { setShow } from "../features/modal/modalSlice";
+import { selectJobCount } from "../features/jobs/jobsSlice";
+import Search from "../features/search/Search";
+
 
 export default function NavBar() {
   const { currentUser } = useContext(AuthContext);
   const location = useLocation();
+    const dispatch = useDispatch();
+    const jobCount = useSelector(selectJobCount);
 
   const regularUserView = () => {
     if (location.pathname === "/") {
@@ -28,10 +35,23 @@ export default function NavBar() {
       return (
         <nav className="jobTrackerNav">
           <NavLink to={"/"}>Home</NavLink>
-          <RequestHelp />
+          <div className="jobSearchAddContainer">
+            <button
+              className={"addJob"}
+              onClick={() => dispatch(setShow(true))}
+            >
+              + Add Job
+            </button>
+            <Search />
+            <div className="jobCount">You've applied to {jobCount} jobs!</div>
+          </div>
+          <div className="navRequestAndLogOut">
+
+          {/* <RequestHelp /> */}
           <button className="logoutButton" onClick={logout}>
             Log Out
           </button>
+          </div>
         </nav>
       );
     }
