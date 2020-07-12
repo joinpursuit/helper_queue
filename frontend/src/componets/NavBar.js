@@ -8,7 +8,7 @@ import RequestHelp from "./RequestHelp";
 import NavLogin from "./auth/NavLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { setShow } from "../features/modal/modalSlice";
-import { selectJobCount } from "../features/jobs/jobsSlice";
+import { selectJobCount, receiveJobs } from "../features/jobs/jobsSlice";
 import Search from "../features/search/Search";
 
 
@@ -18,6 +18,11 @@ export default function NavBar() {
     const dispatch = useDispatch();
     const jobCount = useSelector(selectJobCount);
 
+    const logoutUser = () => {
+      logout();
+      dispatch(receiveJobs({}))
+    }
+
   const regularUserView = () => {
     if (location.pathname === "/") {
       return (
@@ -25,7 +30,7 @@ export default function NavBar() {
           <NavLink to={"/jobtracker"}>Job Tracker</NavLink>
           <div>
             <RequestHelp />
-            <button className="logoutButton" onClick={logout}>
+            <button className="logoutButton" onClick={logoutUser}>
               Log Out
             </button>
           </div>
@@ -48,7 +53,7 @@ export default function NavBar() {
           <div className="navRequestAndLogOut">
 
           {/* <RequestHelp /> */}
-          <button className="logoutButton" onClick={logout}>
+          <button className="logoutButton" onClick={logoutUser}>
             Log Out
           </button>
           </div>
@@ -65,7 +70,7 @@ export default function NavBar() {
             Home
           </NavLink>
           <NavLink to="/admin">Student Queue</NavLink>
-          <button className="logoutButton" onClick={logout}>
+          <button className="logoutButton" onClick={logoutUser}>
             Log Out
           </button>
         </div>

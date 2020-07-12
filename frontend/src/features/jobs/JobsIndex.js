@@ -14,7 +14,13 @@ export default () => {
     }, [token, dispatch])
     const jobs = useSelector(selectFilteredJobs)
     const {startIdx, endIdx} = useSelector(selectPagination)
-
+    if(jobs.length === 0) {
+        return (
+          <div className="emptyJobsList">
+            <span>No Job To Show</span>
+          </div>
+        );
+    }
     return(
         <ul className="jobsList">
             {jobs.slice(startIdx, endIdx).map(job => {
