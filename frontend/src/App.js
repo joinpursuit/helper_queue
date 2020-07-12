@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Home from './componets/Home';
 import NavBar from './componets/NavBar';
 import AuthProvider from './providers/AuthProvider';
 import { AuthRoute, ProtectedRoute, AdminRoute } from './util/auth_routes';
@@ -9,6 +8,7 @@ import Login from './componets/auth/Login';
 import { Route } from 'react-router-dom';
 import Student from './componets/views/Student';
 import Admin from './componets/views/Admin';
+import JobPage from './features/jobs/JobPage';
 
 function App() {
   return (
@@ -27,6 +27,9 @@ function App() {
         <AdminRoute path="/admin" >
           <Admin />
         </AdminRoute>
+        <ProtectedRoute path="/jobtracker">
+          <JobPage />
+        </ProtectedRoute>
       </AuthProvider>
     </div>
   );

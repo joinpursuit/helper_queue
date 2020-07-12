@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../../../../job_tracker/frontend/src/providers/AuthProvider";
+import { AuthContext } from "../../providers/AuthProvider";
 import { useDispatch } from "react-redux";
 import { updateJob } from "./jobsSlice";
 import { setShow, setSelectedJob } from "../modal/modalSlice";

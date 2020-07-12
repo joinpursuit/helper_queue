@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { apiURL } from "../../../../../job_tracker/frontend/src/util/apiURL";
+import { apiURL } from "../../util/apiURL";
 
 const API = apiURL();
 
