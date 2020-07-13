@@ -86,7 +86,7 @@ export default function RequestHelp() {
     }
     if(isLoading) return null; 
     return(
-        <div>
+        <div className="requestContainer">
             {isWaitingForHelp ? 
             <button onClick={cancelRequest} className="cancelRequest request">Cancel Request</button> 
             :

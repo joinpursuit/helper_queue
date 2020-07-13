@@ -11,25 +11,26 @@ import { setShow } from "../features/modal/modalSlice";
 import { selectJobCount, receiveJobs } from "../features/jobs/jobsSlice";
 import Search from "../features/search/Search";
 
-
 export default function NavBar() {
   const { currentUser } = useContext(AuthContext);
   const location = useLocation();
-    const dispatch = useDispatch();
-    const jobCount = useSelector(selectJobCount);
+  const dispatch = useDispatch();
+  const jobCount = useSelector(selectJobCount);
 
-    const logoutUser = () => {
-      logout();
-      dispatch(receiveJobs({}))
-    }
+  const logoutUser = () => {
+    logout();
+    dispatch(receiveJobs({}));
+  };
 
   const regularUserView = () => {
     if (location.pathname === "/") {
       return (
         <nav className={"homeNav"}>
           <NavLink to={"/jobtracker"}>Job Tracker</NavLink>
-          <div>
-            <RequestHelp />
+          <div className="rightSide">
+            <div>
+              <RequestHelp />
+            </div>
             <button className="logoutButton" onClick={logoutUser}>
               Log Out
             </button>
@@ -51,11 +52,10 @@ export default function NavBar() {
             <div className="jobCount">You've applied to {jobCount} jobs!</div>
           </div>
           <div className="navRequestAndLogOut">
-
-          {/* <RequestHelp /> */}
-          <button className="logoutButton" onClick={logoutUser}>
-            Log Out
-          </button>
+            {/* <RequestHelp /> */}
+            <button className="logoutButton" onClick={logoutUser}>
+              Log Out
+            </button>
           </div>
         </nav>
       );

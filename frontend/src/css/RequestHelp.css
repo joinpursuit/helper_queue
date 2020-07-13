@@ -1,4 +1,6 @@
-
+.requestContainer {
+    min-width: 170px;
+}
 
 .request {
     height: 35px;
