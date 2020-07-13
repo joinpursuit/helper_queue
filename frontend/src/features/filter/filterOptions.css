@@ -17,9 +17,12 @@
 
 .filterOptions .selected:hover {
     cursor: pointer;
-    border: 3px solid #EBFF00;
+         font-size: 22px;
+     padding: 6px;
+     transition: ease-in;
+    /* border: 3px solid #EBFF00;
     color: #EBFF00;
-    background-color: #4242EA;
+    background-color: #4242EA; */
 }
 .filterOptions .hidden {
     border: 3px solid #EBFF00;
@@ -33,10 +36,13 @@
 }
 
 .filterOptions .hidden:hover {
-    color: #4242EA;
-    cursor: pointer;
-    border: 3px solid #4242EA;
-    background-color: #EBFF00;
+    /* color: #4242EA; */
+     cursor: pointer;
+     font-size: 22px;
+     padding: 6px;
+     transition: ease-in;
+    /* border: 3px solid #4242EA;
+    background-color: #EBFF00;  */
 }
 
 
