@@ -17,7 +17,7 @@ export default () => {
     if(jobs.length === 0) {
         return (
           <div className="emptyJobsList">
-            <span>No Job To Show</span>
+            <span>No Jobs To Show</span>
           </div>
         );
     }
