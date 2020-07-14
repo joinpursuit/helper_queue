@@ -58,3 +58,16 @@
     font-size: 40px;
     font-weight: bold;
 }
+
+#jobListLegend {
+    font-weight: bold;
+}
+
+
+#jobListLegend:hover {
+    background-color: lightgrey;
+}
+
+.lastModified {
+    text-align: right;
+}

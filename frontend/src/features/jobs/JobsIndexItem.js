@@ -34,7 +34,7 @@ export default ({ job }) => {
         <option value={"onsite"}>Onsite</option>
         <option value={"offer"}>Offer</option>
       </select>
-      <TimeAgo date={job.created_at} className={"timeSinceJobCreation"} />
+      <TimeAgo date={job.last_modified} className={"timeSinceJobCreation"} />
     </li>
   );
 };
