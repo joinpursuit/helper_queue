@@ -14,6 +14,8 @@
     background-color: #EBFF00;
     font-size: 20px;
     font-weight: bold;
+    display: grid;
+    align-items: center;
 }
 
 .filterOptions .selected:hover {
@@ -35,6 +37,8 @@
     background-color: #4242EA;
     font-size: 20px;
     font-weight: bold;
+    display: grid;
+    align-items: center;
 }
 
 .filterOptions .hidden:hover {
