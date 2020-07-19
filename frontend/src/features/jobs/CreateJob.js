@@ -1,38 +1,41 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
+import SunEditor from "suneditor-react";
+import "suneditor/dist/css/suneditor.min.css";
 
-import { useInput } from "../../util/customHooks";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import "react-quill/dist/quill.bubble.css";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { createJob, updateJob } from "./jobsSlice";
+import { useInput } from "../../util/customHooks";
 import "./CreateJob.css";
 
-const modules = {
-  toolbar: [
-    [{ font: [] }],
-    [{ size: ["small", false, "large", "huge"] }],
-    ["bold", "italic", "underline"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ align: [] }],
-    [{ color: [] }, { background: [] }],
-    ["clean"],
+const formats = {
+  font: ["Arial", "tohoma", "Courier New,Courier"],
+  fontSize: [8, 10, 14, 18, 24, 36],
+  buttonList: [
+    ["undo", "redo", "font", "fontSize", "formatBlock"],
+    [
+      "bold",
+      "underline",
+      "italic",
+      "strike",
+      "subscript",
+      "superscript",
+      "removeFormat",
+      "list"
+    ],
+    "/"[ // Line break
+      ("fontColor",
+      "hiliteColor",
+      "outdent",
+      "indent",
+      "align",
+      "horizontalRule",
+      "list",
+      "table")
+    ],
+    ["link", "fullScreen", "showBlocks", "preview"],
   ],
 };
-
-const formats = [
-  "font",
-  "size",
-  "bold",
-  "italic",
-  "underline",
-  "list",
-  "bullet",
-  "align",
-  "color",
-  "background",
-];
 
 export default ({ handleClose }) => {
   const job = useSelector((state) => state.jobs[state.modal.selectedJob]);
@@ -45,6 +48,7 @@ export default ({ handleClose }) => {
   const [description, setDescription] = useState(
     (job && job.description) || ""
   );
+
   const [status, setStatus] = useState((job && job.status) || "applied");
   const { currentUser, token } = useContext(AuthContext);
 
@@ -104,59 +108,55 @@ export default ({ handleClose }) => {
         </label>
       </section>
       <section>
-
-      <label>
-        Post URL:
-        <input placeholder="+ add post url" {...postUrl} />
-      </label>
-      <label>
-        Location:
-        <input placeholder="+ add location" {...location} />
-      </label>
+        <label>
+          Post URL:
+          <input placeholder="+ add post url" {...postUrl} />
+        </label>
+        <label>
+          Location:
+          <input placeholder="+ add location" {...location} />
+        </label>
       </section>
       <section>
-
-      <label>
-        Salary:
-        <input placeholder="+ add salary" {...salary} />
-      </label>
-      <label>
-        {" "}
-        Due Date:
-        <input type="date" {...dueDate} />
-      </label>
+        <label>
+          Salary:
+          <input placeholder="+ add salary" {...salary} />
+        </label>
+        <label>
+          {" "}
+          Due Date:
+          <input type="date" {...dueDate} />
+        </label>
       </section>
       <section>
-
-      <label>
-        Status: 
-      <select value={status} onChange={(e) => setStatus(e.target.value)}>
-        <option value={"rejected"}>Rejected</option>
-        <option value={"wishlist"}>WishList</option>
-        <option value={"applied"}>Applied</option>
-        <option value={"phoneScreen"}>Phone Screen</option>
-        <option value={"codingChallenge"}>Coding Challenge</option>
-        <option value={"techScreen"}>Tech Screen</option>
-        <option value={"onsite"}>Onsite</option>
-        <option value={"offer"}>Offer</option>
-      </select>
-      </label>
+        <label>
+          Status:
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value={"rejected"}>Rejected</option>
+            <option value={"wishlist"}>WishList</option>
+            <option value={"applied"}>Applied</option>
+            <option value={"phoneScreen"}>Phone Screen</option>
+            <option value={"codingChallenge"}>Coding Challenge</option>
+            <option value={"techScreen"}>Tech Screen</option>
+            <option value={"onsite"}>Onsite</option>
+            <option value={"offer"}>Offer</option>
+          </select>
+        </label>
       </section>
       <section>
-
-      <label>
-        Job Description:
-        <ReactQuill
-          value={description}
-          onChange={(e) => setDescription(e)}
-          theme="snow"
-          modules={modules}
-          formats={formats}
-        />
-      </label>
+        <label>
+          Job Description:
+          <SunEditor
+            setContents={description}
+            onChange={(e) => setDescription(e)}
+            setOptions={formats}
+          />
+        </label>
       </section>
 
-      <button className="createJobButton">{job ? "Update Job" : "ADD JOB"}</button>
+      <button className="createJobButton">
+        {job ? "Update Job" : "ADD JOB"}
+      </button>
     </form>
   );
 };

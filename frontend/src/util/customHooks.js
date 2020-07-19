@@ -7,7 +7,7 @@ export const useInput = (initialState) => {
     setState(e.target.value);
   };
 
-  const clearInput = () => setState("");
+  // const clearInput = () => setState("");
 
-  return { value: state, onChange, clearInput };
+  return { value: state, onChange };
 };
