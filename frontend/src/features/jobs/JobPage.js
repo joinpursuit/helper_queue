@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setShow, setSelectedJob } from "../modal/modalSlice";
 import Pagination from "../pagination/Pagination";
 import "./JobPage.css";
+import { Route } from "react-router-dom";
+import JobShow from "./JobShow/JobShow";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -38,6 +40,10 @@ export default () => {
   const modal = useSelector(state => state.modal)
   const {show} = modal;
   return (
+    <>
+      <Route path="/jobtracker/:id">
+        <JobShow />
+      </Route>
     <section className="jobsPageContainer">
       <Modal
         aria-labelledby="transition-modal-title"
@@ -61,5 +67,6 @@ export default () => {
       <JobsIndex />
       <Pagination />
     </section>
+  </>
   );
 };

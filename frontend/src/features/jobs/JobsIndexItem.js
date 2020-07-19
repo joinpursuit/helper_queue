@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
+import { Link } from 'react-router-dom'
 import { AuthContext } from "../../providers/AuthProvider";
 import { useDispatch } from "react-redux";
 import { updateJob } from "./jobsSlice";
 import { setShow, setSelectedJob } from "../modal/modalSlice";
-import TimeAgo from 'react-timeago';
+import TimeAgo from "react-timeago";
 
 export default ({ job }) => {
   const { token } = useContext(AuthContext);
@@ -15,9 +16,9 @@ export default ({ job }) => {
   };
 
   const handleClick = () => {
-    dispatch(setShow(true))
-    dispatch(setSelectedJob(job.id))
-  }
+    dispatch(setShow(true));
+    dispatch(setSelectedJob(job.id));
+  };
   return (
     <li>
       <div onClick={handleClick} className={"jobIndexItemEdit"}>
@@ -35,6 +36,7 @@ export default ({ job }) => {
         <option value={"offer"}>Offer</option>
       </select>
       <TimeAgo date={job.last_modified} className={"timeSinceJobCreation"} />
+      <Link to={`/jobtracker/${job.id}`}>More Info</Link>
     </li>
   );
 };

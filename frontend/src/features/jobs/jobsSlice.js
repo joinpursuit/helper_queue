@@ -6,7 +6,7 @@ const API = apiURL();
 
 const normalize = (arr) => {
   return arr.reduce((acc, el) => {
-    acc[el.id] = el;
+    acc[el.id] = {...acc[el.id], ...el};
     return acc;
   }, {});
 };
@@ -62,7 +62,7 @@ export const jobsSlice = createSlice({
   reducers: {
     receiveJobs: (state, { payload }) => payload,
     receiveJob: (state, { payload }) => {
-      state[payload.id] = payload;
+      state[payload.id] = {...state[payload.id], ...payload};
     },
   },
 });

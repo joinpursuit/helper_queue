@@ -3,6 +3,9 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+.filterOptions label {
+    height: 35px;
+}
 
 .filterOptions .selected {
     border: 3px solid #4242EA;
@@ -18,14 +21,11 @@
     align-items: center;
 }
 
-.filterOptions .selected:hover {
+.filterOptions label:hover {
     cursor: pointer;
          font-size: 22px;
-     padding: 6px;
      transition: ease-in;
-    /* border: 3px solid #EBFF00;
-    color: #EBFF00;
-    background-color: #4242EA; */
+
 }
 .filterOptions .hidden {
     border: 3px solid #EBFF00;
@@ -40,17 +40,6 @@
     display: grid;
     align-items: center;
 }
-
-.filterOptions .hidden:hover {
-    /* color: #4242EA; */
-     cursor: pointer;
-     font-size: 22px;
-     padding: 6px;
-     transition: ease-in;
-    /* border: 3px solid #4242EA;
-    background-color: #EBFF00;  */
-}
-
 
 .filterOptions label input {
     display: none;
