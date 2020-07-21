@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import RequestHelp from "./RequestHelp";
 import NavLogin from "./auth/NavLogin";
 import { useDispatch, useSelector } from "react-redux";
-import { setShow } from "../features/modal/modalSlice";
+import { setJobFormShow } from "../features/modal/modalSlice";
 import { selectJobCount, receiveJobs } from "../features/jobs/jobsSlice";
 import Search from "../features/search/Search";
 
@@ -44,7 +44,7 @@ export default function NavBar() {
           <div className="jobSearchAddContainer">
             <button
               className={"addJob"}
-              onClick={() => dispatch(setShow(true))}
+              onClick={() => dispatch(setJobFormShow(true))}
             >
               + Add Job
             </button>

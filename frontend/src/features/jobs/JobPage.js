@@ -7,7 +7,7 @@ import Fade from "@material-ui/core/Fade";
 import CreateJob from "./CreateJob";
 import FilterOptions from '../filter/filterOptions';
 import { useSelector, useDispatch } from 'react-redux'
-import { setShow, setSelectedJob } from "../modal/modalSlice";
+import { setJobFormShow, setSelectedJob } from "../modal/modalSlice";
 import Pagination from "../pagination/Pagination";
 import "./JobPage.css";
 import { Route } from "react-router-dom";
@@ -33,23 +33,20 @@ export default () => {
   const dispatch = useDispatch()
 
   const handleClose = () => { 
-    dispatch(setShow(false))
+    dispatch(setJobFormShow(false))
     dispatch(setSelectedJob(null))
   };
 
   const modal = useSelector(state => state.modal)
-  const {show} = modal;
+  const {jobFormShow} = modal;
   return (
     <>
-      <Route path="/jobtracker/:id">
-        <JobShow />
-      </Route>
     <section className="jobsPageContainer">
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={show}
+        open={jobFormShow}
         onClose={handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -57,7 +54,7 @@ export default () => {
           timeout: 500,
         }}
       >
-        <Fade in={show}>
+        <Fade in={jobFormShow}>
           <div className={classes.paper}>
             <CreateJob handleClose={handleClose} />
           </div>

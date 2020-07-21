@@ -1,42 +1,95 @@
 import React, { useContext } from "react";
 import { Link } from 'react-router-dom'
 import { AuthContext } from "../../providers/AuthProvider";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateJob } from "./jobsSlice";
-import { setShow, setSelectedJob } from "../modal/modalSlice";
+import { setTimelineShow, setSelectedJob } from "../modal/modalSlice";
 import TimeAgo from "react-timeago";
+
+import { Modal } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import JobShow from "./JobShow/JobShow";
+
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    width: "75%",
+  },
+}));
 
 export default ({ job }) => {
   const { token } = useContext(AuthContext);
   const dispatch = useDispatch();
-  const updateJobStatus = async (e) => {
+
+    const updateJobStatus = async (e) => {
     dispatch(
       updateJob(Object.assign({}, job, { status: e.target.value }), token)
     );
   };
 
   const handleClick = () => {
-    dispatch(setShow(true));
+    dispatch(setTimelineShow(true));
     dispatch(setSelectedJob(job.id));
   };
+
+   const classes = useStyles();
+
+  const handleClose = () => { 
+    dispatch(setTimelineShow(false))
+    dispatch(setSelectedJob(null))
+  };
+
+  const modal = useSelector(state => state.modal)
+  const { jobTimelineShow } = modal;
   return (
-    <li>
-      <div onClick={handleClick} className={"jobIndexItemEdit"}>
-        <h3>{job.company}</h3>
-        <h4>{job.job_title}</h4>
-      </div>
-      <select value={job.status} onChange={updateJobStatus}>
-        <option value={"rejected"}>Rejected</option>
-        <option value={"wishlist"}>WishList</option>
-        <option value={"applied"}>Applied</option>
-        <option value={"phoneScreen"}>Phone Screen</option>
-        <option value={"codingChallenge"}>Coding Challenge</option>
-        <option value={"techScreen"}>Tech Screen</option>
-        <option value={"onsite"}>Onsite</option>
-        <option value={"offer"}>Offer</option>
-      </select>
-      <TimeAgo date={job.last_modified} className={"timeSinceJobCreation"} />
-      <Link to={`/jobtracker/${job.id}`}>More Info</Link>
-    </li>
+    <>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={jobTimelineShow}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={jobTimelineShow}>
+          <div className={classes.paper}>
+            <JobShow />
+          </div>
+        </Fade>
+      </Modal>
+      <li>
+        <div onClick={handleClick} className={"jobIndexItemEdit"}>
+          <h3>{job.company}</h3>
+          <h4>{job.job_title}</h4>
+        </div>
+        <select value={job.status} onChange={updateJobStatus}>
+          <option value={"rejected"}>Rejected</option>
+          <option value={"wishlist"}>WishList</option>
+          <option value={"applied"}>Applied</option>
+          <option value={"phoneScreen"}>Phone Screen</option>
+          <option value={"codingChallenge"}>Coding Challenge</option>
+          <option value={"techScreen"}>Tech Screen</option>
+          <option value={"onsite"}>Onsite</option>
+          <option value={"offer"}>Offer</option>
+        </select>
+        <TimeAgo date={job.last_modified} className={"timeSinceJobCreation"} />
+        <Link to={`/jobtracker/${job.id}`}>Status Timeline</Link>
+      </li>
+    </>
   );
 };

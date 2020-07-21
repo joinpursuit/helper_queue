@@ -1,13 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const modalSlice = createSlice({
-    name: "modal", 
-    initialState: {show: false, selectedJob: null}, 
-    reducers: {
-        setShow: (state, {payload}) => { state.show = payload},
-        setSelectedJob: (state, { payload}) => {state.selectedJob = payload}
-    }
-})
+         name: "modal",
+         initialState: {
+           jobFormShow: false,
+           selectedJob: null,
+           jobTimelineShow: false,
+         },
+         reducers: {
+           setJobFormShow: (state, { payload }) => {
+             state.jobFormShow = payload;
+           },
+           setTimelineShow: (state, { payload }) => {
+             state.jobTimelineShow = payload;
+           },
+           setSelectedJob: (state, { payload }) => {
+             state.selectedJob = payload;
+           },
+         },
+       });
 
-export const { setShow, setSelectedJob } = modalSlice.actions;
+export const {
+         setJobFormShow,
+         setTimelineShow,
+         setSelectedJob,
+       } = modalSlice.actions;
 export default modalSlice.reducer; 
