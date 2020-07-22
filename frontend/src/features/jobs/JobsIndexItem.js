@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
-import { Link } from 'react-router-dom'
+import { Link, Route } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { updateJob } from "./jobsSlice";
-import { setTimelineShow, setSelectedJob } from "../modal/modalSlice";
+import {
+  setJobFormShow,
+  setSelectedJob,
+  setTimelineShow,
+} from "../modal/modalSlice";
 import TimeAgo from "react-timeago";
 
 import { Modal } from "@material-ui/core";
@@ -11,7 +15,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import JobShow from "./JobShow/JobShow";
-
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -32,48 +35,54 @@ export default ({ job }) => {
   const { token } = useContext(AuthContext);
   const dispatch = useDispatch();
 
-    const updateJobStatus = async (e) => {
+  const updateJobStatus = async (e) => {
     dispatch(
       updateJob(Object.assign({}, job, { status: e.target.value }), token)
     );
   };
 
-  const handleClick = () => {
-    dispatch(setTimelineShow(true));
+  const handleFormClick = () => {
+    dispatch(setJobFormShow(true));
     dispatch(setSelectedJob(job.id));
   };
 
-   const classes = useStyles();
-
-  const handleClose = () => { 
-    dispatch(setTimelineShow(false))
-    dispatch(setSelectedJob(null))
+  const handleTimelineClick = () => {
+    dispatch(setTimelineShow(true));
   };
 
-  const modal = useSelector(state => state.modal)
+  const classes = useStyles();
+
+  const handleTimelineClose = () => {
+    dispatch(setTimelineShow(false));
+    dispatch(setSelectedJob(null));
+  };
+
+  const modal = useSelector((state) => state.modal);
   const { jobTimelineShow } = modal;
   return (
     <>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={jobTimelineShow}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={jobTimelineShow}>
-          <div className={classes.paper}>
-            <JobShow />
-          </div>
-        </Fade>
-      </Modal>
+      <Route path="/jobtracker/:id">
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={jobTimelineShow}
+          onClose={handleTimelineClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={jobTimelineShow}>
+            <div className={classes.paper}>
+              <JobShow />
+            </div>
+          </Fade>
+        </Modal>
+      </Route>
       <li>
-        <div onClick={handleClick} className={"jobIndexItemEdit"}>
+        <div onClick={handleFormClick} className={"jobIndexItemEdit"}>
           <h3>{job.company}</h3>
           <h4>{job.job_title}</h4>
         </div>
@@ -88,7 +97,9 @@ export default ({ job }) => {
           <option value={"offer"}>Offer</option>
         </select>
         <TimeAgo date={job.last_modified} className={"timeSinceJobCreation"} />
-        <Link to={`/jobtracker/${job.id}`}>Status Timeline</Link>
+        <Link to={`/jobtracker/${job.id}`} onClick={handleTimelineClick}>
+          Status Timeline
+        </Link>
       </li>
     </>
   );

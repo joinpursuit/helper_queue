@@ -12,9 +12,6 @@ export default () => {
 
     const { token } = useContext(AuthContext);
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [])
 
     useEffect(() => {
         dispatch(fetchAllJobStatusTimelines(token, id));
