@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchAllJobStatusTimelines } from '../jobsSlice';
 import { AuthContext } from '../../../providers/AuthProvider';
+import "./JobShow.css";
 
 export default () => {
     const history = useHistory();
@@ -18,26 +19,40 @@ export default () => {
     }, [token, id, dispatch])
 
     const hideSelf = () => history.push("/jobtracker");
+
+    const formatDate = (time) => {
+        return (
+          1 +
+          new Date(time).getMonth() +
+          "/" +
+          new Date(time).getDate() +
+          "/" +
+          new Date(time).getFullYear()
+        );
+    }
+
+    const formatStatus = (status) => {
+        const result = status.replace(/([A-Z])/g, " $1");
+        const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+        return finalResult;
+    }
+
     if(!job || !job.timelines) return null;
 
     return(
-        <div>
-            <button onClick={hideSelf}>Hide</button>
+        <div className="jobShowContainer">
+            <button onClick={hideSelf}>Close</button>
+            <ul>
             {job.timelines.map(time => {
                 return (
-                  <div>
-                    Status: {time.status}
-                    <br />
-                    Date:{" "}
-                    {1 +
-                      new Date(time.created_at).getMonth() +
-                      "/" +
-                      new Date(time.created_at).getDate() +
-                      "/" +
-                      new Date(time.created_at).getFullYear()}
-                  </div>
+                  <li key={time.created_at}>
+                    <div>{formatStatus(time.status)}</div>
+                    <div>Date: {formatDate(time.created_at)}</div>
+                  </li>
                 );
             })}
+
+            </ul>
         </div>
     )
 }

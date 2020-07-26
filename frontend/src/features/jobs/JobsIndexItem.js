@@ -59,7 +59,9 @@ export default ({ job }) => {
   };
 
   const modal = useSelector((state) => state.modal);
-  const { jobTimelineShow } = modal;
+  // const { jobTimelineShow } = modal;
+  let jobTimelineShow = true
+
   return (
     <>
       <Route path="/jobtracker/:id">
