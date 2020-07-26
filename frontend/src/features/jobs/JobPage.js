@@ -40,29 +40,30 @@ export default () => {
   const {jobFormShow} = modal;
   return (
     <>
-    <section className="jobsPageContainer">
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={jobFormShow}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={jobFormShow}>
-          <div className={classes.paper}>
-            <CreateJob handleClose={handleClose} />
-          </div>
-        </Fade>
-      </Modal>
-      <FilterOptions />
-      <JobsIndex />
-      <Pagination />
-    </section>
-  </>
+      <section className="jobsPageContainer">
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={jobFormShow}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+            style: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+          }}
+        >
+          <Fade in={jobFormShow}>
+            <div className={classes.paper}>
+              <CreateJob handleClose={handleClose} />
+            </div>
+          </Fade>
+        </Modal>
+        <FilterOptions />
+        <JobsIndex />
+        <Pagination />
+      </section>
+    </>
   );
 };

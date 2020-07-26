@@ -28,10 +28,12 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     width: "75%",
-  },
+  }
 }));
 
 export default ({ job }) => {
+    const classes = useStyles();
+
   const { token } = useContext(AuthContext);
   const dispatch = useDispatch();
 
@@ -50,7 +52,6 @@ export default ({ job }) => {
     dispatch(setTimelineShow(true));
   };
 
-  const classes = useStyles();
 
   const handleTimelineClose = () => {
     dispatch(setTimelineShow(false));
@@ -72,6 +73,7 @@ export default ({ job }) => {
           BackdropComponent={Backdrop}
           BackdropProps={{
             timeout: 500,
+            style: { backgroundColor: "rgba(0, 0, 0, 0.1)" },
           }}
         >
           <Fade in={jobTimelineShow}>
