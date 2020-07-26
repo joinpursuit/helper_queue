@@ -3,6 +3,8 @@ import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchAllJobStatusTimelines } from '../jobsSlice';
 import { AuthContext } from '../../../providers/AuthProvider';
+import { ArcherContainer, ArcherElement } from "react-archer";
+
 import "./JobShow.css";
 
 export default () => {
@@ -39,20 +41,35 @@ export default () => {
 
     if(!job || !job.timelines) return null;
 
-    return(
-        <div className="jobShowContainer">
-            <button onClick={hideSelf}>Close</button>
-            <ul>
-            {job.timelines.map(time => {
-                return (
+    return (
+      <div className="jobShowContainer" onClick={hideSelf}>
+        <button>Close</button>
+        <ArcherContainer strokeColor="black">
+          <ul>
+            {job.timelines.map((time, i) => {
+              let relations;
+              if (i === job.timelines.length - 1) {
+                relations = [];
+              } else {
+                relations = [
+                  {
+                    targetId: "element" + (i + 1),
+                    targetAnchor: "left",
+                    sourceAnchor: "right",
+                  },
+                ];
+              }
+              return (
+                <ArcherElement id={"element" + i} relations={relations}>
                   <li key={time.created_at}>
                     <div>{formatStatus(time.status)}</div>
                     <div>Date: {formatDate(time.created_at)}</div>
                   </li>
-                );
+                </ArcherElement>
+              );
             })}
-
-            </ul>
-        </div>
-    )
+          </ul>
+        </ArcherContainer>
+      </div>
+    );
 }

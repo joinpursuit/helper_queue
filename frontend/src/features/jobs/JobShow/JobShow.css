@@ -1,5 +1,10 @@
+.jobShowContainer:hover {
+    cursor: pointer;
+}
+
 .jobShowContainer button {
    float: right; 
+   z-index: 5;
 }
 
 .jobShowContainer button:hover {
@@ -8,7 +13,7 @@
 
 .jobShowContainer ul {
     display: flex; 
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 

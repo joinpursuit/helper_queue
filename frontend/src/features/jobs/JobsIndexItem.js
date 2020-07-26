@@ -59,8 +59,7 @@ export default ({ job }) => {
   };
 
   const modal = useSelector((state) => state.modal);
-  // const { jobTimelineShow } = modal;
-  let jobTimelineShow = true
+  const { jobTimelineShow } = modal;
 
   return (
     <>
