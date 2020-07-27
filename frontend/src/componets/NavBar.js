@@ -18,8 +18,8 @@ export default function NavBar() {
   const jobCount = useSelector(selectJobCount);
 
   const logoutUser = () => {
-    logout();
     dispatch(receiveJobs({}));
+    logout();
   };
 
   const regularUserView = () => {
