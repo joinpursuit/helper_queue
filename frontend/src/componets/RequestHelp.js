@@ -6,14 +6,12 @@ import socketIOClient from "socket.io-client";
 import "../css/RequestHelp.css";
 
 export default function RequestHelp() {
-    const [isLoading, setIsLoading] = useState(true)
     const [isWaitingForHelp, setIsWaitingForHelp] = useState(false);
     const [openTicket, setOpenTicket] = useState(null)
     const { token, currentUser } = useContext(AuthContext);
     const API = apiURL();
     const socket = socketIOClient(API);
     const fetchOpenTicket = async () => {
-        setIsLoading(true)
         try {
             let res = await axios({
                 method: 'get', 
@@ -29,18 +27,14 @@ export default function RequestHelp() {
                 setIsWaitingForHelp(false);
                 setOpenTicket(null)
             }    
-            setIsLoading(false)   
         } catch (error) {
-            setIsLoading(false)   
             setIsWaitingForHelp(false);
             setOpenTicket(null)
         }
         
     }
     useEffect(() => {
-        fetchOpenTicket().then(() => {
-            setIsLoading(false)
-        })
+        fetchOpenTicket()
     }, [])
     
     useEffect(() => {
@@ -84,7 +78,7 @@ export default function RequestHelp() {
         }
 
     }
-    if(isLoading) return null; 
+
     return(
         <div className="requestContainer">
             {isWaitingForHelp ? 
