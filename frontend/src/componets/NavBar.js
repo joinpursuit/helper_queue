@@ -18,7 +18,7 @@ export default function NavBar() {
   const jobCount = useSelector(selectJobCount);
 
   const logoutUser = () => {
-    dispatch(receiveJobs({}));
+    dispatch(receiveJobs([]));
     logout();
   };
 
