@@ -55,7 +55,7 @@ export default () => {
           }}
         >
           <Fade in={jobFormShow}>
-            <div className={classes.paper}>
+            <div className={classes.paper} data-testid="jobFormModal">
               <CreateJob handleClose={handleClose} />
             </div>
           </Fade>
