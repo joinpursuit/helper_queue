@@ -52,7 +52,6 @@ export default function NavBar() {
             <div className="jobCount">You've applied to {jobCount} jobs!</div>
           </div>
           <div className="navRequestAndLogOut">
-            {/* <RequestHelp /> */}
             <button className="logoutButton" onClick={logoutUser}>
               Log Out
             </button>
