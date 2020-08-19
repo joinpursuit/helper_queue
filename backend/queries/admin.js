@@ -37,21 +37,37 @@ const getAllJobsForStudent = async (req, res, next) => {
       "SELECT jobs.id AS job_id, jobs.company, jobs.job_title, " +
         "jobs.post_url, jobs.salary, jobs.location, jobs.due_date, jobs.description, jobs.status, " +
         "jobs.created_at, jobs.user_id, jobs.last_modified, users.email, users.class, " +
-        "ARRAY_AGG(jobs_status_timelines.*) AS job_status_timelines " +
+        "jobs_status_timelines.status as timeline_status, jobs_status_timelines.created_at as timeline_created_at  " +
         "FROM jobs " +
         "JOIN users ON jobs.user_id = users.id " +
         "JOIN jobs_status_timelines ON jobs_status_timelines.job_id = jobs.id " +
         "WHERE users.email = $1 " +
-        "GROUP BY jobs.id, users.email, users.class " +
         "ORDER BY jobs.last_modified DESC",
       req.params.email
     );
+
+    let obj = {};
+
+    jobs.forEach((job) => {
+        if(obj[job.job_id]) {
+            obj[job.job_id].timelines.push({status: job.timeline_status, created_at: job.timeline_created_at})
+        } else {
+            obj[job.job_id] = job;
+            obj[job.job_id].timelines = [
+              { status: job.timeline_status, created_at: job.timeline_created_at },
+            ];
+            delete obj[job.job_id].timeline_status
+            delete obj[job.job_id].timeline_created_at
+        }
+    })
+
+
 
     res.json({
       status: 200,
       message: "All jobs for student",
       email: req.params.email,
-      jobs,
+      jobs: obj,
     });
   } catch (err) {
     next(err);
@@ -59,3 +75,9 @@ const getAllJobsForStudent = async (req, res, next) => {
 };
 
 module.exports = { getAllJobs, getAllJobsForClass, getAllJobsForStudent };
+
+
+
+
+
+  
