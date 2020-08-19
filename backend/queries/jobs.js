@@ -3,9 +3,10 @@ const db = require("../db");
 const getAllUserJobs = async (req, res, next) => {
   try {
     const jobs = await db.any(
-      "SELECT * FROM jobs WHERE user_id = $1",
+      "SELECT jobs.*, jobs_status_timelines.created_at as timeline_created_at, jobs_status_timelines.status as timeline_status FROM jobs LEFT JOIN jobs_status_timelines ON jobs.id = jobs_status_timelines.job_id WHERE user_id = $1",
       req.user.id
     );
+
     res.json({
       jobs,
       message: "All Jobs",
