@@ -74,7 +74,25 @@ const getAllJobsForStudent = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllJobs, getAllJobsForClass, getAllJobsForStudent };
+const getAllUsersOfApp = async (req, res, next) => {
+    try {
+        const users = await db.any("SELECT * FROM users");
+        res.json({
+            status: 200, 
+            message: "all users",
+            users
+        })
+    } catch (err) {
+        next(err)
+    }
+}
+
+module.exports = {
+  getAllJobs,
+  getAllJobsForClass,
+  getAllJobsForStudent,
+  getAllUsersOfApp,
+};
 
 
 
