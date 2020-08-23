@@ -13,12 +13,9 @@ export default () => {
     const dispatch = useDispatch();
     const job = useSelector(state => state.jobs[id]);
 
-    const { token } = useContext(AuthContext);
-
-
     useEffect(() => {
-        dispatch(fetchAllJobStatusTimelines(token, id));
-    }, [token, id, dispatch])
+        dispatch(fetchAllJobStatusTimelines(id));
+    }, [id, dispatch])
 
     const hideSelf = () => history.push("/jobtracker");
 

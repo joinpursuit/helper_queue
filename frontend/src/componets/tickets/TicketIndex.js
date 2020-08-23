@@ -1,37 +1,48 @@
-import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import socketIOClient from "socket.io-client";
 import { apiURL } from "../../util/apiURL";
-import { AuthContext } from "../../providers/AuthProvider";
+import {
+  selectTickets,
+  fetchOpenTickets,
+  destroyTicket,
+} from "../../features/tickets/ticketsSlice";
 import TicketIndexItem from "./TicketIndexItem";
 import alertSound from "../../assets/that-was-quick.mp3";
 import "../../css/TicketIndex.css";
 
 export default function TicketIndex() {
-  const [tickets, setTickets] = useState([]);
-  // const [classes, setClasses] = useState([]);
   let initialFour = window.localStorage.getItem("sixFour");
   let initialThree = window.localStorage.getItem("sixThree");
   let initialTwo = window.localStorage.getItem("sixTwo");
   let initialOne = window.localStorage.getItem("sixOne");
-  
-  const [sixFour, setSixFour] = useState(initialFour === "true" || initialFour === null);
-  const [sixThree, setSixThree] = useState(initialThree === "true" || initialThree === null);
-  const [sixTwo, setSixTwo] = useState(initialTwo === "true" || initialTwo === null);
-  const [sixOne, setSixOne] = useState(initialOne === "true" || initialOne === null);
+
+  const [sixFour, setSixFour] = useState(
+    initialFour === "true" || initialFour === null
+  );
+  const [sixThree, setSixThree] = useState(
+    initialThree === "true" || initialThree === null
+  );
+  const [sixTwo, setSixTwo] = useState(
+    initialTwo === "true" || initialTwo === null
+  );
+  const [sixOne, setSixOne] = useState(
+    initialOne === "true" || initialOne === null
+  );
+  const API = apiURL();
 
   useEffect(() => {
-    window.localStorage.setItem("sixFour", sixFour)
-    window.localStorage.setItem("sixThree", sixThree)
-    window.localStorage.setItem("sixTwo", sixTwo)
-    window.localStorage.setItem("sixOne", sixOne)
+    window.localStorage.setItem("sixFour", sixFour);
+    window.localStorage.setItem("sixThree", sixThree);
+    window.localStorage.setItem("sixTwo", sixTwo);
+    window.localStorage.setItem("sixOne", sixOne);
     return () => {
-      window.localStorage.setItem("sixFour", sixFour)
-      window.localStorage.setItem("sixThree", sixThree)
-      window.localStorage.setItem("sixTwo", sixTwo)
-      window.localStorage.setItem("sixOne", sixOne)
-    }
-  }, [sixOne, sixTwo, sixThree, sixFour])
+      window.localStorage.setItem("sixFour", sixFour);
+      window.localStorage.setItem("sixThree", sixThree);
+      window.localStorage.setItem("sixTwo", sixTwo);
+      window.localStorage.setItem("sixOne", sixOne);
+    };
+  }, [sixOne, sixTwo, sixThree, sixFour]);
 
   const legend = {
     "6.4": sixFour,
@@ -40,30 +51,12 @@ export default function TicketIndex() {
     "6.1": sixOne,
   };
 
-  const API = apiURL();
-  const { token } = useContext(AuthContext);
   const socket = socketIOClient(API);
-  const fetchOpenTickets = async () => {
-    try {
-      let res = await axios({
-        method: "get",
-        url: `${API}/api/tickets`,
-        headers: {
-          AuthToken: token,
-        },
-      });
-      setTickets(res.data.tickets);
-      // setClasses(
-      //   [...new Set(res.data.tickets.map((ticket) => ticket.class))].sort()
-      // );
-    } catch (err) {
-      //    console.log(err);
-      setTickets([]);
-    }
-  };
+  const tickets = useSelector(selectTickets);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchOpenTickets();
+    dispatch(fetchOpenTickets());
     socket.on("updateTickets", fetchOpenTickets);
     return () => socket.off("updateTickets", fetchOpenTickets);
   }, []);
@@ -75,7 +68,7 @@ export default function TicketIndex() {
 
   useEffect(() => {
     const playSound = (data) => {
-      if(legend[data.class]) {
+      if (legend[data.class]) {
         let src = alertSound;
         let audio = new Audio(src);
         audio.play();
@@ -86,19 +79,9 @@ export default function TicketIndex() {
   }, [sixOne, sixTwo, sixThree, sixFour]);
 
   const removeTicket = async (id) => {
-    try {
-      let res = await axios({
-        method: "delete",
-        url: `${API}/api/tickets/close_tickets/${id}`,
-        headers: {
-          AuthToken: token,
-        },
-      });
-      socket.emit("ticketClosed");
-      fetchOpenTickets();
-    } catch (error) {
-      fetchOpenTickets();
-    }
+    dispatch(destroyTicket(id));
+    socket.emit("ticketClosed");
+    dispatch(fetchOpenTickets());
   };
 
   const showTickets = () => {
@@ -131,14 +114,14 @@ export default function TicketIndex() {
     return (
       <form className="classListContainer">
         <label className={sixOne ? "checked" : "notChecked"}>
-        6.1
+          6.1
           <input
             type="checkbox"
             checked={sixOne}
             onChange={(e) => setSixOne((prevSixOne) => !prevSixOne)}
           />
         </label>
-        <label className={sixTwo? "checked" : "notChecked"}>
+        <label className={sixTwo ? "checked" : "notChecked"}>
           6.2
           <input
             type="checkbox"

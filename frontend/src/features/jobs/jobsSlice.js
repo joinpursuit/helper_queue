@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
+import { getNewFirebaseIdToken } from '../auth/authSlice';
 
 const API = apiURL();
 
@@ -11,8 +12,10 @@ const normalize = (arr) => {
   }, {});
 };
 
-export const createJob = (job, token) => async (dispatch) => {
-  try {
+export const createJob = (job) => async (dispatch, getState) => {
+  try {  
+    await dispatch(getNewFirebaseIdToken())
+    const token = getState().auth.token;
     const res = await axios({
       method: "post",
       url: `${API}/api/jobs`,
@@ -26,8 +29,10 @@ export const createJob = (job, token) => async (dispatch) => {
   } catch (err) {}
 };
 
-export const fetchAllJobStatusTimelines = (token, id) => async (dispatch) => {
+export const fetchAllJobStatusTimelines = (id) => async (dispatch, getState) => {
   try {
+    await dispatch(getNewFirebaseIdToken());
+    const token = getState().auth.token;
     const res = await axios({
       method: "get",
       url: `${API}/api/jobs_status_timelines/${id}`,
@@ -41,8 +46,10 @@ export const fetchAllJobStatusTimelines = (token, id) => async (dispatch) => {
   }
 };
 
-export const fetchAllJobs = (token) => async (dispatch) => {
+export const fetchAllJobs = () => async (dispatch, getState) => {
   try {
+    await dispatch(getNewFirebaseIdToken());
+    const token = getState().auth.token;
     const res = await axios({
       method: "get",
       url: `${API}/api/jobs`,
@@ -57,8 +64,10 @@ export const fetchAllJobs = (token) => async (dispatch) => {
   }
 };
 
-export const updateJob = (job, token) => async (dispatch) => {
+export const updateJob = (job) => async (dispatch, getState) => {
   try {
+    await dispatch(getNewFirebaseIdToken());
+    const token = getState().auth.token;
     let res = await axios({
       method: "put",
       url: `${API}/api/jobs/${job.id}`,

@@ -34,12 +34,11 @@ const useStyles = makeStyles((theme) => ({
 export default ({ job }) => {
     const classes = useStyles();
 
-  const { token } = useContext(AuthContext);
   const dispatch = useDispatch();
 
   const updateJobStatus = async (e) => {
     dispatch(
-      updateJob(Object.assign({}, job, { status: e.target.value }), token)
+      updateJob(Object.assign({}, job, { status: e.target.value }))
     );
   };
 
