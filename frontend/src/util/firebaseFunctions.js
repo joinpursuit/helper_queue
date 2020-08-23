@@ -10,4 +10,4 @@ export const signUp = (email, password) => firebase
          .createUserWithEmailAndPassword(email, password);
 
 export const getFirebaseIdToken = () =>
-         firebase.auth().currentUser.getIdToken(false);
+         firebase.auth().currentUser.getIdToken(true);
