@@ -13,7 +13,13 @@ export default () => {
         <div>
             <h3>Stats Page</h3>
             <div>
-                current applications applied: {}
+                current applications applied including wishList: 
+                current applications applied NOT wishList: 
+                current rejections:
+                alltime phone screens:
+                alltime technical screen:
+                alltime onsites:
+                alltime offers: 
             </div>
         </div>
     )
