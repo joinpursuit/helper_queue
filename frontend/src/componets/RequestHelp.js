@@ -13,8 +13,8 @@ import "../css/RequestHelp.css";
 
 export default function RequestHelp() {
   const { currentUser } = useContext(AuthContext);
-  const openTicket = useSelector(state => {
-    return state.request
+  const openTicket = useSelector((state) => {
+    return state.request;
   });
   const API = apiURL();
   const socket = socketIOClient(API);
@@ -37,20 +37,14 @@ export default function RequestHelp() {
     try {
       await dispatch(createRequest());
       socket.emit("openTicket", currentUser);
-      fetchRequest();
-    } catch (error) {
-      fetchRequest();
-    }
+    } catch (error) {}
   };
 
   const cancelRequest = async () => {
     try {
       await dispatch(deleteRequest(openTicket.id));
       socket.emit("closeTicket", "remove ticket");
-      fetchRequest();
-    } catch (error) {
-      fetchRequest();
-    }
+    } catch (error) {}
   };
 
   return (
