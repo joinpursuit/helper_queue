@@ -57,13 +57,13 @@ export default function TicketIndex() {
 
   useEffect(() => {
     dispatch(fetchOpenTickets());
-    socket.on("updateTickets", fetchOpenTickets);
-    return () => socket.off("updateTickets", fetchOpenTickets);
+    socket.on("updateTickets", fetchTickets);
+    return () => socket.off("updateTickets", fetchTickets);
   }, []);
 
   useEffect(() => {
-    socket.on("ticketClose", fetchOpenTickets);
-    return () => socket.off("ticketClose", fetchOpenTickets);
+    socket.on("ticketClose", fetchTickets);
+    return () => socket.off("ticketClose", fetchTickets);
   });
 
   useEffect(() => {
@@ -79,10 +79,13 @@ export default function TicketIndex() {
   }, [sixOne, sixTwo, sixThree, sixFour]);
 
   const removeTicket = async (id) => {
-    dispatch(destroyTicket(id));
+    await dispatch(destroyTicket(id));
     socket.emit("ticketClosed");
-    dispatch(fetchOpenTickets());
   };
+
+  const fetchTickets = () => {
+    dispatch(fetchOpenTickets())
+  }
 
   const showTickets = () => {
     if (tickets.length) {

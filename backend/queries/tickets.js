@@ -5,12 +5,13 @@ const createTicket = async (req, res, next) => {
  
   try {
     await db.none("UPDATE tickets SET complete = true WHERE owner_id = $1", req.user.id)
-    const user = await db.none(
-      "INSERT INTO tickets (body, owner_id) VALUES(${body}, ${owner_id})",
+    const ticket = await db.one(
+      "INSERT INTO tickets (body, owner_id) VALUES(${body}, ${owner_id}) RETURNING *",
       req.body
     );
     res.json({
       message: "NEW Ticket CREATED",
+      ticket
     });
   } catch (err) {
     next(err);

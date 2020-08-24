@@ -3,9 +3,13 @@ import { getFirebaseIdToken } from '../../util/firebaseFunctions';
 
 export const getNewFirebaseIdToken = () => async (dispatch) => {
   try {
+    debugger
     let token = await getFirebaseIdToken();
     dispatch(updateToken(token));
-  } catch (err) {}
+  } catch (err) {
+    console.log(err)
+    debugger
+  }
 };
 
 
