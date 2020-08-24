@@ -16,39 +16,36 @@ export const fetchOpenRequest = () => async (dispatch, getState) => {
         AuthToken: token,
       },
     });
-    debugger
     if (res.data.openTicket.length) {
       dispatch(updateRequest(res.data.openTicket[0]));
     } else {
       dispatch(updateRequest(null));
     }
-  } catch (err) {}
+  } catch (err) {
+    console.log(err)
+  }
 };
 
-export const createRequest = () => async (getState, dispatch) => {
+export const createRequest = () => async (dispatch, getState) => {
   try {
-    debugger
-        await dispatch(getNewFirebaseIdToken());
-        const token = getState().auth.token;
-    debugger
-       let res = await axios({
-         method: "post",
-         url: `${API}/api/tickets`,
-         headers: {
-           AuthToken: token,
-         },
-         data: {
-           body: "",
-         },
-       });
-       debugger
-       dispatch(updateRequest(res.data.ticket))
-      } catch (error) {
-        debugger
-        console.log(error)
-        
+    await dispatch(getNewFirebaseIdToken());
+    const token = getState().auth.token;
+
+    let res = await axios({
+      method: "post",
+      url: `${API}/api/tickets`,
+      headers: {
+        AuthToken: token,
+      },
+      data: {
+        body: "",
+      },
+    });
+    dispatch(updateRequest(res.data.ticket));
+  } catch (error) {
+    console.log(error);
   }
-}
+};
 
 
 export const deleteRequest = (id) => async (dispatch, getState) => {
@@ -71,9 +68,7 @@ export const requestsSlice = createSlice({
   name: "requests",
   initialState: null,
   reducers: {
-    updateRequest: (_, { payload }) =>{
-      return payload
-    },
+    updateRequest: (state, { payload }) => payload
   },
 });
 export const { updateRequest } = requestsSlice.actions;

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { apiURL } from "../util/apiURL";
 import { AuthContext } from "../providers/AuthProvider";
@@ -10,42 +10,18 @@ import {
 } from "../features/requests/requestsSlice";
 import socketIOClient from "socket.io-client";
 import "../css/RequestHelp.css";
-import { fetchOpenTickets } from "../features/tickets/ticketsSlice";
-import axios from 'axios'
 
 export default function RequestHelp() {
-  const [isWaitingForHelp, setIsWaitingForHelp] = useState(false);
-  const [openTicket, setOpenTicket] = useState(null);
-  const { currentUser,token } = useContext(AuthContext);
-  // const openTicket = useSelector(selectRequest);
+  const { currentUser } = useContext(AuthContext);
+  const openTicket = useSelector(state => {
+    return state.request
+  });
   const API = apiURL();
   const socket = socketIOClient(API);
-  // const dispatch = useDispatch();
-  const fetchOpenTicket = async () => {
-    try {
-      let res = await axios({
-        method: "get",
-        url: `${API}/api/tickets/open_tickets/`,
-        headers: {
-          AuthToken: token,
-        },
-      });
-      debugger
-      if (res.data.openTicket.length) {
-        setIsWaitingForHelp(true);
-        setOpenTicket(res.data.openTicket[0]);
-      } else {
-        setIsWaitingForHelp(false);
-        setOpenTicket(null);
-      }
-    } catch (error) {
-      setIsWaitingForHelp(false);
-      setOpenTicket(null);
-    }
-  };
+  const dispatch = useDispatch();
+
   const fetchRequest = () => {
-    fetchOpenTicket()
-    // dispatch(fetchOpenTicket());
+    dispatch(fetchOpenRequest());
   };
 
   useEffect(() => {
@@ -59,17 +35,7 @@ export default function RequestHelp() {
 
   const makeRequest = async () => {
     try {
-      let res = await axios({
-        method: "post",
-        url: `${API}/api/tickets`,
-        headers: {
-          AuthToken: token,
-        },
-        data: {
-          body: "",
-        },
-      });
-      // dispatch(createRequest());
+      await dispatch(createRequest());
       socket.emit("openTicket", currentUser);
       fetchRequest();
     } catch (error) {
@@ -79,14 +45,7 @@ export default function RequestHelp() {
 
   const cancelRequest = async () => {
     try {
-      // dispatch(deleteRequest(openTicket.id));
-      let res = await axios({
-        method: "delete",
-        url: `${API}/api/tickets/close_tickets/${openTicket.id}`,
-        headers: {
-          AuthToken: token,
-        },
-      });
+      await dispatch(deleteRequest(openTicket.id));
       socket.emit("closeTicket", "remove ticket");
       fetchRequest();
     } catch (error) {
@@ -97,10 +56,10 @@ export default function RequestHelp() {
   return (
     <div className="requestContainer">
       <button
-        onClick={isWaitingForHelp ? cancelRequest : makeRequest}
-        className={isWaitingForHelp ? "cancelRequest request" : "makeRequest request"}
+        onClick={openTicket ? cancelRequest : makeRequest}
+        className={openTicket ? "cancelRequest request" : "makeRequest request"}
       >
-        {isWaitingForHelp ? "Cancel Request" : "Request Help"}
+        {openTicket ? "Cancel Request" : "Request Help"}
       </button>
     </div>
   );

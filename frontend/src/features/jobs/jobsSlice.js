@@ -5,12 +5,12 @@ import { getNewFirebaseIdToken } from '../auth/authSlice';
 
 const API = apiURL();
 
-const normalize = (arr) => {
-  return arr.reduce((acc, el) => {
-    acc[el.id] = { ...acc[el.id], ...el };
-    return acc;
-  }, {});
-};
+// const normalize = (arr) => {
+//   return arr.reduce((acc, el) => {
+//     acc[el.id] = { ...acc[el.id], ...el };
+//     return acc;
+//   }, {});
+// };
 
 export const createJob = (job) => async (dispatch, getState) => {
   try {  
