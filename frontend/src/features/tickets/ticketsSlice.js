@@ -49,6 +49,7 @@ export const ticketsSlice = createSlice({
       if(idx > -1) {
         state.splice(idx, 1)
       }
+      return state;
     },
   },
 });
