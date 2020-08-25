@@ -5,6 +5,8 @@ import filterReducer from "./features/filter/filterSlice";
 import searchReducer from "./features/search/searchSlice";
 import modalReducer from "./features/modal/modalSlice";
 import paginationReducer from "./features/pagination/paginationSlice";
+import ticketsReducer from "./features/tickets/ticketsSlice";
+import requestsReducer from "./features/requests/requestsSlice";
 import logger from 'redux-logger'
 
 export default configureStore({
@@ -15,7 +17,9 @@ export default configureStore({
     search: searchReducer,
     modal: modalReducer,
     pagination: paginationReducer,
+    tickets: ticketsReducer,
+    request: requestsReducer,
   },
-  middleware: [ logger, ...getDefaultMiddleware()],
+  middleware: [...getDefaultMiddleware(), logger],
   devTools: true,
 });

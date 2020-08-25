@@ -10,7 +10,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setJobFormShow, setSelectedJob } from "../modal/modalSlice";
 import Pagination from "../pagination/Pagination";
 import "./JobPage.css";
-import JobShow from "./JobShow/JobShow";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
