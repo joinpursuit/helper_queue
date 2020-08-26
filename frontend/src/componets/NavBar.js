@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-// import { NavLink } from "react-router-dom";
-import { CustomNavLink } from '../util/customLinks';
+import { CustomNavLink as NavLink } from "../util/customLinks";
 import "../css/NavBar.css";
 import { AuthContext } from "../providers/AuthProvider";
 import { logout } from "../util/firebaseFunctions";
@@ -37,7 +36,7 @@ export default function NavBar() {
     if (location.pathname === "/") {
       return (
         <nav className={"homeNav"}>
-          <CustomNavLink to={"/jobtracker"}>Job Tracker</CustomNavLink>
+          <NavLink to={"/jobtracker"}>Job Tracker</NavLink>
           <div className="rightSide">
             <div>
               <RequestHelp />
@@ -51,7 +50,7 @@ export default function NavBar() {
     } else {
       return (
         <nav className="jobTrackerNav">
-          <CustomNavLink to={"/"}>Home</CustomNavLink>
+          <NavLink to={"/"}>Home</NavLink>
           <div className="jobSearchAddContainer">
             <button
               className={"addJob"}
@@ -76,10 +75,10 @@ export default function NavBar() {
     return (
       <nav>
         <div className="navAdmin">
-          <CustomNavLink exact to="/">
+          <NavLink exact to="/">
             Home
-          </CustomNavLink>
-          <CustomNavLink to="/admin">Student Queue</CustomNavLink>
+          </NavLink>
+          <NavLink to="/admin">Student Queue</NavLink>
           <div>
 
           <button className="logoutButton" onClick={majorUpdate}>
@@ -113,17 +112,17 @@ export default function NavBar() {
     } else if (location.pathname === "/login") {
       return (
         <nav>
-          <CustomNavLink className="signUpAndLogin" to={"/signup"}>
+          <NavLink className="signUpAndLogin" to={"/signup"}>
             Sign Up
-          </CustomNavLink>
+          </NavLink>
         </nav>
       );
     } else {
       return (
         <nav>
-          <CustomNavLink to={"/login"} className="signUpAndLogin">
+          <NavLink to={"/login"} className="signUpAndLogin">
             Login
-          </CustomNavLink>
+          </NavLink>
         </nav>
       );
     }

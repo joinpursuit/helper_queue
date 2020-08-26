@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom'
+import { CustomLink } from '../../util/customLinks'
 import { useHistory } from "react-router-dom";
 import {login} from '../../util/firebaseFunctions';
 import "../../css/NavLogin.css";
@@ -38,7 +38,7 @@ export default function NavLogin() {
         />
         <button type="submit">Login</button>
       </form>
-      <Link to="/signup" className="navSwitchAuth">Need to sign up?</Link>
+      <CustomLink to="/signup" className="navSwitchAuth">Need to sign up?</CustomLink>
     </div>
   );
 }

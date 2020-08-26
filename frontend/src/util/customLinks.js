@@ -9,7 +9,7 @@ export const CustomLink = ({ to, onClick, ...otherProps }) => {
       onClick={(e) => {
         e.preventDefault();
         if (window.updateRequired) return (window.location = to);
-        // return browserHistory.push(to);
+        return history.push(to);
       }}
       {...otherProps}
     />
