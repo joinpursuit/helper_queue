@@ -10,31 +10,36 @@ import Student from "./componets/views/Student";
 import Admin from "./componets/views/Admin";
 import JobPage from "./features/jobs/JobPage";
 import ErrorBoundaries from "./componets/ErrorBoundaries/ErrorBoundaries";
+import ClientRefresh from "./ClientRefresh";
+import SocketProvider from "./providers/SocketProvider";
 
 function App() {
   return (
     <div className="App">
       <ErrorBoundaries>
-        <AuthProvider>
-          <NavBar />
-          <ErrorBoundaries>
-            <Route exact path="/">
-              <Student />
-            </Route>
-            <AuthRoute path="/signup">
-              <SignUp />
-            </AuthRoute>
-            <AuthRoute path="/login">
-              <Login />
-            </AuthRoute>
-            <AdminRoute path="/admin">
-              <Admin />
-            </AdminRoute>
-            <ProtectedRoute path="/jobtracker">
-              <JobPage />
-            </ProtectedRoute>
-          </ErrorBoundaries>
-        </AuthProvider>
+        <SocketProvider>
+          <AuthProvider>
+            <NavBar />
+            <ClientRefresh />
+            <ErrorBoundaries>
+              <Route exact path="/">
+                <Student />
+              </Route>
+              <AuthRoute path="/signup">
+                <SignUp />
+              </AuthRoute>
+              <AuthRoute path="/login">
+                <Login />
+              </AuthRoute>
+              <AdminRoute path="/admin">
+                <Admin />
+              </AdminRoute>
+              <ProtectedRoute path="/jobtracker">
+                <JobPage />
+              </ProtectedRoute>
+            </ErrorBoundaries>
+          </AuthProvider>
+        </SocketProvider>
       </ErrorBoundaries>
     </div>
   );

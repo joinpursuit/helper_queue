@@ -17,21 +17,27 @@ const server = app.listen(PORT, () => {
   console.log("listing on port ", PORT);
 })
 const io = socket(server);
-io.on('connection', (socket) => {
+
+io.on('connection', onConnect)
+
+
+function onConnect(socket) {
   socket.on("openTicket", (data) => {
-    io.sockets.emit("updateTickets", data)
-    io.sockets.emit("newTicket", data)
-  })
+    io.sockets.emit("updateTickets", data);
+    io.sockets.emit("newTicket", data);
+  });
   socket.on("closeTicket", (data) => {
-    io.sockets.emit("updateTickets", data)
-  })
+    io.sockets.emit("updateTickets", data);
+  });
 
   socket.on("ticketClosed", () => {
-    io.sockets.emit("ticketClose")
-  })
-  
-})
+    io.sockets.emit("ticketClose");
+  });
 
+  socket.on("majorUpdate", () => {
+    io.sockets.emit("majorUpdate")
+  })
+}
 
 
 
