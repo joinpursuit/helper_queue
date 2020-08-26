@@ -37,6 +37,10 @@ function onConnect(socket) {
   socket.on("majorUpdate", () => {
     io.sockets.emit("majorUpdate")
   })
+
+  socket.on("minorUpdate", () => {
+    io.sockets.emit("minorUpdate")
+  })
 }
 
 

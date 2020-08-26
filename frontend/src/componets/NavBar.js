@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
+import { CustomNavLink } from '../util/customLinks';
 import "../css/NavBar.css";
 import { AuthContext } from "../providers/AuthProvider";
 import { logout } from "../util/firebaseFunctions";
@@ -28,11 +29,15 @@ export default function NavBar() {
     socket.emit("majorUpdate");
   }
 
+  const minorUpdate = () => {
+    socket.emit("minorUpdate");
+  }
+
   const regularUserView = () => {
     if (location.pathname === "/") {
       return (
         <nav className={"homeNav"}>
-          <NavLink to={"/jobtracker"}>Job Tracker</NavLink>
+          <CustomNavLink to={"/jobtracker"}>Job Tracker</CustomNavLink>
           <div className="rightSide">
             <div>
               <RequestHelp />
@@ -46,7 +51,7 @@ export default function NavBar() {
     } else {
       return (
         <nav className="jobTrackerNav">
-          <NavLink to={"/"}>Home</NavLink>
+          <CustomNavLink to={"/"}>Home</CustomNavLink>
           <div className="jobSearchAddContainer">
             <button
               className={"addJob"}
@@ -71,13 +76,19 @@ export default function NavBar() {
     return (
       <nav>
         <div className="navAdmin">
-          <NavLink exact to="/">
+          <CustomNavLink exact to="/">
             Home
-          </NavLink>
-          <NavLink to="/admin">Student Queue</NavLink>
+          </CustomNavLink>
+          <CustomNavLink to="/admin">Student Queue</CustomNavLink>
+          <div>
+
           <button className="logoutButton" onClick={majorUpdate}>
             Major Update
           </button>
+          <button className="logoutButton" onClick={minorUpdate}>
+            Minor Update
+          </button>
+          </div>
           <button className="logoutButton" onClick={logoutUser}>
             Log Out
           </button>
@@ -102,17 +113,17 @@ export default function NavBar() {
     } else if (location.pathname === "/login") {
       return (
         <nav>
-          <NavLink className="signUpAndLogin" to={"/signup"}>
+          <CustomNavLink className="signUpAndLogin" to={"/signup"}>
             Sign Up
-          </NavLink>
+          </CustomNavLink>
         </nav>
       );
     } else {
       return (
         <nav>
-          <NavLink to={"/login"} className="signUpAndLogin">
+          <CustomNavLink to={"/login"} className="signUpAndLogin">
             Login
-          </NavLink>
+          </CustomNavLink>
         </nav>
       );
     }

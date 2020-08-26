@@ -21,6 +21,12 @@ export default (props) => {
     return () => socket.off("majorUpdate", appRequiresRefresh);
   }, [socket]);
 
+  useEffect(() => {
+    const changeLinksToRefresh = () => {window.updateRequired = true}
+    socket.on("minorUpdate", changeLinksToRefresh);
+    return () => socket.off("minorUpdate", changeLinksToRefresh);
+  }, [socket]);
+
   const reloadApp = (e) => {
     e.preventDefault();
     window.location.reload(true);
