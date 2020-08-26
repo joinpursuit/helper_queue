@@ -10,9 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setJobFormShow } from "../features/modal/modalSlice";
 import { selectJobCount, receiveJobs } from "../features/jobs/jobsSlice";
 import Search from "../features/search/Search";
+import { SocketContext } from "../providers/SocketProvider";
 
 export default function NavBar() {
   const { currentUser } = useContext(AuthContext);
+  const socket = useContext(SocketContext);
   const location = useLocation();
   const dispatch = useDispatch();
   const jobCount = useSelector(selectJobCount);
@@ -21,6 +23,10 @@ export default function NavBar() {
     dispatch(receiveJobs([]));
     logout();
   };
+
+  const majorUpdate = () => {
+    socket.emit("majorUpdate");
+  }
 
   const regularUserView = () => {
     if (location.pathname === "/") {
@@ -69,6 +75,9 @@ export default function NavBar() {
             Home
           </NavLink>
           <NavLink to="/admin">Student Queue</NavLink>
+          <button className="logoutButton" onClick={majorUpdate}>
+            Major Update
+          </button>
           <button className="logoutButton" onClick={logoutUser}>
             Log Out
           </button>

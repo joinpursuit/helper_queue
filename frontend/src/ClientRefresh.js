@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import socketIOClient from "socket.io-client";
-import { apiURL } from './util/apiURL'
-
+import React, { useState, useEffect, useContext } from "react";
+import { SocketContext } from './providers/SocketProvider';
 const style = {
   position: "absolute",
   top: 10,
@@ -15,14 +13,13 @@ const style = {
 
 export default (props) => {
   const [needsRefresh, setNeedsRefresh] = useState(false);
-  const API = apiURL();
-  const socket = socketIOClient(API);
+  const socket = useContext(SocketContext);
 
   useEffect(() => {
     const appRequiresRefresh = () => setNeedsRefresh(true);
     socket.on("majorUpdate", appRequiresRefresh);
     return () => socket.off("majorUpdate", appRequiresRefresh);
-  }, [socket, API]);
+  }, [socket]);
 
   const reloadApp = (e) => {
     e.preventDefault();

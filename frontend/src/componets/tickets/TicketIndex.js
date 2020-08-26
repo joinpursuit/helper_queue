@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import socketIOClient from "socket.io-client";
-import { apiURL } from "../../util/apiURL";
+import { SocketContext } from '../../providers/SocketProvider';
 import {
   selectTickets,
   fetchOpenTickets,
@@ -29,7 +28,6 @@ export default function TicketIndex() {
   const [sixOne, setSixOne] = useState(
     initialOne === "true" || initialOne === null
   );
-  const API = apiURL();
 
   useEffect(() => {
     window.localStorage.setItem("sixFour", sixFour);
@@ -51,7 +49,7 @@ export default function TicketIndex() {
     "6.1": sixOne,
   };
 
-  const socket = socketIOClient(API);
+  const socket = useContext(SocketContext);
   const tickets = useSelector(selectTickets);
   const dispatch = useDispatch();
 

@@ -1,21 +1,19 @@
 import React, { useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { apiURL } from "../util/apiURL";
 import { AuthContext } from "../providers/AuthProvider";
+import { SocketContext } from "../providers/SocketProvider";
 import {
   fetchOpenRequest,
   selectRequest,
   createRequest,
   deleteRequest,
 } from "../features/requests/requestsSlice";
-import socketIOClient from "socket.io-client";
 import "../css/RequestHelp.css";
 
 export default function RequestHelp() {
   const { currentUser } = useContext(AuthContext);
   const openTicket = useSelector(selectRequest);
-  const API = apiURL();
-  const socket = socketIOClient(API);
+  const socket = useContext(SocketContext);;
   const dispatch = useDispatch();
 
   const fetchRequest = () => {
