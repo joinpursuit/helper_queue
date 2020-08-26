@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "../../css/ResourceListIndex.css";
+import "./ResourceListIndex.css";
 
 export default function ResourceListIndex({header, list}) {
     const [showList, setShowList] = useState(false);

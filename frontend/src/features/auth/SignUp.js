@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { CustomLink as Link } from '../../util/customLinks'
 import { apiURL } from "../../util/apiURL";
 import { signUp } from "../../util/firebaseFunctions";
-import "../../css/Auth.css";
+import "./Auth.css";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");

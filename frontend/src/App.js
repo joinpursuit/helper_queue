@@ -1,15 +1,15 @@
 import React from "react";
 import "./App.css";
-import NavBar from "./componets/NavBar";
+import NavBar from "./features/navbar/NavBar";
 import AuthProvider from "./providers/AuthProvider";
 import { AuthRoute, ProtectedRoute, AdminRoute } from "./util/auth_routes";
-import SignUp from "./componets/auth/SignUp";
-import Login from "./componets/auth/Login";
+import SignUp from "./features/auth/SignUp";
+import Login from "./features/auth/Login";
 import { Route } from "react-router-dom";
-import Student from "./componets/views/Student";
-import Admin from "./componets/views/Admin";
+import Student from "./features/views/Student";
+import Admin from "./features/views/Admin";
 import JobPage from "./features/jobs/JobPage";
-import ErrorBoundaries from "./componets/ErrorBoundaries/ErrorBoundaries";
+import ErrorBoundaries from "./features/ErrorBoundaries/ErrorBoundaries";
 import ClientRefresh from "./ClientRefresh";
 import SocketProvider from "./providers/SocketProvider";
 

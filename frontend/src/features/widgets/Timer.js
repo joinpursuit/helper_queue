@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import alertSound from "../../assets/alarm.mp3";
 
-import "../../css/Timer.css";
+import "./Timer.css";
 
 export default function Timer() {
   const [interval, setInterval] = useState(15);

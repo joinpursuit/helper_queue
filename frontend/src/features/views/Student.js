@@ -1,5 +1,5 @@
 import React from 'react'
-import Home from '../Home'
+import Home from '../home/Home'
 
 
 export default function Student() {

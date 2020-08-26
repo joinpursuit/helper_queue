@@ -5,10 +5,10 @@ import {
   selectTickets,
   fetchOpenTickets,
   destroyTicket,
-} from "../../features/tickets/ticketsSlice";
+} from "./ticketsSlice";
 import TicketIndexItem from "./TicketIndexItem";
 import alertSound from "../../assets/that-was-quick.mp3";
-import "../../css/TicketIndex.css";
+import "./TicketIndex.css";
 
 export default function TicketIndex() {
   let initialFour = window.localStorage.getItem("sixFour");

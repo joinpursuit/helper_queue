@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { CustomLink as Link } from "../../util/customLinks";
+import { CustomLink } from '../../util/customLinks'
 import { useHistory } from "react-router-dom";
 import {login} from '../../util/firebaseFunctions';
-import "../../css/Auth.css";
+import "./NavLogin.css";
 
-export default function Login() {
+export default function NavLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,10 +21,9 @@ export default function Login() {
   };
 
   return (
-    <div className="authContainer">
-      <h1>Login Page</h1>
-      {error ? <div className="error">{error}</div> : <div className="error"></div>}
-      <form onSubmit={handleSubmit} className="authForm">
+    <div className="navLoginContainer">
+      {error ? <div className="navError">{error}</div> : <div className="navError"></div>}
+      <form onSubmit={handleSubmit} className="navAuthForm">
         <input
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
@@ -39,7 +38,7 @@ export default function Login() {
         />
         <button type="submit">Login</button>
       </form>
-      <Link to="/signup" className="switchAuth">Need to sign up?</Link>
+      <CustomLink to="/signup" className="navSwitchAuth">Need to sign up?</CustomLink>
     </div>
   );
 }

@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
-import { CustomNavLink as NavLink } from "../util/customLinks";
-import "../css/NavBar.css";
-import { AuthContext } from "../providers/AuthProvider";
-import { logout } from "../util/firebaseFunctions";
+import { CustomNavLink as NavLink } from "../../util/customLinks";
+import "./NavBar.css";
+import { AuthContext } from "../../providers/AuthProvider";
+import { logout } from "../../util/firebaseFunctions";
 import { useLocation } from "react-router-dom";
-import RequestHelp from "./RequestHelp";
-import NavLogin from "./auth/NavLogin";
+import RequestHelp from "../requests/RequestHelp";
+import NavLogin from "../auth/NavLogin";
 import { useDispatch, useSelector } from "react-redux";
-import { setJobFormShow } from "../features/modal/modalSlice";
-import { selectJobCount, receiveJobs } from "../features/jobs/jobsSlice";
-import Search from "../features/search/Search";
-import { SocketContext } from "../providers/SocketProvider";
+import { setJobFormShow } from "../modal/modalSlice";
+import { selectJobCount, receiveJobs } from "../jobs/jobsSlice";
+import Search from "../search/Search";
+import { SocketContext } from "../../providers/SocketProvider";
 
 export default function NavBar() {
   const { currentUser } = useContext(AuthContext);
