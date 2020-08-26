@@ -13,9 +13,7 @@ import "../css/RequestHelp.css";
 
 export default function RequestHelp() {
   const { currentUser } = useContext(AuthContext);
-  const openTicket = useSelector((state) => {
-    return state.request;
-  });
+  const openTicket = useSelector(selectRequest);
   const API = apiURL();
   const socket = socketIOClient(API);
   const dispatch = useDispatch();

@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link, Route } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { updateJob } from "./jobsSlice";
 import {

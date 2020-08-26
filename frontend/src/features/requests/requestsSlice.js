@@ -53,7 +53,7 @@ export const deleteRequest = (id) => async (dispatch, getState) => {
     await dispatch(getNewFirebaseIdToken());
     const token = getState().auth.token;
 
-      let res = await axios({
+      await axios({
         method: "delete",
         url: `${API}/api/tickets/close_tickets/${id}`,
         headers: {

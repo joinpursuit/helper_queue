@@ -1,8 +1,7 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchAllJobStatusTimelines } from '../jobsSlice';
-import { AuthContext } from '../../../providers/AuthProvider';
 import { ArcherContainer, ArcherElement } from "react-archer";
 
 import "./JobShow.css";

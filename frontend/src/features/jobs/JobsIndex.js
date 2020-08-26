@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect } from 'react'
 import JobsIndexItem from './JobsIndexItem'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectFilteredJobs, fetchAllJobs } from "./jobsSlice";
