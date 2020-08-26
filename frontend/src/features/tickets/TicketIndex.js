@@ -16,6 +16,9 @@ export default function TicketIndex() {
   let initialTwo = window.localStorage.getItem("sixTwo");
   let initialOne = window.localStorage.getItem("sixOne");
 
+  let initialSevenOne = window.localStorage.getItem("sevenOne");
+  let initialSevenTwo = window.localStorage.getItem("sevenTwo");
+
   const [sixFour, setSixFour] = useState(
     initialFour === "true" || initialFour === null
   );
@@ -28,21 +31,34 @@ export default function TicketIndex() {
   const [sixOne, setSixOne] = useState(
     initialOne === "true" || initialOne === null
   );
+  const [sevenOne, setSevenOne] = useState(
+    initialSevenOne === "true" || initialSevenOne === null
+  );
+  const [sevenTwo, setSevenTwo] = useState(
+    initialSevenTwo === "true" || initialSevenTwo === null
+  );
+
 
   useEffect(() => {
     window.localStorage.setItem("sixFour", sixFour);
     window.localStorage.setItem("sixThree", sixThree);
     window.localStorage.setItem("sixTwo", sixTwo);
     window.localStorage.setItem("sixOne", sixOne);
+    window.localStorage.setItem("sevenOne", sevenOne);
+    window.localStorage.setItem("sevenTwo", sevenTwo);
     return () => {
       window.localStorage.setItem("sixFour", sixFour);
       window.localStorage.setItem("sixThree", sixThree);
       window.localStorage.setItem("sixTwo", sixTwo);
       window.localStorage.setItem("sixOne", sixOne);
+      window.localStorage.setItem("sevenOne", sevenOne);
+      window.localStorage.setItem("sevenTwo", sevenTwo);
     };
-  }, [sixOne, sixTwo, sixThree, sixFour]);
+  }, [sixOne, sixTwo, sixThree, sixFour, sevenOne, sevenTwo]);
 
   const legend = {
+    "7.2": sevenTwo,
+    "7.1": sevenOne,
     "6.4": sixFour,
     "6.3": sixThree,
     "6.2": sixTwo,
@@ -144,6 +160,22 @@ export default function TicketIndex() {
             type="checkbox"
             checked={sixFour}
             onChange={(e) => setSixFour((prevSixFour) => !prevSixFour)}
+          />
+        </label>
+        <label className={sevenOne ? "checked" : "notChecked"}>
+          7.1
+          <input
+            type="checkbox"
+            checked={sevenOne}
+            onChange={(e) => setSevenOne((prevSevenOne) => !prevSevenOne)}
+          />
+        </label>
+        <label className={sevenTwo ? "checked" : "notChecked"}>
+          7.2
+          <input
+            type="checkbox"
+            checked={sevenTwo}
+            onChange={(e) => setSevenTwo((prevSevenTwo) => !prevSevenTwo)}
           />
         </label>
       </form>
