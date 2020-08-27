@@ -7,7 +7,7 @@ export const SocketContext = createContext();
 const SocketProvider = (props) => {
     const API = apiURL();
     const { currentUser } = useContext(AuthContext)
-    const socket = socketIOClient(API, {query: `email=${currentUser.email}`});
+    const socket = socketIOClient(API, {query: `email=${currentUser && currentUser.email}`});
     // console.log(socket)
     // console.log("SOCKET ID: ", socket.id)
     return(
