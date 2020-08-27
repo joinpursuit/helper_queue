@@ -8,6 +8,7 @@ import {
   selectRequest,
   createRequest,
   deleteRequest,
+  updateRequest,
 } from "./requestsSlice";
 import "./RequestHelp.css";
 
@@ -26,9 +27,13 @@ export default function RequestHelp() {
     fetchRequest();
   }, [network]);
 
+  
   useEffect(() => {
-    socket.on("ticketClose", fetchRequest);
-    return () => socket.off("ticketClose", fetchRequest);
+    const adminRemoveRequest = () => {
+      dispatch(updateRequest(null))
+    };
+    socket.on("adminRemoveRequest", adminRemoveRequest);
+    return () => socket.off("adminRemoveRequest", adminRemoveRequest);
   }, []);
 
   const makeRequest = async () => {

@@ -27,7 +27,7 @@ function onConnect(socket) {
     if(email === "admin@admin.com") {
       socket.join('admin');
     } else {
-      // socket.join(email)
+      socket.join(email)
       allUsers[email] = socket.id;
     }
   socket.on("openRequest", (data) => {
@@ -40,19 +40,11 @@ function onConnect(socket) {
 
   socket.on("adminRemoveTicket", (ticket) => {
     socket.broadcast.to('admin').emit( "updateTickets", ticket.email);
-  })
-  
-  // socket.on("updateTickets", (email) => {
-  //   socket.broadcast.to('admin').emit( "updateTickets", email);
-  // });
+      const socketToNotify = allUsers[ticket.email];
 
-  socket.on("ticketClosed", (email) => {
-    const socketToNotify = allUsers[email];
-    console.log("socket to notify: ", socketToNotify)
-    io.to(socketToNotify).emit("ticketClose", email);
-    // socket.broadcast.to(email).emit("ticketClose")
-    socket.broadcast.to('admin').emit( "updateTickets", email);
-  });
+      io.to(socketToNotify).emit("adminRemoveRequest")
+      socket.broadcast.to(ticket.email).emit("adminRemoveRequest")
+  })
 
   socket.on("majorUpdate", () => {
     io.sockets.emit("majorUpdate")
