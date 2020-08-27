@@ -32,6 +32,7 @@ export default function RequestHelp() {
   const makeRequest = async () => {
     try {
       await dispatch(createRequest());
+      currentUser.socket_id = socket.id
       socket.emit("openTicket", currentUser);
     } catch (error) {}
   };

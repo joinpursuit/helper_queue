@@ -71,14 +71,15 @@ export default function TicketIndex() {
         let audio = new Audio(src);
         audio.play();
       }
+      //have socket id to close: data.socket_id
     };
     socket.on("newTicket", playSound);
     return () => socket.off("newTicket", playSound);
   }, [sixOne, sixTwo, sixThree, sixFour]);
 
-  const removeTicket = async (id) => {
-    await dispatch(destroyTicket(id));
-    socket.emit("ticketClosed");
+  const removeTicket = async (ticket) => {
+    await dispatch(destroyTicket(ticket.id));
+    socket.emit("ticketClosed", ticket.email);
   };
 
   const fetchTickets = () => {

@@ -7,7 +7,7 @@ import TimeAgo from 'react-timeago';
         <li className="ticketIndexItem">
         <div>
             <p> {ticket.email} </p>
-            <button onClick={() => removeTicket(ticket.id)}>Complete</button>
+            <button onClick={() => removeTicket(ticket)}>Complete</button>
             <TimeAgo date={ticket.created_at} />
         </div>
             

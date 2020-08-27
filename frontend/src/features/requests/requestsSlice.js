@@ -16,6 +16,7 @@ export const fetchOpenRequest = () => async (dispatch, getState) => {
         AuthToken: token,
       },
     });
+    
     if (res.data.openTicket.length) {
       dispatch(updateRequest(res.data.openTicket[0]));
     } else {

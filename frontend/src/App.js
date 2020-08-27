@@ -12,15 +12,21 @@ import JobPage from "./features/jobs/JobPage";
 import ErrorBoundaries from "./componets/ErrorBoundaries/ErrorBoundaries";
 import ClientRefresh from "./ClientRefresh";
 import SocketProvider from "./providers/SocketProvider";
+import AutoReload from "./AutoReload";
 
 function App() {
   return (
     <div className="App">
       <ErrorBoundaries>
-        <SocketProvider>
-          <AuthProvider>
+        <AuthProvider>
+          <SocketProvider>
             <NavBar />
             <ClientRefresh />
+            <AutoReload
+              url="/index.html"
+              tryDelay={10 * 60 * 1000}
+              forceDelay={24 * 60 * 60 * 1000}
+            />
             <ErrorBoundaries>
               <Route exact path="/">
                 <Student />
@@ -38,8 +44,8 @@ function App() {
                 <JobPage />
               </ProtectedRoute>
             </ErrorBoundaries>
-          </AuthProvider>
-        </SocketProvider>
+          </SocketProvider>
+        </AuthProvider>
       </ErrorBoundaries>
     </div>
   );
