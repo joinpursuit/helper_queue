@@ -13,6 +13,7 @@ import ErrorBoundaries from "./componets/ErrorBoundaries/ErrorBoundaries";
 import ClientRefresh from "./ClientRefresh";
 import SocketProvider from "./providers/SocketProvider";
 import AutoReload from "./AutoReload";
+import NetworkProvider from "./providers/NetworkProvider";
 
 function App() {
   return (
@@ -20,30 +21,32 @@ function App() {
       <ErrorBoundaries>
         <AuthProvider>
           <SocketProvider>
-            <NavBar />
-            <ClientRefresh />
-            <AutoReload
-              url="/index.html"
-              tryDelay={10 * 60 * 1000}
-              forceDelay={24 * 60 * 60 * 1000}
-            />
-            <ErrorBoundaries>
-              <Route exact path="/">
-                <Student />
-              </Route>
-              <AuthRoute path="/signup">
-                <SignUp />
-              </AuthRoute>
-              <AuthRoute path="/login">
-                <Login />
-              </AuthRoute>
-              <AdminRoute path="/admin">
-                <Admin />
-              </AdminRoute>
-              <ProtectedRoute path="/jobtracker">
-                <JobPage />
-              </ProtectedRoute>
-            </ErrorBoundaries>
+            <NetworkProvider>
+              <NavBar />
+              <ClientRefresh />
+              <AutoReload
+                url="/index.html"
+                tryDelay={10 * 60 * 1000}
+                forceDelay={24 * 60 * 60 * 1000}
+              />
+              <ErrorBoundaries>
+                <Route exact path="/">
+                  <Student />
+                </Route>
+                <AuthRoute path="/signup">
+                  <SignUp />
+                </AuthRoute>
+                <AuthRoute path="/login">
+                  <Login />
+                </AuthRoute>
+                <AdminRoute path="/admin">
+                  <Admin />
+                </AdminRoute>
+                <ProtectedRoute path="/jobtracker">
+                  <JobPage />
+                </ProtectedRoute>
+              </ErrorBoundaries>
+            </NetworkProvider>
           </SocketProvider>
         </AuthProvider>
       </ErrorBoundaries>

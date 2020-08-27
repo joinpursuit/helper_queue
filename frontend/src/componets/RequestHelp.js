@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AuthContext } from "../providers/AuthProvider";
 import { SocketContext } from "../providers/SocketProvider";
+import { NetworkContext } from "../providers/NetworkProvider";
 import {
   fetchOpenRequest,
   selectRequest,
@@ -14,6 +15,7 @@ export default function RequestHelp() {
   const { currentUser } = useContext(AuthContext);
   const openTicket = useSelector(selectRequest);
   const socket = useContext(SocketContext);;
+  const network = useContext(NetworkContext);;
   const dispatch = useDispatch();
 
   const fetchRequest = () => {
@@ -22,7 +24,7 @@ export default function RequestHelp() {
 
   useEffect(() => {
     fetchRequest();
-  }, []);
+  }, [network]);
 
   useEffect(() => {
     socket.on("ticketClose", fetchRequest);

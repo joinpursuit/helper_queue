@@ -25,7 +25,7 @@ class AutoReload extends Component {
   }
 
   fetchSource() {
-      console.log("FETCH")
+      // console.log("FETCH")
     return fetch(this.props.url)
       .then((response) => {
         if (response.status !== 200) {

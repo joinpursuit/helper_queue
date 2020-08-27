@@ -8,8 +8,8 @@ const SocketProvider = (props) => {
     const API = apiURL();
     const { currentUser } = useContext(AuthContext)
     const socket = socketIOClient(API, {query: `email=${currentUser.email}`});
-    console.log(socket)
-    console.log("SOCKET ID: ", socket.id)
+    // console.log(socket)
+    // console.log("SOCKET ID: ", socket.id)
     return(
         <SocketContext.Provider value={socket}>
             {props.children}

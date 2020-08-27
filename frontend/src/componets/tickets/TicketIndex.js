@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SocketContext } from '../../providers/SocketProvider';
+import { NetworkContext } from '../../providers/NetworkProvider';
 import {
   selectTickets,
   fetchOpenTickets,
@@ -50,6 +51,7 @@ export default function TicketIndex() {
   };
 
   const socket = useContext(SocketContext);
+  const network = useContext(NetworkContext);
   const tickets = useSelector(selectTickets);
   const dispatch = useDispatch();
 
@@ -57,7 +59,7 @@ export default function TicketIndex() {
     dispatch(fetchOpenTickets());
     socket.on("updateTickets", fetchTickets);
     return () => socket.off("updateTickets", fetchTickets);
-  }, []);
+  }, [network]);
 
   useEffect(() => {
     socket.on("ticketClose", fetchTickets);
