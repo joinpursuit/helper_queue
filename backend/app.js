@@ -17,21 +17,33 @@ const server = app.listen(PORT, () => {
   console.log("listing on port ", PORT);
 })
 const io = socket(server);
+const allUsers = {};
 
 io.on('connection', onConnect)
 
 
 function onConnect(socket) {
+    let email = socket.handshake.query["email"];
+    if(email === "admin@admin.com") {
+      socket.join('admin');
+    } else {
+      socket.join(email)
+      // allUsers[email] = socket.id;
+    }
   socket.on("openTicket", (data) => {
-    io.sockets.emit("updateTickets", data);
-    io.sockets.emit("newTicket", data);
+    socket.broadcast.to('admin').emit("updateTickets", data);
+    socket.broadcast.to('admin').emit("newTicket", data);
   });
-  socket.on("closeTicket", (data) => {
-    io.sockets.emit("updateTickets", data);
+  socket.on("closeTicket", (email) => {
+    socket.broadcast.to('admin').emit( "updateTickets", email);
   });
-
-  socket.on("ticketClosed", () => {
-    io.sockets.emit("ticketClose");
+  
+  socket.on("ticketClosed", (email) => {
+    // const socketToNotify = allUsers[email];
+    // console.log("socket to notify: ", socketToNotify)
+    // io.to(socketToNotify).emit("ticketClose", email);
+    socket.broadcast.to(email).emit("ticketClose")
+    socket.broadcast.to('admin').emit( "ticketClose", email);
   });
 
   socket.on("majorUpdate", () => {

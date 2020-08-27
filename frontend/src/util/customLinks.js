@@ -30,3 +30,6 @@ export const CustomNavLink = ({ to, onClick, ...otherProps }) => {
     />
   );
 };
+
+
+//inspired by Yan Takushevich stack overflow answer https://stackoverflow.com/questions/34388614/how-to-force-update-single-page-application-spa-pages

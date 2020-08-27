@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SocketContext } from '../../providers/SocketProvider';
+import { NetworkContext } from '../../providers/NetworkProvider';
 import {
   selectTickets,
   fetchOpenTickets,
@@ -66,6 +67,7 @@ export default function TicketIndex() {
   };
 
   const socket = useContext(SocketContext);
+  const network = useContext(NetworkContext);
   const tickets = useSelector(selectTickets);
   const dispatch = useDispatch();
 
@@ -73,7 +75,7 @@ export default function TicketIndex() {
     dispatch(fetchOpenTickets());
     socket.on("updateTickets", fetchTickets);
     return () => socket.off("updateTickets", fetchTickets);
-  }, []);
+  }, [network]);
 
   useEffect(() => {
     socket.on("ticketClose", fetchTickets);
@@ -87,14 +89,15 @@ export default function TicketIndex() {
         let audio = new Audio(src);
         audio.play();
       }
+      //have socket id to close: data.socket_id
     };
     socket.on("newTicket", playSound);
     return () => socket.off("newTicket", playSound);
   }, [sixOne, sixTwo, sixThree, sixFour]);
 
-  const removeTicket = async (id) => {
-    await dispatch(destroyTicket(id));
-    socket.emit("ticketClosed");
+  const removeTicket = async (ticket) => {
+    await dispatch(destroyTicket(ticket.id));
+    socket.emit("ticketClosed", ticket.email);
   };
 
   const fetchTickets = () => {
