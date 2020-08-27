@@ -17,8 +17,8 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await signUp(email, password);
-      await axios.post(`${API}/api/users`, { id: res.user.uid, email, class: classTitle.trim() });
+      let res = await signUp(email.toLowerCase(), password);
+      await axios.post(`${API}/api/users`, { id: res.user.uid, email: email.toLowerCase(), class: classTitle.trim() });
       history.push("/");
     } catch (err) {
       setError(err.message);
