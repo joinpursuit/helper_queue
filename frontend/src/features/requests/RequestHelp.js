@@ -35,14 +35,15 @@ export default function RequestHelp() {
     try {
       await dispatch(createRequest());
       currentUser.socket_id = socket.id
-      socket.emit("openTicket", currentUser);
+      socket.emit("openRequest", currentUser);
     } catch (error) {}
   };
 
   const cancelRequest = async () => {
     try {
-      await dispatch(deleteRequest(openTicket.id));
-      socket.emit("closeTicket", "remove ticket");
+      await dispatch(deleteRequest(currentUser.email));
+      currentUser.socket_id = socket.id;
+      socket.emit("cancelRequest", currentUser);
     } catch (error) {}
   };
 

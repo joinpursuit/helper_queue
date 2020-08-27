@@ -11,7 +11,6 @@ const NetworkProvider = (props) => {
         const webPing = window.setInterval(() => {
           fetch("//google.com", { mode: "no-cors" })
             .then(() => {
-              console.log("CONNECTED");
               setIsConnected(true);
               clearInterval(webPing);
             })

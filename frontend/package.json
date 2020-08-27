@@ -10,7 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.19.2",
     "battery-friendly-timer": "^1.0.1",
-    "firebase": "^7.17.1",
+    "firebase": "^7.19.0",
     "react": "^16.13.1",
     "react-archer": "^2.0.2",
     "react-dom": "^16.13.1",
@@ -21,7 +21,7 @@
     "redux-logger": "^3.0.6",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.0",
-    "suneditor-react": "^2.13.1"
+    "suneditor-react": "^2.13.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -6,6 +6,8 @@ import {
   selectTickets,
   fetchOpenTickets,
   destroyTicket,
+  receiveTicket,
+  removeTicket
 } from "./ticketsSlice";
 import TicketIndexItem from "./TicketIndexItem";
 import alertSound from "../../assets/that-was-quick.mp3";
@@ -71,38 +73,46 @@ export default function TicketIndex() {
   const tickets = useSelector(selectTickets);
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     dispatch(fetchOpenTickets());
-    socket.on("updateTickets", fetchTickets);
-    return () => socket.off("updateTickets", fetchTickets);
   }, [network]);
-
+  
   useEffect(() => {
-    socket.on("ticketClose", fetchTickets);
-    return () => socket.off("ticketClose", fetchTickets);
+    const cancelRequest = (user) => {
+      dispatch(removeTicket(user.email));
+    }
+    socket.on("cancelRequest", cancelRequest);
+    return () => socket.off("cancelRequest", cancelRequest);
+  });
+  useEffect(() => {
+    const updateTickets = (email) => {
+      dispatch(removeTicket(email));
+    }
+    socket.on("updateTickets", updateTickets);
+    return () => socket.off("updateTickets", updateTickets);
   });
 
   useEffect(() => {
-    const playSound = (data) => {
-      if (legend[data.class]) {
+    const playSound = (ticket) => {
+      if (legend[ticket.class]) {
         let src = alertSound;
         let audio = new Audio(src);
         audio.play();
       }
-      //have socket id to close: data.socket_id
+
+      dispatch(receiveTicket(ticket))
+      //have socket id to close: ticket.socket_id
     };
     socket.on("newTicket", playSound);
     return () => socket.off("newTicket", playSound);
   }, [sixOne, sixTwo, sixThree, sixFour]);
 
-  const removeTicket = async (ticket) => {
-    await dispatch(destroyTicket(ticket.id));
-    socket.emit("ticketClosed", ticket.email);
+  const adminRemoveTicket = async (ticket) => {
+    await dispatch(destroyTicket(ticket));
+    socket.emit("adminRemoveTicket", ticket);
   };
 
-  const fetchTickets = () => {
-    dispatch(fetchOpenTickets())
-  }
 
   const showTickets = () => {
     if (tickets.length) {
@@ -115,7 +125,7 @@ export default function TicketIndex() {
                   <TicketIndexItem
                     key={ticket.id}
                     ticket={ticket}
-                    removeTicket={removeTicket}
+                    removeTicket={adminRemoveTicket}
                   />
                 );
               } else {

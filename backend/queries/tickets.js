@@ -33,8 +33,10 @@ const findOpenTicket = async (req, res, next) => {
 const deleteOpenTicket = async (req, res, next) => {
 
   try {
-    let owner = await db.one("SELECT owner_id FROM tickets WHERE id = $1 LIMIT 1", req.params.id)
-    await db.none("UPDATE tickets SET complete = true WHERE owner_id = $1", owner.owner_id)
+    let owner = await db.one("SELECT id FROM users WHERE email = $1 LIMIT 1", req.params.id)
+    console.log(owner)
+    await db.none("DELETE FROM tickets WHERE owner_id = $1", owner.id)
+    // await db.none("UPDATE tickets SET complete = true WHERE owner_id = $1", owner.owner_id)
     res.json({
       message: "success"
     })
