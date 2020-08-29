@@ -1,7 +1,7 @@
 .filterOptions {
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    align-items: center;
 }
 .filterOptions label {
     height: 35px;

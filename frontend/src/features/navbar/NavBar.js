@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CustomNavLink as NavLink } from "../../util/customLinks";
+import { CustomNavLink as NavLink, CustomLink as Link } from "../../util/customLinks";
 import "./NavBar.css";
 import { AuthContext } from "../../providers/AuthProvider";
 import { logout } from "../../util/firebaseFunctions";
@@ -47,6 +47,19 @@ export default function NavBar() {
           </div>
         </nav>
       );
+    } else if (location.pathname === "/stats/jobtracker") {
+      return (
+        <nav className="jobTrackerNav">
+          <NavLink to={"/"}>Home</NavLink>
+          <NavLink to={"/jobtracker"}>Job Tracker</NavLink>
+
+          <div className="navRequestAndLogOut">
+            <button className="logoutButton" onClick={logoutUser}>
+              Log Out
+            </button>
+          </div>
+        </nav>
+      );
     } else {
       return (
         <nav className="jobTrackerNav">
@@ -59,7 +72,12 @@ export default function NavBar() {
               + Add Job
             </button>
             <Search />
-            <div className="jobCount">You've applied to {jobCount} jobs!</div>
+            <div className="jobCount">
+              <p>You've applied to {jobCount} jobs!</p>
+              <Link id="statsPageLink" to={"/stats/jobtracker"}>
+                See All Stats
+              </Link>
+            </div>
           </div>
           <div className="navRequestAndLogOut">
             <button className="logoutButton" onClick={logoutUser}>

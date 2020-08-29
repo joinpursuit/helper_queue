@@ -135,3 +135,9 @@ nav {
     color: white;
     font-size: 14px;
 }
+
+#statsPageLink {
+  text-decoration: underline;
+  font-size: 13px; 
+  font-weight: normal;
+}
