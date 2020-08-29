@@ -14,6 +14,7 @@ import ClientRefresh from "./ClientRefresh";
 import SocketProvider from "./providers/SocketProvider";
 import AutoReload from "./AutoReload";
 import NetworkProvider from "./providers/NetworkProvider";
+import JobStats from "./features/jobs/Stats/JobStats";
 
 function App() {
   return (
@@ -44,6 +45,9 @@ function App() {
                 </AdminRoute>
                 <ProtectedRoute path="/jobtracker">
                   <JobPage />
+                </ProtectedRoute>
+                <ProtectedRoute path="/stats/jobtracker">
+                  <JobStats/>
                 </ProtectedRoute>
               </ErrorBoundaries>
             </NetworkProvider>

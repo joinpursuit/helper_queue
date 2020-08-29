@@ -7,10 +7,12 @@ import { selectPagination } from '../pagination/paginationSlice';
 
 export default () => {
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(fetchAllJobs())
-    }, [dispatch])
     const jobs = useSelector(selectFilteredJobs)
+    useEffect(() => {
+        if(!jobs.length) {
+            dispatch(fetchAllJobs())
+        }
+    }, [dispatch])
     const {startIdx, endIdx} = useSelector(selectPagination)
     if(jobs.length === 0) {
         return (

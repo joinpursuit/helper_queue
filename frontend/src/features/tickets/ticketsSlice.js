@@ -47,14 +47,17 @@ export const ticketsSlice = createSlice({
     receiveTickets: (state, { payload }) => payload,
     removeTicket: (state, { payload }) => {
       let idx = state.findIndex((ticket) => ticket.email === payload);
-      if(idx > -1) {
-        state.splice(idx, 1)
+      if (idx > -1) {
+        state.splice(idx, 1);
       }
       return state;
     },
     receiveTicket: (state, { payload }) => {
-      state.push(payload)
-    }
+      state.push(payload);
+    },
+  },
+  extraReducers: {
+    logoutUser: () => []
   },
 });
 export const { receiveTickets,receiveTicket, removeTicket } = ticketsSlice.actions;

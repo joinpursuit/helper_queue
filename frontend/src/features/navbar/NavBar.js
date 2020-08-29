@@ -8,7 +8,8 @@ import RequestHelp from "../requests/RequestHelp";
 import NavLogin from "../auth/NavLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { setJobFormShow } from "../modal/modalSlice";
-import { selectJobCount, receiveJobs } from "../jobs/jobsSlice";
+import { selectJobCount } from "../jobs/jobsSlice";
+import { logoutUser as userLogOut} from '../auth/authSlice'
 import Search from "../search/Search";
 import { SocketContext } from "../../providers/SocketProvider";
 
@@ -20,7 +21,7 @@ export default function NavBar() {
   const jobCount = useSelector(selectJobCount);
 
   const logoutUser = () => {
-    dispatch(receiveJobs([]));
+    dispatch(userLogOut);
     logout();
   };
 
@@ -37,6 +38,7 @@ export default function NavBar() {
       return (
         <nav className={"homeNav"}>
           <NavLink to={"/jobtracker"}>Job Tracker</NavLink>
+          {/* <NavLink to={"/stats/jobtracker"}>Job Stats</NavLink> */}
           <div className="rightSide">
             <div>
               <RequestHelp />

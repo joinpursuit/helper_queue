@@ -25,15 +25,15 @@ const createJob = async (req, res, next) => {
       req.body
     );
 
-    await db.none(
+    let timeline = await db.any(
       "INSERT INTO jobs_status_timelines (status, job_id)" + 
-      " VALUES(${status}, ${job_id})", 
+      " VALUES(${status}, ${job_id}) RETURNING *", 
       {
         job_id: job.id,
         status: job.status
         }
       );
-
+      job.timelines = timeline
     res.json({
       job,
       message: "New Job Added",

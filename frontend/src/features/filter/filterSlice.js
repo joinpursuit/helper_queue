@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-export const filterSlice = createSlice({
-  name: "filter",
-  initialState: {
+const initState = {
     rejected: false,
     wishlist: false,
     applied: true,
@@ -11,12 +8,18 @@ export const filterSlice = createSlice({
     techScreen: false,
     onsite: false,
     offer: false,
-  },
-  reducers: {
-      updateFilter: (state, {payload}) => {
-          state[payload] = !state[payload]
-      }
   }
+export const filterSlice = createSlice({
+  name: "filter",
+  initialState: initState,
+  reducers: {
+    updateFilter: (state, { payload }) => {
+      state[payload] = !state[payload];
+    },
+  },
+  extraReducers: {
+    logoutUser: () => initState 
+  },
 });
 export const {updateFilter} = filterSlice.actions;
 export default filterSlice.reducer;

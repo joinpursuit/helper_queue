@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
 import { getNewFirebaseIdToken } from '../auth/authSlice';
+import { logoutUser } from '../auth/authSlice'
 
 const API = apiURL();
 
@@ -96,7 +97,7 @@ export const jobsSlice = createSlice({
         });
         state[el.id] = { ...state[el.id], ...el };
 
-        delete state[el.id].timeline_status
+        delete state[el.id].timeline_status;
         delete state[el.id].timeline_created_at;
       });
     },
@@ -109,6 +110,9 @@ export const jobsSlice = createSlice({
       job.timelines = payload.timelines;
       state[job_id] = { ...state[job_id], timelines: payload.timelines };
     },
+  },
+  extraReducers: {
+    logoutUser: () => {}
   },
 });
 

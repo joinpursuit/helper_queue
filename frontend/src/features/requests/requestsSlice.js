@@ -69,7 +69,10 @@ export const requestsSlice = createSlice({
   name: "requests",
   initialState: null,
   reducers: {
-    updateRequest: (state, { payload }) => payload
+    updateRequest: (state, { payload }) => payload,
+  },
+  extraReducers: {
+    logoutUser: () => null
   },
 });
 export const { updateRequest } = requestsSlice.actions;
