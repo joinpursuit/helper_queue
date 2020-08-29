@@ -2,6 +2,17 @@ import React, { createContext, useState, useEffect } from "react";
 
 export const NetworkContext = createContext();
 
+    const style = {
+      position: "absolute",
+      top: 10,
+      right: 10,
+      padding: "1em",
+      zIndex: 2000,
+      backgroundColor: "pink",
+      borderRadius: 5,
+      textAlign: "center",
+    };
+
 const NetworkProvider = (props) => {
   const [isConnected, setIsConnected] = useState(true);
 
@@ -30,6 +41,7 @@ const NetworkProvider = (props) => {
   }, []);
   return (
     <NetworkContext.Provider value={isConnected}>
+    {isConnected ? null :  <div style={style}><div>Currently Offline</div></div>}
       {props.children}
     </NetworkContext.Provider>
   );
