@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { logoutUser } from '../auth/authSlice'
 const initState =  {
            jobFormShow: false,
            selectedJob: null,
@@ -19,7 +20,7 @@ export const modalSlice = createSlice({
     },
   },
   extraReducers: {
-    logoutUser: () => initState
+    [logoutUser]() { return initState }
   },
 });
 

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { logoutUser } from "../auth/authSlice";
 
 export const searchSlice = createSlice({
   name: "search",
@@ -8,7 +9,7 @@ export const searchSlice = createSlice({
     clearInput: () => "",
   },
   extraReducers: {
-    logoutUser: () => ""
+    [logoutUser](){return ""}
   },
 });
 export const { updateSearch, clearInput } = searchSlice.actions; 

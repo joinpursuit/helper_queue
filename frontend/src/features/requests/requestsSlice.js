@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { logoutUser } from "../auth/authSlice";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
 import { getNewFirebaseIdToken } from "../auth/authSlice";
@@ -72,7 +73,7 @@ export const requestsSlice = createSlice({
     updateRequest: (state, { payload }) => payload,
   },
   extraReducers: {
-    logoutUser: () => null
+    [logoutUser](){return null}
   },
 });
 export const { updateRequest } = requestsSlice.actions;

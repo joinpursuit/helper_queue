@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { logoutUser } from '../auth/authSlice';
 const initState = {
     rejected: false,
     wishlist: false,
@@ -18,7 +19,7 @@ export const filterSlice = createSlice({
     },
   },
   extraReducers: {
-    logoutUser: () => initState 
+    [logoutUser](){ return initState }
   },
 });
 export const {updateFilter} = filterSlice.actions;

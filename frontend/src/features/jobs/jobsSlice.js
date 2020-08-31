@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { apiURL } from "../../util/apiURL";
-import { getNewFirebaseIdToken } from '../auth/authSlice';
-import { logoutUser } from '../auth/authSlice'
+import { getNewFirebaseIdToken } from "../auth/authSlice";
+import { logoutUser } from "../auth/authSlice";
 
 const API = apiURL();
 
@@ -14,8 +14,8 @@ const API = apiURL();
 // };
 
 export const createJob = (job) => async (dispatch, getState) => {
-  try {  
-    await dispatch(getNewFirebaseIdToken())
+  try {
+    await dispatch(getNewFirebaseIdToken());
     const token = getState().auth.token;
     const res = await axios({
       method: "post",
@@ -30,7 +30,10 @@ export const createJob = (job) => async (dispatch, getState) => {
   } catch (err) {}
 };
 
-export const fetchAllJobStatusTimelines = (id) => async (dispatch, getState) => {
+export const fetchAllJobStatusTimelines = (id) => async (
+  dispatch,
+  getState
+) => {
   try {
     await dispatch(getNewFirebaseIdToken());
     const token = getState().auth.token;
@@ -112,7 +115,7 @@ export const jobsSlice = createSlice({
     },
   },
   extraReducers: {
-    logoutUser: () => {}
+    [logoutUser]() { return {} },
   },
 });
 
@@ -141,3 +144,4 @@ export const selectFilteredJobs = (state) => {
   });
   return allJobs;
 };
+

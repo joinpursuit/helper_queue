@@ -4,7 +4,7 @@ import firebase from "../firebase";
 import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import { useDispatch } from "react-redux";
-import { updateCurrentUser } from "../features/auth/authSlice";
+import { updateCurrentUser, logoutUser } from "../features/auth/authSlice";
 
 export const AuthContext = createContext();
 
@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
       });
     } else {
       dispatch(updateCurrentUser(null));
-
+      dispatch(logoutUser())
       setCurrentUser(null);
       setLoading(false);
     }

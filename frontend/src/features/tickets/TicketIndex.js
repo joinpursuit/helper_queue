@@ -100,9 +100,8 @@ export default function TicketIndex() {
         let audio = new Audio(src);
         audio.play();
       }
-
+      ticket.created_at = Date.now();
       dispatch(receiveTicket(ticket))
-      //have socket id to close: ticket.socket_id
     };
     socket.on("newTicket", playSound);
     return () => socket.off("newTicket", playSound);

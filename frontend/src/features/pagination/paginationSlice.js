@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { logoutUser } from '../auth/authSlice';
 
 export const paginationSlice = createSlice({
   name: "pagination",
@@ -21,7 +22,7 @@ export const paginationSlice = createSlice({
     },
   },
   extraReducers: {
-    logoutUser: () => ({ startIdx: 0, endIdx: 15, page: 0 })
+    [logoutUser](){ return { startIdx: 0, endIdx: 15, page: 0 }}
   },
 });
 
