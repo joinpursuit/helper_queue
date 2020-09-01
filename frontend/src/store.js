@@ -20,6 +20,6 @@ export default configureStore({
     tickets: ticketsReducer,
     request: requestsReducer,
   },
-  middleware: [...getDefaultMiddleware(), logger],
+  middleware: [...getDefaultMiddleware()],
   devTools: true,
 });
