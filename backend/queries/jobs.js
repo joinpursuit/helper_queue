@@ -45,17 +45,18 @@ const createJob = async (req, res, next) => {
 
 const updateJob = async (req, res, next) => {
   req.body.id = req.params.id;
+  let statusTimeline = false
   try {
     let prevJob = await db.one("SELECT status FROM jobs WHERE id = $1", req.params.id);
     if(prevJob.status !== req.body.status) {
-          await db.none(
-            "INSERT INTO jobs_status_timelines (status, job_id)" +
-              " VALUES(${status}, ${job_id})",
-            {
-              job_id: req.params.id,
-              status: req.body.status,
-            }
-          );
+        statusTimeline = await db.one(
+          "INSERT INTO jobs_status_timelines (status, job_id)" +
+            " VALUES(${status}, ${job_id}) RETURNING *",
+          {
+            job_id: req.params.id,
+            status: req.body.status,
+          }
+        );
     }
     let job = await db.one(
       "UPDATE jobs SET company=${company}, job_title=${job_title}, post_url=${post_url}, location=${location}, salary=${salary}, due_date=${due_date}, description=${description}, status=${status} WHERE id = ${id} RETURNING *",
@@ -63,6 +64,7 @@ const updateJob = async (req, res, next) => {
     );
     res.json({
       job,
+      timeline: statusTimeline,
       message: "Job Updated",
     });
   } catch (err) {

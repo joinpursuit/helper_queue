@@ -1,0 +1,7 @@
+.statsDisplay {
+    display: grid;
+    margin: auto;
+    width: 500px;
+    text-align: left;
+    grid-gap: 15px;
+}

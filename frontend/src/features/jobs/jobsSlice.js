@@ -81,6 +81,9 @@ export const updateJob = (job) => async (dispatch, getState) => {
       data: job,
     });
     dispatch(receiveJob(res.data.job));
+    if(res.data.timeline) {
+      dispatch(receiveJobStatusTimeline(res.data.timeline))
+    }
   } catch (err) {}
 };
 
@@ -113,6 +116,12 @@ export const jobsSlice = createSlice({
       job.timelines = payload.timelines;
       state[job_id] = { ...state[job_id], timelines: payload.timelines };
     },
+    receiveJobStatusTimeline: (state, {payload}) => {
+      let job_id = payload.job_id; 
+      let job = state[job_id];
+      job.timelines.push(payload);
+      state[job_id] = job;
+    }
   },
   extraReducers: {
     [logoutUser]() { return {} },
@@ -123,6 +132,7 @@ export const {
   receiveJobs,
   receiveJob,
   receiveJobStatusTimelines,
+  receiveJobStatusTimeline,
 } = jobsSlice.actions;
 export default jobsSlice.reducer;
 
