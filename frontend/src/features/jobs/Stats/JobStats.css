@@ -1,7 +1,20 @@
 .statsDisplay {
     display: grid;
     margin: auto;
-    width: 500px;
     text-align: left;
     grid-gap: 15px;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding-bottom: 50px;
+}
+
+.statItem {
+    display: flex;
+    justify-content: space-between;
+    vertical-align: center;
+    border-bottom: 1px solid lightgray;
+    grid-column: 2 / 3;
+}
+
+.statItem > div {
+
 }
