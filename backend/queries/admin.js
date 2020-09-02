@@ -5,7 +5,7 @@ const getAllJobs = async (req, res, next) => {
     const jobs = await db.any(
       "SELECT * FROM jobs JOIN users ON users.id = jobs.user_id ORDER BY class"
     );
-    jobs.filter(job => job.email !== "teststudent@pursuit.org")
+    jobs = jobs.filter(job => job.email !== "teststudent@pursuit.org")
     res.json({
       jobs,
       message: "All Jobs",
