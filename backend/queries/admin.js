@@ -21,7 +21,7 @@ const getAllJobsForClass = async (req, res, next) => {
       "SELECT * FROM jobs JOIN users ON users.id = jobs.user_id where class = $1",
       req.params.class
     );
-    console.log(jobs);
+    jobs = jobs.filter((job) => job.email !== "teststudent@pursuit.org");
     res.json({
       jobs,
       message: "All Jobs",
