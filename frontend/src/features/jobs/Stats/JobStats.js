@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectJobs, fetchAllJobs } from "../jobsSlice";
+import { selectJobs, fetchAllJobs, selectJobCount } from "../jobsSlice";
 import "./JobStats.css";
 
 export default () => {
   const dispatch = useDispatch();
   const jobs = useSelector(selectJobs);
+  const jobCount = useSelector(selectJobCount)
   const [appsThisWeek, setAppsThisWeek] = useState(0);
   const [totalRejections, setTotalRejections] = useState(0);
   const [phoneScreens, setPhoneScreens] = useState(0);
@@ -69,9 +70,10 @@ export default () => {
     let applied = 0;
     let wishlist = 0;
     jobs.forEach((job) => {
-      if (job.status === "applied") {
+      let status = job.status.toLowerCase();
+      if (status === "applied") {
         applied++;
-      } else if (job.status === "wishList") {
+      } else if (status === "wishlist") {
         wishlist++;
       }
     });
@@ -84,7 +86,7 @@ export default () => {
       <div className="statsDisplay">
         <div className="statItem">
           <p>Total Applications: </p>
-          <p>{jobs.length}</p>
+          <p>{jobCount}</p>
         </div>
         <div className="statItem">
           <p>Number Of Applications this week: </p>
