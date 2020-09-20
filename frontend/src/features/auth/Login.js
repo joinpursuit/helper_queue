@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CustomLink as Link } from "../../util/customLinks";
 import { useHistory } from "react-router-dom";
-import {login} from '../../util/firebaseFunctions';
+import { login } from "../../util/firebaseFunctions";
 import "./Auth.css";
 
 export default function Login() {
@@ -16,14 +16,18 @@ export default function Login() {
       await login(email, password);
       history.push("/");
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     }
   };
 
   return (
     <div className="authContainer">
       <h1>Login Page</h1>
-      {error ? <div className="error">{error}</div> : <div className="error"></div>}
+      {error ? (
+        <div className="error">{error}</div>
+      ) : (
+        <div className="error"></div>
+      )}
       <form onSubmit={handleSubmit} className="authForm">
         <input
           onChange={(e) => setEmail(e.target.value)}
@@ -39,7 +43,14 @@ export default function Login() {
         />
         <button type="submit">Login</button>
       </form>
-      <Link to="/signup" className="switchAuth">Need to sign up?</Link>
+      <div className="formLinks">
+      <Link to="/signup" className="switchAuth">
+        Need to sign up?
+      </Link>
+        <Link to="/forgotpassword" className="switchAuth">
+          Forgot Password?
+        </Link>
+      </div>
     </div>
   );
 }

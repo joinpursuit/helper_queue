@@ -15,6 +15,7 @@ import SocketProvider from "./providers/SocketProvider";
 import AutoReload from "./AutoReload";
 import NetworkProvider from "./providers/NetworkProvider";
 import JobStats from "./features/jobs/Stats/JobStats";
+import ForgotPassword from "./features/auth/ForgotPassword";
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
                 </Route>
                 <AuthRoute path="/signup">
                   <SignUp />
+                </AuthRoute>
+                <AuthRoute path="/forgotpassword">
+                  < ForgotPassword />
                 </AuthRoute>
                 <AuthRoute path="/login">
                   <Login />
