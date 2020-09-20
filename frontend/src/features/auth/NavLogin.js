@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { CustomLink } from '../../util/customLinks'
+import { CustomLink } from "../../util/customLinks";
 import { useHistory } from "react-router-dom";
-import {login} from '../../util/firebaseFunctions';
+import { login } from "../../util/firebaseFunctions";
 import "./NavLogin.css";
 
 export default function NavLogin() {
@@ -16,13 +16,17 @@ export default function NavLogin() {
       await login(email, password);
       history.push("/");
     } catch (err) {
-      setError(err.message)
+      setError(err.message);
     }
   };
 
   return (
     <div className="navLoginContainer">
-      {error ? <div className="navError">{error}</div> : <div className="navError"></div>}
+      {error ? (
+        <div className="navError">{error}</div>
+      ) : (
+        <div className="navError"></div>
+      )}
       <form onSubmit={handleSubmit} className="navAuthForm">
         <input
           onChange={(e) => setEmail(e.target.value)}
@@ -38,7 +42,14 @@ export default function NavLogin() {
         />
         <button type="submit">Login</button>
       </form>
-      <CustomLink to="/signup" className="navSwitchAuth">Need to sign up?</CustomLink>
+      <div className="navHelpLinks">
+        <CustomLink to="/signup" className="navSwitchAuth">
+          Need to sign up?
+        </CustomLink>
+        <CustomLink to="/forgotpassword" className="navSwitchAuth">
+          Forgot Password
+        </CustomLink>
+      </div>
     </div>
   );
 }

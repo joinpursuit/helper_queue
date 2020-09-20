@@ -46,3 +46,10 @@
 .navSwitchAuth:hover {
     text-decoration: underline;
 }
+
+.navHelpLinks {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: auto;
+}
