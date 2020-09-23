@@ -16,7 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import JobShow from "./JobShow/JobShow";
-import { updateFilter } from "../filter/filterSlice";
+import { selectFilter, updateFilter } from "../filter/filterSlice";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -37,6 +37,7 @@ export default ({ job }) => {
   const [status, setStatus] = useState(job.status);
   const [showConfetti, setShowConfetti] = useState(false);
   const { width, height } = useWindowSize();
+  const filter = useSelector(selectFilter);
 
   const classes = useStyles();
 
@@ -44,7 +45,7 @@ export default ({ job }) => {
 
   const updateJobStatus = async (e) => {
     setStatus(e.target.value);
-    if (e.target.value === "accepted") {
+    if (e.target.value === "accepted" && !filter["accepted"]) {
       setShowConfetti(true);
       dispatch(updateFilter(e.target.value))
     } 
@@ -118,7 +119,7 @@ export default ({ job }) => {
           <option value={"accepted"}>Accepted!</option>
         </select>
         {status === "accepted" ? (
-          <Link to={`/gong`} className={"timeSinceJobCreation"}>
+          <Link to={`/gong`} className={"timeSinceJobCreation blink-text"} >
             Go To Gong!
           </Link>
         ) : (

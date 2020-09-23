@@ -1,5 +1,5 @@
 .gongContainer {
-  background-color:#4242EA;
+  background-color: #4242ea;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -53,4 +53,39 @@
 .gong {
   width: 400px;
   border-radius: 50%;
+}
+
+.blink-text {
+  color: #000;
+  font-weight: bold;
+  font-size: 22px;
+  animation: blinkingText 1s infinite;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+@keyframes blinkingText {
+  0% {
+    color: #ebff00;
+  }
+  20% {
+    color: #4242ea;
+  }
+  40% {
+    color: #ebff00;
+  }
+  60% {
+    color: #4242ea;
+  }
+  80% {
+    color: #ebff00;
+  }
+  100% {
+    color: #4242ea;
+  }
+}
+
+.blink-text:hover {
+  text-decoration: underline;
+  animation: none;
+  color: #4242ea;
 }
