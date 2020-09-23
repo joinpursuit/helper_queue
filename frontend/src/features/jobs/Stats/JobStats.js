@@ -101,7 +101,7 @@ export default () => {
           <div>
             <p>
               {activeApplied} -->{" "}
-              {Math.floor((activeApplied / jobs.length) * 100)}%
+              {Math.floor((activeApplied / jobs.length) * 100) || 0}%
             </p>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default () => {
           <div>
             <p>
               {totalRejections} -->{" "}
-              {Math.floor((totalRejections / jobs.length) * 100)}%
+              {Math.floor((totalRejections / jobs.length) * 100) || 0}%
             </p>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default () => {
           <p>Total phone screens ever: </p>
           <div>
             <p>
-              {phoneScreens}--> {Math.floor((phoneScreens / jobs.length) * 100)}
+              {phoneScreens}--> {Math.floor((phoneScreens / jobs.length) * 100) || 0}
               %
             </p>
           </div>
@@ -128,7 +128,7 @@ export default () => {
           <div>
             <p>
               {codingChallenges} -->{" "}
-              {Math.floor((codingChallenges / jobs.length) * 100)}%
+              {Math.floor((codingChallenges / jobs.length) * 100) || 0}%
             </p>
           </div>
         </div>
@@ -136,7 +136,7 @@ export default () => {
           <p>Total technical screens: </p>
           <div>
             <p>
-              {techScreens} --> {Math.floor((techScreens / jobs.length) * 100)}%
+              {techScreens} --> {Math.floor((techScreens / jobs.length) * 100) || 0}%
             </p>
           </div>
         </div>
@@ -146,14 +146,14 @@ export default () => {
           <div>
             <p>
               {totalOnsites} -->{" "}
-              {Math.floor((totalOnsites / jobs.length) * 100)}%
+              {Math.floor((totalOnsites / jobs.length) * 100) || 0}%
             </p>
           </div>
         </div>
         <div className="statItem">
           <p>Total offers: </p>
           <div>
-            <p>{totalOffers} --> {" "}{Math.floor((totalOffers / jobs.length) * 100)}%</p>
+            <p>{totalOffers} --> {" "}{Math.floor((totalOffers / jobs.length) * 100) || 0}%</p>
           </div>
         </div>
       </div>
