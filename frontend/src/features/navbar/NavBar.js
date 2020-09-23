@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
-import { CustomNavLink as NavLink, CustomLink as Link } from "../../util/customLinks";
+import {
+  CustomNavLink as NavLink,
+  CustomLink as Link,
+} from "../../util/customLinks";
 import "./NavBar.css";
 import { AuthContext } from "../../providers/AuthProvider";
 import { logout } from "../../util/firebaseFunctions";
@@ -9,7 +12,7 @@ import NavLogin from "../auth/NavLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { setJobFormShow } from "../modal/modalSlice";
 import { selectJobCount } from "../jobs/jobsSlice";
-import { logoutUser as userLogOut} from '../auth/authSlice'
+import { logoutUser as userLogOut } from "../auth/authSlice";
 import Search from "../search/Search";
 import { SocketContext } from "../../providers/SocketProvider";
 
@@ -27,11 +30,11 @@ export default function NavBar() {
 
   const majorUpdate = () => {
     socket.emit("majorUpdate");
-  }
+  };
 
   const minorUpdate = () => {
     socket.emit("minorUpdate");
-  }
+  };
 
   const regularUserView = () => {
     if (location.pathname === "/") {
@@ -47,6 +50,20 @@ export default function NavBar() {
               Log Out
             </button>
           </div>
+        </nav>
+      );
+    } else if (location.pathname === "/gong") {
+      return (
+        <nav className={"homeNav"}>
+          <NavLink to={"/jobtracker"}>Job Tracker</NavLink>
+
+          <NavLink exact to={"/"}>
+            Home
+          </NavLink>
+
+          <button className="logoutButton" onClick={logoutUser}>
+            Log Out
+          </button>
         </nav>
       );
     } else if (location.pathname === "/stats/jobtracker") {
@@ -100,13 +117,12 @@ export default function NavBar() {
           </NavLink>
           <NavLink to="/admin">Student Queue</NavLink>
           <div>
-
-          <button className="logoutButton" onClick={majorUpdate}>
-            Major Update
-          </button>
-          <button className="logoutButton" onClick={minorUpdate}>
-            Minor Update
-          </button>
+            <button className="logoutButton" onClick={majorUpdate}>
+              Major Update
+            </button>
+            <button className="logoutButton" onClick={minorUpdate}>
+              Minor Update
+            </button>
           </div>
           <button className="logoutButton" onClick={logoutUser}>
             Log Out

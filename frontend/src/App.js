@@ -16,6 +16,7 @@ import AutoReload from "./AutoReload";
 import NetworkProvider from "./providers/NetworkProvider";
 import JobStats from "./features/jobs/Stats/JobStats";
 import ForgotPassword from "./features/auth/ForgotPassword";
+import Gong from './features/gong/Gong';
 
 function App() {
   return (
@@ -52,6 +53,9 @@ function App() {
                 </ProtectedRoute>
                 <ProtectedRoute path="/stats/jobtracker">
                   <JobStats/>
+                </ProtectedRoute>
+                <ProtectedRoute path="/gong">
+                  <Gong/>
                 </ProtectedRoute>
               </ErrorBoundaries>
             </NetworkProvider>

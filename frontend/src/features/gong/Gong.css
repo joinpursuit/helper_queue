@@ -1,10 +1,13 @@
 .gongContainer {
-  background-color: darkblue;
+  background-color:#4242EA;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .gongContainer:hover {
-  cursor: url(../assets/mallet2.png), auto;
+  cursor: url(../../assets/mallet2.png), auto;
 }
 
 .shake {

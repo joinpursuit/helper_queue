@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
-import socketIOClient from "socket.io-client";
-import { apiURL } from "../util/apiURL";
-import gong from "../assets/gong3.png";
-import gongSound from "../assets/gongSound.wav";
-import "../css/Gong.css";
+import { SocketContext } from "../../providers/SocketProvider";
+
+import gong from "../../assets/gong3.png";
+import gongSound from "../../assets/gongSound.wav";
+import "./Gong.css";
 
 export default function Gong(params) {
   const [showConfetti, setShowConfetti] = useState(false);
   const [shake, setShake] = useState("");
   const { width, height } = useWindowSize();
   const [recycle, setRecycle] = useState(true);
-  const API = apiURL();
-  const socket = socketIOClient(API);
+  const socket = useContext(SocketContext);
 
   const startParty = () => {
     setShowConfetti(true);
