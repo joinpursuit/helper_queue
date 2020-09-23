@@ -44,7 +44,7 @@ export default ({ handleClose }) => {
   const postUrl = useInput((job && job.post_url) || "");
   const location = useInput((job && job.location) || "");
   const salary = useInput((job && job.salary) || "");
-  const dueDate = useInput((job && job.dueDate) || "");
+  const dueDate = useInput((job && job.due_date) || "");
   const [description, setDescription] = useState(
     (job && job.description) || ""
   );
