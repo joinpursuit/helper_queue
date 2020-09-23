@@ -9,6 +9,7 @@ const initState = {
     techScreen: false,
     onsite: false,
     offer: false,
+    accepted: false,
   }
 export const filterSlice = createSlice({
   name: "filter",

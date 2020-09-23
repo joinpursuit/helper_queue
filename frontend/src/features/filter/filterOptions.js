@@ -21,6 +21,7 @@ export default () => {
             <label className={filter["techScreen"] ? "selected" : "hidden"}><input type="checkbox"  checked={filter["techScreen"]} value={"techScreen"} onChange={handleChange}/>Tech Screen</label>
             <label className={filter["onsite"] ? "selected" : "hidden"}><input type="checkbox"  checked={filter["onsite"]} value={"onsite"} onChange={handleChange}/>Onsite</label>
             <label className={filter["offer"] ? "selected" : "hidden"}><input type="checkbox"  checked={filter["offer"]} value={"offer"} onChange={handleChange}/>Offer</label>
+            <label className={filter["accepted"] ? "selected" : "hidden"}><input type="checkbox"  checked={filter["accepted"]} value={"accepted"} onChange={handleChange}/>Accepted</label>
         </form>
     )
 }
