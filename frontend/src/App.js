@@ -18,6 +18,8 @@ import JobStats from "./features/jobs/Stats/JobStats";
 import ForgotPassword from "./features/auth/ForgotPassword";
 import Gong from './features/gong/Gong';
 import Pairs from './features/pairs/Pairs';
+import CreatePairList from "./features/pairs/CreatePairList";
+import ShowPairList from "./features/pairs/ShowPairList";
 
 function App() {
   return (
@@ -49,8 +51,14 @@ function App() {
                 <AdminRoute path="/admin">
                   <Admin />
                 </AdminRoute>
-                <AdminRoute path="/pairs">
+                <AdminRoute exact path="/pairs">
                   <Pairs />
+                </AdminRoute>
+                <AdminRoute exact path="/pairs/create">
+                  <CreatePairList />
+                </AdminRoute>
+                <AdminRoute exact path="/pairs/view/:id">
+                  <ShowPairList />
                 </AdminRoute>
                 <ProtectedRoute path="/jobtracker">
                   <JobPage />

@@ -13,27 +13,49 @@ export const fetchAllPairLists = () => async (dispatch, getState) => {
 
     let res = await axios({
       method: "get",
-      url: `${API}/api/pairs/`,
+      url: `${API}/api/pairs`,
       headers: {
         AuthToken: token,
       },
     });
-    dispatch(receivePairsLists(res.data.pair_lists));
+    dispatch(receivePairLists(res.data.pair_lists));
   } catch (err) {
-    dispatch(receivePairsLists([]));
+    dispatch(receivePairLists([]));
   }
 };
 
+export const createPairList = (data) => async (dispatch, getState) => {
+  try {
+    await dispatch(getNewFirebaseIdToken());
+    const token = getState().auth.token;
+
+    const res = await axios({
+        method:"post",
+        url: `${API}/api/pairs`,
+        data: data, 
+        headers: {
+            AuthToken: token,
+        }
+    })
+    dispatch(receivePairList(res.data.pair_list))
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const pairsSlice = createSlice({
   name: "pairs",
   initialState: {},
   reducers: {
-    receivePairsLists: (state, { payload }) => {
-        return payload.reduce((obj, pairList) => {
-            obj[pairList.id] = pairList
-        }, {})
+    receivePairLists: (state, { payload }) => {
+      return payload.reduce((obj, pairList) => {
+        obj[pairList.id] = pairList;
+        return obj;
+      }, {});
     },
+    receivePairList: (state, { payload }) => {
+        state[payload.id] = payload
+    }
   },
   extraReducers: {
     [logoutUser]() {
@@ -41,9 +63,7 @@ export const pairsSlice = createSlice({
     },
   },
 });
-export const {
-  receivePairsLists,
-} = pairsSlice.actions;
+export const { receivePairLists, receivePairList } = pairsSlice.actions;
 export default pairsSlice.reducer;
 
 export const selectPairLists = (state) => Object.values(state.pairs);

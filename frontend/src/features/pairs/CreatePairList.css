@@ -1,0 +1,39 @@
+.createPairList {
+    display: flex;
+    margin: auto; 
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}
+
+.createPairList > input{
+    padding: 15px;
+    margin: 10px; 
+    border-radius: 5px;
+}
+.createPairList > textarea{
+    padding: 15px;
+    margin: 10px; 
+    border-radius: 5px;
+    height: 150px;
+}
+
+.createPairList > button {
+        height: 35px;
+    min-width: 170px;
+    border-radius: 5px;
+    background-color: #EBFF00;
+    color: #4242EA;
+    border: 2px solid #4242EA;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    margin: 15px;
+}
+.createPairList > button:hover {
+    cursor: pointer;
+    background-color: #4242EA;
+    color:#EBFF00;
+    border: 2px solid #EBFF00;
+}

@@ -1,3 +1,5 @@
+const db = require("../db");
+
 const createNewPairList = async (req, res, next) => {
   try {
     const pairList = await db.one(
