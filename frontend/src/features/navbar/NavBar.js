@@ -116,6 +116,7 @@ export default function NavBar() {
             Home
           </NavLink>
           <NavLink to="/admin">Student Queue</NavLink>
+          <NavLink to="/pairs">Pairs</NavLink>
           <div>
             <button className="logoutButton" onClick={majorUpdate}>
               Major Update

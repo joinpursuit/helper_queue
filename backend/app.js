@@ -10,6 +10,7 @@ const ticketsRouter = require('./routes/tickets');
 const jobsRouter = require('./routes/jobs');
 const jobsStatusTimelinesRouter = require('./routes/jobs_status_timelines');
 const adminRouter = require('./routes/admin');
+const pairsRouter = require('./routes/pairs');
 
 const PORT = process.env.PORT;
 
@@ -67,6 +68,7 @@ app.use("/api/tickets", ticketsRouter)
 app.use("/api/jobs", jobsRouter);
 app.use("/api/jobs_status_timelines", jobsStatusTimelinesRouter);
 app.use("/api/admin", adminRouter)
+app.use("/api/pairs", pairsRouter)
 
 app.use((err, req, res, next) => {
   console.log(err);

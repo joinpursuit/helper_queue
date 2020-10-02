@@ -17,6 +17,7 @@ import NetworkProvider from "./providers/NetworkProvider";
 import JobStats from "./features/jobs/Stats/JobStats";
 import ForgotPassword from "./features/auth/ForgotPassword";
 import Gong from './features/gong/Gong';
+import Pairs from './features/pairs/Pairs';
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
                 </AuthRoute>
                 <AdminRoute path="/admin">
                   <Admin />
+                </AdminRoute>
+                <AdminRoute path="/pairs">
+                  <Pairs />
                 </AdminRoute>
                 <ProtectedRoute path="/jobtracker">
                   <JobPage />

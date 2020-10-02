@@ -7,6 +7,7 @@ import modalReducer from "./features/modal/modalSlice";
 import paginationReducer from "./features/pagination/paginationSlice";
 import ticketsReducer from "./features/tickets/ticketsSlice";
 import requestsReducer from "./features/requests/requestsSlice";
+import pairsReducer from "./features/pairs/pairsSlice";
 import logger from 'redux-logger'
 
 export default configureStore({
@@ -19,6 +20,7 @@ export default configureStore({
     pagination: paginationReducer,
     tickets: ticketsReducer,
     request: requestsReducer,
+    pairs: pairsReducer
   },
   middleware: [...getDefaultMiddleware()],
   devTools: true,

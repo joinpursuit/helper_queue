@@ -196,7 +196,7 @@ export default function TicketIndex() {
 
   return (
     <div className="adminContainer">
-      <h1>Admin Only</h1>
+      <h1>Student Queue</h1>
       {showCheckBoxes()}
       {showTickets()}
     </div>
