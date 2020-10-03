@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import DisplayAllPairDays from './DisplayAllPairDays';
 import { fetchPairList } from './pairsSlice';
 
 export default function ShowPairList() {
@@ -64,7 +65,7 @@ export default function ShowPairList() {
     return (
       <div className="adminContainer">
         <h1>{pair.title + " List"}</h1>
-        
+        <DisplayAllPairDays days={days} />
       </div>
     );
 };
