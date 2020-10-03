@@ -32,4 +32,18 @@ const fetchAllPairLists = async (req, res, next) => {
   }
 };
 
-module.exports = { createNewPairList, fetchAllPairLists };
+const fetchPairLists = async (req, res, next) => {
+  try {
+    const pair_list = await db.one("SELECT * FROM pairs WHERE id = $1", req.params.id)
+    res.json({
+      status: 200, 
+      message: "One pair list",
+      pair_list,
+    })
+  } catch (err) {
+    next(err);
+    
+  }
+}
+
+module.exports = { createNewPairList, fetchAllPairLists, fetchPairLists };

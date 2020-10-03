@@ -14,7 +14,7 @@ export default function Pairs() {
     useEffect(() => {
         dispatch(fetchAllPairLists())
     }, [])
-
+    
     return (
       <div className="adminContainer">
         <h1>Pairs</h1>
@@ -22,7 +22,7 @@ export default function Pairs() {
         <ul>
             {pairLists.map(pair => {
                 return (<li key={pair.id}>
-                    <Link to={"/pairs/view/" + pair.id}>{pair.title}</Link>
+                    <Link to={"/pairs/view/" + pair.id}>{pair.title }</Link>
                 </li>
                 );
             })}
