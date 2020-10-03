@@ -1,15 +1,15 @@
 import React from "react";
-
+import "./DisplayAllPairsDaysItem.css"
 export default function DisplayAllPairDaysItem({ day }) {
   return (
-    <ul>
+    <ul className="displayAllPairDaysItemContainer">
       {day.map((pair) => {
         if (!pair[0] || !pair[1]) {
-          return <li key={pair[0] + pair[1]}>{pair[0] || pair[1]} Working Solo</li>;
+          return <li key={pair[0] + pair[1]}>{pair[0] || pair[1]} - Solo</li>;
         } else {
           return (
             <li key={pair[0] + pair[1]}>
-              {pair[0]} AND {pair[1]}
+              {pair[0]} & {pair[1]}
             </li>
           );
         }

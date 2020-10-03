@@ -16,6 +16,8 @@
     margin: 10px; 
     border-radius: 5px;
     height: 150px;
+    border-width: 2px;
+    font-family: sans-serif;
 }
 
 .createPairList > button {

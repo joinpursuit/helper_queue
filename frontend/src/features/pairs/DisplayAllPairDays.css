@@ -1,0 +1,12 @@
+.pairDayCard {
+    display: flex;
+    width: 50%;
+    border: 1px solid lightgray;
+    border-radius: 7px;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+}

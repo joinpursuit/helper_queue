@@ -22,6 +22,6 @@ export default configureStore({
     request: requestsReducer,
     pairs: pairsReducer
   },
-  middleware: [...getDefaultMiddleware()],
+  middleware: [logger,...getDefaultMiddleware()],
   devTools: true,
 });

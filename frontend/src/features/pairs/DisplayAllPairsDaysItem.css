@@ -1,0 +1,7 @@
+.displayAllPairDaysItemContainer {
+    text-align: left;
+}
+
+.displayAllPairDaysItemContainer > li {
+    padding: 5px;
+}
