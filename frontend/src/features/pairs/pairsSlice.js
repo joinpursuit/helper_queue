@@ -32,11 +32,11 @@ export const fetchPairList = (id) => async (dispatch, getState) => {
       method: "get",
       url: `${API}/api/pairs/${id}`,
       headers: {
-          AuthToken: token
-      }
+        AuthToken: token,
+      },
     });
-    dispatch(receivePairList(res.data.pair_list))
-    return res.data.pair_list
+    dispatch(receivePairList(res.data.pair_list));
+    return res.data.pair_list;
   } catch (err) {
     console.log(err);
   }
@@ -51,10 +51,10 @@ export const updatePairList = (data) => async (dispatch, getState) => {
       url: `${API}/api/pairs/${data.id}`,
       data: data,
       headers: {
-          AuthToken: token
-      }
+        AuthToken: token,
+      },
     });
-    dispatch(receivePairList(res.data.pair_list))
+    dispatch(receivePairList(res.data.pair_list));
   } catch (err) {
     console.log(err);
   }
@@ -79,6 +79,24 @@ export const createPairList = (data) => async (dispatch, getState) => {
   }
 };
 
+export const deletePairList = (id) => async (dispatch, getState) => {
+  try {
+    await dispatch(getNewFirebaseIdToken());
+    const token = getState().auth.token;
+
+    const res = await axios({
+      method: "delete",
+      url: `${API}/api/pairs/${id}`,
+      headers: {
+        AuthToken: token,
+      },
+    });
+    dispatch(removePairList(id));
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const pairsSlice = createSlice({
   name: "pairs",
   initialState: {},
@@ -92,6 +110,9 @@ export const pairsSlice = createSlice({
     receivePairList: (state, { payload }) => {
       state[payload.id] = payload;
     },
+    removePairList: (state, { payload }) => {
+        delete state[payload]
+    }
   },
   extraReducers: {
     [logoutUser]() {
@@ -102,6 +123,7 @@ export const pairsSlice = createSlice({
 export const {
   receivePairLists,
   receivePairList,
+  removePairList,
 } = pairsSlice.actions;
 export default pairsSlice.reducer;
 

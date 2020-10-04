@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import DisplayAllPairDays from './DisplayAllPairDays';
-import { fetchPairList } from './pairsSlice';
+import { fetchPairList, deletePairList } from "./pairsSlice";
 
 export default function ShowPairList() {
     const [days, setDays] = useState([]);
@@ -59,6 +59,14 @@ export default function ShowPairList() {
         }
     }, [pair]);
 
+    const deleteList = async () => {
+       let shouldDelete = await window.confirm("Deleting this list is permanent action.");
+       if(shouldDelete) {
+           dispatch(deletePairList(id))
+           history.push("/pairs")
+       }
+    }
+
 
     if(!pair) return null; 
 
@@ -69,6 +77,7 @@ export default function ShowPairList() {
       <div className="adminContainer">
         <h1>{pair.title + " List"}</h1>
         <button onClick={() => history.push(`/pairs/edit/${id}`)}>Edit List</button>
+        <button onClick={deleteList}>Delete List</button>
         <DisplayAllPairDays days={days} />
       </div>
     );

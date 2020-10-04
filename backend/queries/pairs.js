@@ -20,7 +20,6 @@ const createNewPairList = async (req, res, next) => {
 };
 
 const updatePairList = async (req, res, next) => {
-  console.log(req.body);
   try {
     const pairList = await db.one(
       "UPDATE pairs " +
@@ -35,6 +34,22 @@ const updatePairList = async (req, res, next) => {
     });
   } catch (err) {
     console.log(err);
+    next(err);
+  }
+};
+const deletePairList = async (req, res, next) => {
+  try {
+    await db.none(
+      "DELETE FROM pairs " +
+        "WHERE id=$1",
+      req.params.id
+    );
+
+    res.json({
+      status: 200,
+      message: "Deleted Pair List " + req.params.id,
+    });
+  } catch (err) {
     next(err);
   }
 };
@@ -73,4 +88,5 @@ module.exports = {
   fetchAllPairLists,
   fetchPairLists,
   updatePairList,
+  deletePairList,
 };
