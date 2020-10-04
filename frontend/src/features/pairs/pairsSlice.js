@@ -41,6 +41,24 @@ export const fetchPairList = (id) => async (dispatch, getState) => {
   }
 };
 
+export const updatePairList = (data) => async (dispatch, getState) => {
+  try {
+    await dispatch(getNewFirebaseIdToken());
+    const token = getState().auth.token;
+    const res = await axios({
+      method: "put",
+      url: `${API}/api/pairs/${data.id}`,
+      data: data,
+      headers: {
+          AuthToken: token
+      }
+    });
+    dispatch(receivePairList(res.data.pair_list))
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const createPairList = (data) => async (dispatch, getState) => {
   try {
     await dispatch(getNewFirebaseIdToken());
@@ -80,7 +98,10 @@ export const pairsSlice = createSlice({
     },
   },
 });
-export const { receivePairLists, receivePairList } = pairsSlice.actions;
+export const {
+  receivePairLists,
+  receivePairList,
+} = pairsSlice.actions;
 export default pairsSlice.reducer;
 
 export const selectPairLists = (state) => Object.values(state.pairs);

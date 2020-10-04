@@ -12,7 +12,9 @@ export default function Pairs() {
     const pairLists = useSelector(selectPairLists);
 
     useEffect(() => {
-        dispatch(fetchAllPairLists())
+        if(!pairLists.length) {
+            dispatch(fetchAllPairLists())
+        }
     }, [])
     
     return (

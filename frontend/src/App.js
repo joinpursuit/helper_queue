@@ -19,6 +19,7 @@ import ForgotPassword from "./features/auth/ForgotPassword";
 import Gong from './features/gong/Gong';
 import Pairs from './features/pairs/Pairs';
 import CreatePairList from "./features/pairs/CreatePairList";
+import EditPairList from "./features/pairs/EditPairList";
 import ShowPairList from "./features/pairs/ShowPairList";
 
 function App() {
@@ -59,6 +60,9 @@ function App() {
                 </AdminRoute>
                 <AdminRoute exact path="/pairs/view/:id">
                   <ShowPairList />
+                </AdminRoute>
+                <AdminRoute exact path="/pairs/edit/:id">
+                  <EditPairList />
                 </AdminRoute>
                 <ProtectedRoute path="/jobtracker">
                   <JobPage />

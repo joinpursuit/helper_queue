@@ -12,7 +12,9 @@ export default function ShowPairList() {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        if(!pair) {
             dispatch(fetchPairList(id));
+        }
     }, [id])
 
 

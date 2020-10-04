@@ -19,6 +19,25 @@ const createNewPairList = async (req, res, next) => {
   }
 };
 
+const updatePairList = async (req, res, next) => {
+  req.body.id = req.params.id
+  try {
+    const pairList = await db.one(
+      "UPDATE pairs" +
+        "SET title=${title}, body=${body}, current_day=${current_day} WHERE id=${id} RETURNING *",
+      req.body
+    );
+
+    res.json({
+      status: 200,
+      message: "Update Pair List " + req.params.id,
+      pair_list: pairList,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const fetchAllPairLists = async (req, res, next) => {
   try {
       const pairLists = await db.any("SELECT * FROM pairs");
@@ -46,4 +65,9 @@ const fetchPairLists = async (req, res, next) => {
   }
 }
 
-module.exports = { createNewPairList, fetchAllPairLists, fetchPairLists };
+module.exports = {
+  createNewPairList,
+  fetchAllPairLists,
+  fetchPairLists,
+  updatePairList,
+};
