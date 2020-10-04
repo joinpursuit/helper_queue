@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd backend && npm install && npm start"
-
   },
   "keywords": [],
   "author": "",
