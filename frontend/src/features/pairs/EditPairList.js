@@ -6,17 +6,24 @@ import { useParams } from "react-router-dom";
 import { updatePairList, fetchPairList } from "./pairsSlice";
 
 export default function EditPairList() {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const { id } = useParams();
+    const [title, setTitle] = useState("");
+    const [body, setBody] = useState("");
+    const [currentDay, setCurrentDay] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { id } = useParams();
+    const pair = useSelector((state) => state.pairs[id]);
 
-  const pair = useSelector((state) => state.pairs[id]);
 
 
   useEffect(() => {
-    dispatch(fetchPairList(id));
+    dispatch(fetchPairList(id)).then(fetchedPair => {
+        setTitle(fetchedPair.title);
+        setBody(fetchedPair.body);
+        setCurrentDay(fetchedPair.current_day + 1)
+        setIsLoading(false);
+    })
   }, [id]);
 
   const handleSubmit = (e) => {
@@ -25,12 +32,15 @@ export default function EditPairList() {
       updatePairList({
         title,
         body,
+        id, 
+        current_day: currentDay - 1,
       })
     );
     history.push(`/pairs/view/${id}`);
   };
 
   if(!pair) return null;
+  if(isLoading) return <div>Loading</div>
 
   return (
     <div className="adminContainer">
@@ -47,6 +57,19 @@ export default function EditPairList() {
           onChange={(e) => setBody(e.target.value)}
           placeholder={"Enter each name on a new line"}
           required
+        />
+        <input
+          value={currentDay}
+          onChange={(e) => setCurrentDay(e.target.value)}
+          placeholder={"Current Day"}
+          required
+          type="number"
+          min="1"
+          max={`${
+            body.split("\n").length % 2
+              ? body.split("\n").length
+              : body.split("\n").length - 1
+          }`}
         />
         <button>Update Pair List</button>
       </form>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import DisplayAllPairDays from './DisplayAllPairDays';
 import { fetchPairList } from './pairsSlice';
 
 export default function ShowPairList() {
     const [days, setDays] = useState([]);
     const { id } = useParams();
+    const history = useHistory();
     const pair = useSelector((state) => state.pairs[id])
 
     const dispatch = useDispatch()
@@ -67,6 +68,7 @@ export default function ShowPairList() {
     return (
       <div className="adminContainer">
         <h1>{pair.title + " List"}</h1>
+        <button onClick={() => history.push(`/pairs/edit/${id}`)}>Edit List</button>
         <DisplayAllPairDays days={days} />
       </div>
     );

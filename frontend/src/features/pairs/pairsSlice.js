@@ -36,6 +36,7 @@ export const fetchPairList = (id) => async (dispatch, getState) => {
       }
     });
     dispatch(receivePairList(res.data.pair_list))
+    return res.data.pair_list
   } catch (err) {
     console.log(err);
   }
