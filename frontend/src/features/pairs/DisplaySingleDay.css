@@ -1,0 +1,55 @@
+.displaySingleDayContainer {
+  width: 75%;
+  margin: auto;
+}
+
+.displaySingleDayButtons > h3 {
+  font-weight: bold;
+  font-size: 25px;
+  padding: 10px;
+}
+
+.displaySingleDayButtons {
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  width: 50%;
+}
+
+.displaySingleDayPairs {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.displaySingleDayPairs > li {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 10px 20px 2fr 1fr;
+  text-align: left;
+  padding: 3px;
+  text-align: left;
+}
+.displaySingleDayPairsLeft {
+  grid-column-start: 3;
+  min-width: fit-content;
+}
+
+.displaySingleDayPairsSym {
+  width: 10px;
+}
+
+.displaySingleDayPairsRight {
+  text-align: left;
+  grid-column-start: 6;
+    min-width: fit-content;
+
+}
+
+.displaySingleDayButtons > button {
+    height: 25px;
+
+}
+.displaySingleDayButtons > button:hover {
+    cursor: pointer;
+
+}

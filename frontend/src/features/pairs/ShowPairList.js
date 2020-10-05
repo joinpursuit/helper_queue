@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import DisplayAllPairDays from "./DisplayAllPairDays";
 import DisplaySingleDay from "./DisplaySingleDay";
 import { fetchPairList, deletePairList, updatePairList } from "./pairsSlice";
+import "./ShowPairList.css";
 
 export default function ShowPairList() {
   const [days, setDays] = useState([]);
@@ -48,6 +49,7 @@ export default function ShowPairList() {
 
     let candidates = items.slice(1);
 
+
     for (let i = 0; i <= n - 2; i++) {
       let group = [];
       group.push([inifinityPoint, candidates[i]]);
@@ -77,7 +79,7 @@ export default function ShowPairList() {
 
   const deleteList = async () => {
     let shouldDelete = await window.confirm(
-      "Deleting this list is permanent action."
+      "Deleting this list is a permanent action and cannot be undone."
     );
     if (shouldDelete) {
       dispatch(deletePairList(id));
@@ -90,13 +92,16 @@ export default function ShowPairList() {
   return (
     <div className="adminContainer">
       <h1>{pair.title + " List"}</h1>
+      <div className="pairListButtons">
+      <button onClick={() => setShowSingleDay(prevDay => !prevDay)}>
+         {showSingleDay ? "Show All Days" : "Show Current Day"}
+      </button>
+
       <button onClick={() => history.push(`/pairs/edit/${id}`)}>
         Edit List
       </button>
       <button onClick={deleteList}>Delete List</button>
-      <button onClick={() => setShowSingleDay(prevDay => !prevDay)}>
-         {showSingleDay ? "Show All Days" : "Show Current Day"}
-      </button>
+      </div>
       {showSingleDay ? 
       <DisplaySingleDay
         day={days[pair.current_day]}

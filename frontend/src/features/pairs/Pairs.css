@@ -1,0 +1,39 @@
+#createPairListLink{
+    height: 35px;
+    min-width: 200px;
+    border-radius: 5px;
+    background-color: #EBFF00;
+    color: #4242EA;
+    border: 2px solid #4242EA;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    margin: 35px;
+    padding: 10px;
+}
+#createPairListLink:hover {
+    cursor: pointer;
+    background-color: #4242EA;
+    color:#EBFF00;
+    border: 2px solid #EBFF00;
+}
+
+.allPairLists {
+    width: 50%;
+    margin: auto; 
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.allPairLists li {
+    width: 50%;
+    text-align: center;
+    margin: auto; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}

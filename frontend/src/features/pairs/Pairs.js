@@ -5,6 +5,7 @@ import {
   CustomNavLink as NavLink,
   CustomLink as Link,
 } from "../../util/customLinks";
+import './Pairs.css';
 
 export default function Pairs() {
     const dispatch = useDispatch();
@@ -20,8 +21,8 @@ export default function Pairs() {
     return (
       <div className="adminContainer">
         <h1>Pairs</h1>
-        <Link to="/pairs/create">Create A New Pair List</Link>
-        <ul>
+        <Link to="/pairs/create" id="createPairListLink">Create A New Pair List</Link>
+        <ul className="allPairLists">
             {pairLists.map(pair => {
                 return (<li key={pair.id}>
                     <Link to={"/pairs/view/" + pair.id}>{pair.title }</Link>
