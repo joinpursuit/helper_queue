@@ -45,14 +45,14 @@ export default function ShowPairList() {
     let groups = [];
 
     let n = items.length;
-    let inifinityPoint = items[0];
+    let infinityPoint = items[0];
 
     let candidates = items.slice(1);
 
 
     for (let i = 0; i <= n - 2; i++) {
       let group = [];
-      group.push([inifinityPoint, candidates[i]]);
+      group.push([infinityPoint, candidates[i]]);
 
       for (let j = 1; j <= n / 2 - 1; j++) {
         let k = i + j;
