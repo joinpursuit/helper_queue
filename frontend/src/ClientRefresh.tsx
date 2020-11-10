@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { SocketContext } from './providers/SocketProvider';
-const style = {
+const style: React.CSSProperties = {
   position: "absolute",
   top: 10,
   right: 10,
@@ -11,25 +11,29 @@ const style = {
   textAlign: "center",
 };
 
-export default (props) => {
+export default () => {
   const [needsRefresh, setNeedsRefresh] = useState(false);
   const socket = useContext(SocketContext);
 
   useEffect(() => {
     const appRequiresRefresh = () => setNeedsRefresh(true);
     socket.on("majorUpdate", appRequiresRefresh);
-    return () => socket.off("majorUpdate", appRequiresRefresh);
+    return () => {
+       socket.off("majorUpdate", appRequiresRefresh);
+    }
   }, [socket]);
 
   useEffect(() => {
     const changeLinksToRefresh = () => {window.updateRequired = true}
     socket.on("minorUpdate", changeLinksToRefresh);
-    return () => socket.off("minorUpdate", changeLinksToRefresh);
+    return () => {
+      socket.off("minorUpdate", changeLinksToRefresh);
+    }
   }, [socket]);
 
-  const reloadApp = (e) => {
+  const reloadApp = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
-    window.location.reload(true);
+    window.location.reload();
   };
 
   if (needsRefresh) {
