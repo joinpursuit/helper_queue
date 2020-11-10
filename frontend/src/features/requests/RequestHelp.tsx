@@ -15,8 +15,8 @@ import "./RequestHelp.css";
 export default function RequestHelp() {
   const { currentUser } = useContext(AuthContext);
   const openTicket = useSelector(selectRequest);
-  const socket = useContext(SocketContext);;
-  const network = useContext(NetworkContext);;
+  const socket = useContext(SocketContext);
+  const network = useContext(NetworkContext);
   const dispatch = useDispatch();
 
   const fetchRequest = () => {
@@ -33,21 +33,23 @@ export default function RequestHelp() {
       dispatch(updateRequest(null))
     };
     socket.on("adminRemoveRequest", adminRemoveRequest);
-    return () => socket.off("adminRemoveRequest", adminRemoveRequest);
+    return () => {
+      socket.off("adminRemoveRequest", adminRemoveRequest);
+    }
   }, []);
 
   const makeRequest = async () => {
     try {
       await dispatch(createRequest());
-      currentUser.socket_id = socket.id
+      currentUser!.socket_id = socket.id
       socket.emit("openRequest", currentUser);
     } catch (error) {}
   };
 
   const cancelRequest = async () => {
     try {
-      await dispatch(deleteRequest(currentUser.email));
-      currentUser.socket_id = socket.id;
+      await dispatch(deleteRequest(currentUser!.email));
+      currentUser!.socket_id = socket.id;
       socket.emit("cancelRequest", currentUser);
     } catch (error) {}
   };

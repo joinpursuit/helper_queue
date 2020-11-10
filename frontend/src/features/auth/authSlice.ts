@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, Dispatch } from "@reduxjs/toolkit";
 import { getFirebaseIdToken } from '../../util/firebaseFunctions';
 
-export const getNewFirebaseIdToken = () => async (dispatch) => {
+export const getNewFirebaseIdToken = () => async (dispatch: Dispatch) => {
   try {
     let token = await getFirebaseIdToken();
     return dispatch(updateToken(token));
@@ -22,7 +22,7 @@ const authSlice = createSlice({
         updateToken: (state, { payload }) => {
             state.token = payload; 
         }, 
-        logoutUser: (_, { payload }) =>( {currentUser: null, token: null})
+        logoutUser: () =>( {currentUser: null, token: null})
     }
 })
 

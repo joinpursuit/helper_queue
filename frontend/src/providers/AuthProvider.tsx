@@ -12,6 +12,7 @@ interface User {
   uid: string;
   lastLogin?: string;
   token?: string;
+  socket_id?: string
 }
 
 interface Auth {
@@ -31,53 +32,53 @@ const AuthProvider = ({ children }: PropsChildren) => {
   const API = apiURL();
   const dispatch = useDispatch();
 
-  const updateUser = (user: firebase.User | null) => {
-    setLoading(true);
-    if (user) {
-      const { email, uid } = user;
-      const lastLogin = user.metadata.lastSignInTime;
-      setCurrentUser({ email, uid, lastLogin });
-      getFirebaseIdToken()?.then((token) => {
-        setToken(token);
-        setLoading(false);
-        axios({
-          method: "get",
-          url: `${API}/api/users/current_user`,
-          headers: {
-            AuthToken: token,
-          },
-        })
-          .then((res) => {
-            dispatch(
-              updateCurrentUser({
-                email,
-                uid,
-                lastLogin,
-                token,
-              })
-            );
-
-            setCurrentUser((prevCurrentUser) => ({
-              ...res.data.user,
-              ...prevCurrentUser,
-            }));
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      });
-    } else {
-      dispatch(updateCurrentUser(null));
-      dispatch(logoutUser());
-      setCurrentUser(null);
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const updateUser = (user: firebase.User | null) => {
+      setLoading(true);
+      if (user) {
+        const { email, uid } = user;
+        const lastLogin = user.metadata.lastSignInTime;
+        setCurrentUser({ email, uid, lastLogin });
+        getFirebaseIdToken()?.then((token) => {
+          setToken(token);
+          setLoading(false);
+          axios({
+            method: "get",
+            url: `${API}/api/users/current_user`,
+            headers: {
+              AuthToken: token,
+            },
+          })
+            .then((res) => {
+              dispatch(
+                updateCurrentUser({
+                  email,
+                  uid,
+                  lastLogin,
+                  token,
+                })
+              );
+
+              setCurrentUser((prevCurrentUser) => ({
+                ...res.data.user,
+                ...prevCurrentUser,
+              }));
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
+      } else {
+        dispatch(updateCurrentUser(null));
+        dispatch(logoutUser());
+        setCurrentUser(null);
+        setLoading(false);
+      }
+    };
+
     const unsubscribe = firebase.auth().onAuthStateChanged(updateUser);
     return unsubscribe;
-  }, []);
+  }, [API, dispatch]);
 
   if (loading) return <div>Loading...</div>;
 

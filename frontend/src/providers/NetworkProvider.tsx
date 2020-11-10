@@ -1,19 +1,20 @@
 import React, { createContext, useState, useEffect } from "react";
+import { PropsChildren } from "../interfaces/interfaces";
 
-export const NetworkContext = createContext();
+export const NetworkContext = createContext(true);
 
-    const style = {
-      position: "absolute",
-      top: 10,
-      right: 10,
-      padding: "1em",
-      zIndex: 2000,
-      backgroundColor: "pink",
-      borderRadius: 5,
-      textAlign: "center",
-    };
+const style: React.CSSProperties = {
+  position: "absolute",
+  top: 10,
+  right: 10,
+  padding: "1em",
+  zIndex: 2000,
+  backgroundColor: "pink",
+  borderRadius: 5,
+  textAlign: "center",
+};
 
-const NetworkProvider = (props) => {
+const NetworkProvider = ({ children }: PropsChildren) => {
   const [isConnected, setIsConnected] = useState(true);
 
   useEffect(() => {
@@ -41,8 +42,12 @@ const NetworkProvider = (props) => {
   }, []);
   return (
     <NetworkContext.Provider value={isConnected}>
-    {isConnected ? null :  <div style={style}><div>Currently Offline</div></div>}
-      {props.children}
+      {isConnected ? null : (
+        <div style={style}>
+          <div>Currently Offline</div>
+        </div>
+      )}
+      {children}
     </NetworkContext.Provider>
   );
 };
