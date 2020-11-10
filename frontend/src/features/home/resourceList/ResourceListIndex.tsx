@@ -1,7 +1,17 @@
 import React, { useState } from 'react'
 import "./ResourceListIndex.css";
 
-export default function ResourceListIndex({header, list}) {
+interface ResourceListIndexItem {
+    name: string; 
+    url: string;
+}
+
+interface ResourceListIndexProps {
+  header: string;
+  list: ResourceListIndexItem[];
+}
+
+export default function ResourceListIndex({header, list}: ResourceListIndexProps) {
     const [showList, setShowList] = useState(false);
     const displayList = () => {
         if(!showList) return null;

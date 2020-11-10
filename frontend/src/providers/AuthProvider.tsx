@@ -5,23 +5,39 @@ import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import { useDispatch } from "react-redux";
 import { updateCurrentUser, logoutUser } from "../features/auth/authSlice";
+import { PropsChildren } from "../interfaces/interfaces";
 
-export const AuthContext = createContext();
+interface User {
+  email: string | null;
+  uid: string;
+  lastLogin?: string;
+  token?: string;
+}
 
-const AuthProvider = ({ children }) => {
+interface Auth {
+  currentUser: User | null;
+  token: string | null;
+}
+
+export const AuthContext = createContext<Auth>({
+  currentUser: null,
+  token: null,
+});
+
+const AuthProvider = ({ children }: PropsChildren) => {
   const [loading, setLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const API = apiURL();
   const dispatch = useDispatch();
 
-  const updateUser = (user) => {
+  const updateUser = (user: firebase.User | null) => {
     setLoading(true);
     if (user) {
       const { email, uid } = user;
       const lastLogin = user.metadata.lastSignInTime;
       setCurrentUser({ email, uid, lastLogin });
-      getFirebaseIdToken().then((token) => {
+      getFirebaseIdToken()?.then((token) => {
         setToken(token);
         setLoading(false);
         axios({
@@ -52,7 +68,7 @@ const AuthProvider = ({ children }) => {
       });
     } else {
       dispatch(updateCurrentUser(null));
-      dispatch(logoutUser())
+      dispatch(logoutUser());
       setCurrentUser(null);
       setLoading(false);
     }

@@ -4,15 +4,17 @@ import Confetti from "react-confetti";
 import { SocketContext } from "../../providers/SocketProvider";
 
 import gong from "../../assets/gong3.png";
-import gongSound from "../../assets/gongSound.wav";
 import "./Gong.css";
+import gongSound from "../../assets/gongSound.wav";
 
-export default function Gong(params) {
+export default function Gong() {
   const [showConfetti, setShowConfetti] = useState(false);
-  const [shake, setShake] = useState("");
+  const [shake, setShake] = useState(false);
   const { width, height } = useWindowSize();
   const [recycle, setRecycle] = useState(true);
   const socket = useContext(SocketContext);
+
+  console.log(socket)
 
   const startParty = () => {
     setShowConfetti(true);

@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
+import "./Timer.css";
 import alertSound from "../../assets/alarm.mp3";
 
-import "./Timer.css";
 
 export default function Timer() {
   const [interval, setInterval] = useState(15);
   const [isCountingDown, setIsCountingDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(900);
-  const cancelTime = useRef();
+  const cancelTime = useRef<undefined | number>();
 
   const displayTimes = () => {
     const intervals = [1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 45, 60];
@@ -17,7 +17,7 @@ export default function Timer() {
         {intervals.map((interval) => (
           <option
             key={interval}
-            val={interval}
+            value={interval}
             data-testid="timeIntervalOptions"
           >
             {interval}
@@ -33,9 +33,9 @@ export default function Timer() {
     };
   }, []);
 
-  const updateTime = (e) => {
-    setInterval(e.target.value);
-    setTimeRemaining(e.target.value * 60);
+  const updateTime = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setInterval(Number(e.target.value));
+    setTimeRemaining(Number(e.target.value) * 60);
   };
   const togglePause = () => {
     if (!isPaused) {
@@ -46,14 +46,14 @@ export default function Timer() {
     setIsPaused((prevPause) => !prevPause);
   };
 
-  const startTime = (e) => {
+  const startTime = () => {
     setIsCountingDown(true);
     cancelTime.current = window.setInterval(() => {
       setTimeRemaining((prevTime) => prevTime - 1);
     }, 1000);
   };
 
-  const stopTime = (e) => {
+  const stopTime = () => {
     setIsCountingDown(false);
     setIsPaused(false);
     clearInterval(cancelTime.current);

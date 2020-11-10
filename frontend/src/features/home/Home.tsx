@@ -6,7 +6,7 @@ import curriculum from '../../assets/resources/curriculum.json';
 import "./Home.css"
 import Timer from '../widgets/Timer';
 
-export default () => {
+const Home = () => {
     return(
         <div className="homeContainer">
         <div className="headerContainer">
@@ -29,3 +29,4 @@ export default () => {
         </div>
     )
 }
+export default Home;
