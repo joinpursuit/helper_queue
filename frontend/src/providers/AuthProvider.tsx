@@ -5,15 +5,9 @@ import axios from "axios";
 import { apiURL } from "../util/apiURL";
 import { useDispatch } from "react-redux";
 import { updateCurrentUser, logoutUser } from "../features/auth/authSlice";
-import { PropsChildren } from "../interfaces/interfaces";
+import { PropsChildren, User } from "../interfaces/interfaces";
 
-interface User {
-  email: string | null;
-  uid: string;
-  lastLogin?: string;
-  token?: string;
-  socket_id?: string
-}
+
 
 interface Auth {
   currentUser: User | null;

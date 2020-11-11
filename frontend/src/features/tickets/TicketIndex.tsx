@@ -1,17 +1,23 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SocketContext } from '../../providers/SocketProvider';
-import { NetworkContext } from '../../providers/NetworkProvider';
+import { SocketContext } from "../../providers/SocketProvider";
+import { NetworkContext } from "../../providers/NetworkProvider";
 import {
   selectTickets,
   fetchOpenTickets,
   destroyTicket,
   receiveTicket,
-  removeTicket
+  removeTicket,
 } from "./ticketsSlice";
 import TicketIndexItem from "./TicketIndexItem";
+import { User, Ticket } from '../../interfaces/interfaces';
 import alertSound from "../../assets/that-was-quick.mp3";
 import "./TicketIndex.css";
+
+
+interface Legend {
+  [key: string]: boolean;
+}
 
 export default function TicketIndex() {
   let initialFour = window.localStorage.getItem("sixFour");
@@ -41,25 +47,24 @@ export default function TicketIndex() {
     initialSevenTwo === "true" || initialSevenTwo === null
   );
 
-
   useEffect(() => {
-    window.localStorage.setItem("sixFour", sixFour);
-    window.localStorage.setItem("sixThree", sixThree);
-    window.localStorage.setItem("sixTwo", sixTwo);
-    window.localStorage.setItem("sixOne", sixOne);
-    window.localStorage.setItem("sevenOne", sevenOne);
-    window.localStorage.setItem("sevenTwo", sevenTwo);
+    window.localStorage.setItem("sixFour", sixFour.toString());
+    window.localStorage.setItem("sixThree", sixThree.toString());
+    window.localStorage.setItem("sixTwo", sixTwo.toString());
+    window.localStorage.setItem("sixOne", sixOne.toString());
+    window.localStorage.setItem("sevenOne", sevenOne.toString());
+    window.localStorage.setItem("sevenTwo", sevenTwo.toString());
     return () => {
-      window.localStorage.setItem("sixFour", sixFour);
-      window.localStorage.setItem("sixThree", sixThree);
-      window.localStorage.setItem("sixTwo", sixTwo);
-      window.localStorage.setItem("sixOne", sixOne);
-      window.localStorage.setItem("sevenOne", sevenOne);
-      window.localStorage.setItem("sevenTwo", sevenTwo);
+      window.localStorage.setItem("sixFour", sixFour.toString());
+      window.localStorage.setItem("sixThree", sixThree.toString());
+      window.localStorage.setItem("sixTwo", sixTwo.toString());
+      window.localStorage.setItem("sixOne", sixOne.toString());
+      window.localStorage.setItem("sevenOne", sevenOne.toString());
+      window.localStorage.setItem("sevenTwo", sevenTwo.toString());
     };
   }, [sixOne, sixTwo, sixThree, sixFour, sevenOne, sevenTwo]);
 
-  const legend = {
+  const legend: Legend = {
     "7.2": sevenTwo,
     "7.1": sevenOne,
     "6.4": sixFour,
@@ -70,48 +75,52 @@ export default function TicketIndex() {
 
   const socket = useContext(SocketContext);
   const network = useContext(NetworkContext);
-  const tickets = useSelector(selectTickets);
+  const tickets: Ticket[] = useSelector(selectTickets);
   const dispatch = useDispatch();
 
-  
   useEffect(() => {
     dispatch(fetchOpenTickets());
   }, [network]);
-  
+
   useEffect(() => {
-    const cancelRequest = (user) => {
+    const cancelRequest = (user: User) => {
       dispatch(removeTicket(user.email));
-    }
+    };
     socket.on("cancelRequest", cancelRequest);
-    return () => socket.off("cancelRequest", cancelRequest);
+    return () => {
+      socket.off("cancelRequest", cancelRequest);
+    };
   });
   useEffect(() => {
-    const updateTickets = (email) => {
+    const updateTickets = (email: string) => {
       dispatch(removeTicket(email));
-    }
+    };
     socket.on("updateTickets", updateTickets);
-    return () => socket.off("updateTickets", updateTickets);
+    return () => {
+      socket.off("updateTickets", updateTickets);
+    }
   });
 
   useEffect(() => {
-    const playSound = (ticket) => {
+    const playSound = (ticket: Ticket) => {
       if (legend[ticket.class]) {
         let src = alertSound;
         let audio = new Audio(src);
         audio.play();
       }
       ticket.created_at = Date.now();
-      dispatch(receiveTicket(ticket))
+      dispatch(receiveTicket(ticket));
     };
     socket.on("newTicket", playSound);
-    return () => socket.off("newTicket", playSound);
+    return () => {
+       socket.off("newTicket", playSound);
+    }
   }, [sixOne, sixTwo, sixThree, sixFour]);
 
-  const adminRemoveTicket = async (ticket) => {
+  const adminRemoveTicket = async (ticket: Ticket) => {
     await dispatch(destroyTicket(ticket));
     socket.emit("adminRemoveTicket", ticket);
   };
-
 
   const showTickets = () => {
     if (tickets.length) {
@@ -147,7 +156,7 @@ export default function TicketIndex() {
           <input
             type="checkbox"
             checked={sixOne}
-            onChange={(e) => setSixOne((prevSixOne) => !prevSixOne)}
+            onChange={() => setSixOne((prevSixOne) => !prevSixOne)}
           />
         </label>
         <label className={sixTwo ? "checked" : "notChecked"}>
@@ -155,7 +164,7 @@ export default function TicketIndex() {
           <input
             type="checkbox"
             checked={sixTwo}
-            onChange={(e) => setSixTwo((prevSixTwo) => !prevSixTwo)}
+            onChange={() => setSixTwo((prevSixTwo) => !prevSixTwo)}
           />
         </label>
         <label className={sixThree ? "checked" : "notChecked"}>
@@ -163,7 +172,7 @@ export default function TicketIndex() {
           <input
             type="checkbox"
             checked={sixThree}
-            onChange={(e) => setSixThree((prevSixThree) => !prevSixThree)}
+            onChange={() => setSixThree((prevSixThree) => !prevSixThree)}
           />
         </label>
         <label className={sixFour ? "checked" : "notChecked"}>
@@ -171,7 +180,7 @@ export default function TicketIndex() {
           <input
             type="checkbox"
             checked={sixFour}
-            onChange={(e) => setSixFour((prevSixFour) => !prevSixFour)}
+            onChange={() => setSixFour((prevSixFour) => !prevSixFour)}
           />
         </label>
         <label className={sevenOne ? "checked" : "notChecked"}>
@@ -179,7 +188,7 @@ export default function TicketIndex() {
           <input
             type="checkbox"
             checked={sevenOne}
-            onChange={(e) => setSevenOne((prevSevenOne) => !prevSevenOne)}
+            onChange={() => setSevenOne((prevSevenOne) => !prevSevenOne)}
           />
         </label>
         <label className={sevenTwo ? "checked" : "notChecked"}>
@@ -187,7 +196,7 @@ export default function TicketIndex() {
           <input
             type="checkbox"
             checked={sevenTwo}
-            onChange={(e) => setSevenTwo((prevSevenTwo) => !prevSevenTwo)}
+            onChange={() => setSevenTwo((prevSevenTwo) => !prevSevenTwo)}
           />
         </label>
       </form>
