@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../../store';
 import { logoutUser } from "../auth/authSlice";
 
 export const searchSlice = createSlice({
   name: "search",
   initialState: "",
   reducers: {
-    updateSearch: (state, { payload }) => payload,
+    updateSearch: (_, { payload }) => payload,
     clearInput: () => "",
   },
   extraReducers: {
@@ -14,4 +15,4 @@ export const searchSlice = createSlice({
 });
 export const { updateSearch, clearInput } = searchSlice.actions; 
 export default searchSlice.reducer;
-export const selectSearch = (state) => state.search;
+export const selectSearch = (state: RootState) => state.search;

@@ -10,7 +10,7 @@ import requestsReducer from "./features/requests/requestsSlice";
 import pairsReducer from "./features/pairs/pairsSlice";
 import logger from 'redux-logger'
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     jobs: jobsReducer,
     auth: authReducer,
@@ -25,3 +25,8 @@ export default configureStore({
   middleware: [logger,...getDefaultMiddleware()],
   devTools: true,
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export default store; 

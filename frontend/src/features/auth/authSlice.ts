@@ -1,20 +1,30 @@
-import { createSlice, Dispatch } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getFirebaseIdToken } from '../../util/firebaseFunctions';
+import { User } from '../../interfaces/interfaces'
 
-export const getNewFirebaseIdToken = () => async (dispatch: Dispatch) => {
-  try {
-    let token = await getFirebaseIdToken();
-    return dispatch(updateToken(token));
-  } catch (err) {
-    console.log(err)
+export const getNewFirebaseIdToken = createAsyncThunk(
+  'auth/getNewFirebaseIdToken',
+  async () => {
+    try {
+      let token = await getFirebaseIdToken();
+      return token
+    } catch (err) {
+      console.log(err);
+    }
   }
-};
+)
+
+interface AuthState {
+  currentUser: User | null;
+  token: string | null | undefined; 
+}
 
 
+const initialState: AuthState = {currentUser: null, token: null}
 
 const authSlice = createSlice({
     name: "auth",
-    initialState: {currentUser: null, token: null},
+    initialState,
     reducers: {
         updateCurrentUser: (state, {payload}) => {
             state.currentUser = payload;
@@ -23,6 +33,11 @@ const authSlice = createSlice({
             state.token = payload; 
         }, 
         logoutUser: () =>( {currentUser: null, token: null})
+    },
+    extraReducers: builder => {
+        builder.addCase(getNewFirebaseIdToken.fulfilled, (state, { payload }) => {
+          state.token = payload;
+        })
     }
 })
 

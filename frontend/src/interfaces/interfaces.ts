@@ -8,7 +8,7 @@ export interface User {
   uid: string;
   id?: string;
   lastLogin?: string;
-  token?: string;
+  token?: string | null;
   socket_id?: string;
 }
 
