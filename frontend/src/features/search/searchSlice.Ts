@@ -9,8 +9,8 @@ export const searchSlice = createSlice({
     updateSearch: (_, { payload }) => payload,
     clearInput: () => "",
   },
-  extraReducers: {
-    [logoutUser](){return ""}
+  extraReducers: (builder) => {
+    builder.addCase(logoutUser, () => "")
   },
 });
 export const { updateSearch, clearInput } = searchSlice.actions; 

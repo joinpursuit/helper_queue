@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import { RootState } from "../../store";
 import DisplayAllPairDays from "./DisplayAllPairDays";
 import DisplaySingleDay from "./DisplaySingleDay";
 import { fetchPairList, deletePairList, updatePairList } from "./pairsSlice";
 import "./ShowPairList.css";
 
+interface ParamTypes {
+  id: string;
+}
+
 export default function ShowPairList() {
   const [days, setDays] = useState([]);
   const [showSingleDay, setShowSingleDay] = useState(true)
-  const { id } = useParams();
+  const { id } = useParams<ParamTypes>();
   const history = useHistory();
-  const pair = useSelector((state) => state.pairs[id]);
+  const pair = useSelector((state: RootState) => state.pairs[id]);
 
   const dispatch = useDispatch();
 
-  const changeDay = (day) => {
+  const changeDay = (day: number) => {
     if (day >= days.length) {
       day = day % days.length;
     } else if (day < 0) {
@@ -38,16 +43,16 @@ export default function ShowPairList() {
     }
   }, [id]);
 
-  const createDays = (items) => {
-    items = items.split("\n");
-    if (items.length % 2) items.push(null);
+  const createDays = (items: string) => {
+    const itemsArr: (string | null)[] = items.split("\n");
+    if (itemsArr.length % 2) itemsArr.push(null);
 
     let groups = [];
 
-    let n = items.length;
-    let infinityPoint = items[0];
+    let n = itemsArr.length;
+    let infinityPoint = itemsArr[0];
 
-    let candidates = items.slice(1);
+    let candidates = itemsArr.slice(1);
 
 
     for (let i = 0; i <= n - 2; i++) {
