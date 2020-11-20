@@ -22,6 +22,10 @@
             "url": "https://github.com/vitaly-t/pg-promise"
         },
         {
+            "name": "Knex.js",
+            "url": "http://knexjs.org/"
+        },
+        {
             "name": "React",
             "url": "https://reactjs.org/docs/getting-started.html"
         },

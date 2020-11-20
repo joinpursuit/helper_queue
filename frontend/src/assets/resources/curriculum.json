@@ -1,25 +1,29 @@
 {
-    "header": "Curriculum", 
-    "list": [
-        {
-            "name": "Unit 1 - Fundamentals",
-            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/fundamentals/README.md"
-        },
-        {
-            "name": "Unit 2 - HTML / CSS / DOM",
-            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/html_css_dom/README.md"
-        },
-        {
-            "name": "Unit 3 - Node / Express / SQL",
-            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/node/README.md"
-        },
-        {
-            "name": "Unit 4 - React",
-            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/react/README.md"
-        },
-        {
-            "name": "Unit 5 - React / Redux",
-            "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/react_2/README.md"
-        }
-    ]
+  "header": "Curriculum",
+  "list": [
+    {
+      "name": "Module 1 - Fundamentals",
+      "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/fundamentals/README.md"
+    },
+    {
+      "name": "Module 2 - Building Web Apps",
+      "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/html_css_dom/README.md"
+    },
+    {
+      "name": "Module 3 - React + Redux",
+      "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/react/README.md"
+    },
+    {
+      "name": "Module 4 - Backend Development",
+      "url": "https://github.com/joinpursuit/Pursuit-Core-Web/blob/master/node/README.md"
+    },
+    {
+      "name": "Module 5 - Capstone",
+      "url": "https://github.com/joinpursuit/Pursuit-Core-Web/tree/master/capstone"
+    },
+    {
+      "name": "Module 6 - Computer Science",
+      "url": "https://github.com/joinpursuit/Pursuit-Core-dsa"
+    }
+  ]
 }
