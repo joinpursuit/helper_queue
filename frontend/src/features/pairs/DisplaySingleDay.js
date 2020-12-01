@@ -18,22 +18,24 @@ export default function DisplaySingleDay({
         </h3>
         <button onClick={() => changeDay(currentDay + 1)}>Next Day</button>
       </div>
-      <ul className={"displaySingleDayPairs"}>
+      <ol className={"displaySingleDayPairs"}>
         {day.map((pair, i) => {
           return (
             <li key={pair[0] + pair[1]}>
               {!pair[0] || !pair[1] ? (
                 <>
                   <div className="displaySingleDayPairsLeft">
-                    {" "}
-                    {pair[0] || pair[1]}{" "}
+                    {i + 1}. {pair[0] || pair[1]}{" "}
                   </div>
                   <div>-</div>
                   <div className="displaySingleDayPairsRight">Solo</div>
                 </>
               ) : (
                 <>
-                  <div className="displaySingleDayPairsLeft"> {pair[0]} </div>
+                  <div className="displaySingleDayPairsLeft">
+                    {" "}
+                    {i + 1}. {pair[0]}{" "}
+                  </div>
                   <div className="displaySingleDayPairsSym">&</div>
                   <div className="displaySingleDayPairsRight">{pair[1]}</div>
                 </>
@@ -41,7 +43,7 @@ export default function DisplaySingleDay({
             </li>
           );
         })}
-      </ul>
+      </ol>
     </div>
   );
 }
