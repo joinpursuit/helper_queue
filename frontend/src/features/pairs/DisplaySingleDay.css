@@ -53,3 +53,17 @@
     cursor: pointer;
 
 }
+
+.clipboardPairs {
+  height: 17px;
+  width: 17px;
+}
+
+.clipboardPairsButton {
+  border: none;
+  margin-left: 5px;
+}
+
+.clipboardPairsButton:hover {
+  cursor: pointer;
+}

@@ -1,4 +1,6 @@
 import React from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import clipboard from '../../assets/clipboard.png'
 import "./DisplaySingleDay.css";
 import { updatePairList } from "./pairsSlice";
 
@@ -14,7 +16,14 @@ export default function DisplaySingleDay({
       <div className="displaySingleDayButtons">
         <button onClick={() => changeDay(currentDay - 1)}>Previous Day</button>
         <h3>
-          Day: {currentDay + 1} of {totalDays}{" "}
+          Day: {currentDay + 1} of {totalDays}
+          <button
+            className="clipboardPairsButton" onClick={() => {
+              navigator.clipboard.writeText(buildDayText(day, `Day: ${currentDay + 1} of ${totalDays}`));
+            }}
+          >
+            <img src={clipboard} alt="copy" className="clipboardPairs" />
+          </button>
         </h3>
         <button onClick={() => changeDay(currentDay + 1)}>Next Day</button>
       </div>
@@ -47,3 +56,13 @@ export default function DisplaySingleDay({
     </div>
   );
 }
+
+const buildDayText = (day, intro = "") => {
+  let pairs = day.map((pair, i) => {
+    return !pair[0] || !pair[1]
+      ? `${i + 1}. ${pair[0] || pair[1]} - Solo`
+      : `${i + 1}. ${pair[0]} & ${pair[1]}`;
+  })
+  pairs.unshift(intro)
+  return pairs.join("\n")
+};
