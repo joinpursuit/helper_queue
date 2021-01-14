@@ -55,20 +55,9 @@ They jobs are fully filterable by the jobs current status and ordered by most re
     * Click the gear next to `Project Overview` and click `Project Settings`
     * Go to the `Service Accounts` tab and generate a new private key
     * Download the private key to your computer
-    * Create another `.env ` file in the root of your backend, and add the private key info to the the  `.env`.     
-    ```
-    TYPE = service_account
-    PROJECT_ID = 
-    PRIVATE_KEY_ID = 
-    CLIENT_ID = 
-    AUTH_URI = 
-    TOKEN_URI = 
-    AUTH_PROVIDER_X509_CERT_URL = 
-    CLIENT_X509_CERT_URL = 
-    CLIENT_EMAIL = 
-    PRIVATE_KEY = 
+    * Put the private key in the root of `/backend`
+    * Name the private key file `firebase-admin.json`
 
-    ```
     * Change the `databaseURL` string in the `admin.initializeApp` config object to the one in the admin sdk example code
 
 3. Next you  will need to create your database. 
@@ -81,7 +70,7 @@ They jobs are fully filterable by the jobs current status and ordered by most re
     ```
     * Run the command `psql -f relativePathToSchemaFile`
     * Repeat this process of making sure code is commented in, and running the command for all migrations in the migration folder. Migrations should be run in order. 
-5. Inside the backend .env file you'll need to add the following:
+5. Create another `.env ` file in the root of your backend. Add the following:
     * DATABASE_URL = postgres://localhost:5432/helper_queue
     * PORT = 3001
 6. run `npm install` while inside the backend. Then run `node app.js` 
