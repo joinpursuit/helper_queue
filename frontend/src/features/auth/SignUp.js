@@ -1,10 +1,28 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { CustomLink as Link } from '../../util/customLinks'
+import { CustomLink as Link } from "../../util/customLinks";
 import { apiURL } from "../../util/apiURL";
 import { signUp } from "../../util/firebaseFunctions";
 import "./Auth.css";
+
+const VALID_CLASSES = [
+  "staff",
+  "4.1",
+  "4.2",
+  "4.3",
+  "4.4",
+  "5.1",
+  "5.2",
+  "5.3",
+  "5.4",
+  "6.1",
+  "6.2",
+  "6.3",
+  "6.4",
+  "7.1",
+  "7.2",
+].reverse();
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -18,7 +36,11 @@ export default function SignUp() {
     e.preventDefault();
     try {
       let res = await signUp(email.toLowerCase(), password);
-      await axios.post(`${API}/api/users`, { id: res.user.uid, email: email.toLowerCase(), class: classTitle.trim() });
+      await axios.post(`${API}/api/users`, {
+        id: res.user.uid,
+        email: email.toLowerCase(),
+        class: classTitle.trim(),
+      });
       history.push("/");
     } catch (err) {
       setError(err.message);
@@ -49,12 +71,24 @@ export default function SignUp() {
             autoComplete="on"
             required
           />
-
-          <input
+          <select
             onChange={(e) => setClassTitle(e.target.value)}
             value={classTitle}
-            placeholder="Class Name Exp: 6.4"
-          />
+            placeholder="Class Num Exp: 6.4"
+            required
+          >
+            <option key={"choose"} value={""} selected disabled>
+              Class Number
+            </option>
+            ;
+            {VALID_CLASSES.map((classNum) => {
+              return (
+                <option key={classNum} value={classNum}>
+                  {classNum}
+                </option>
+              );
+            })}
+          </select>
         </div>
         <button type="submit">Sign Up</button>
       </form>
