@@ -30,7 +30,7 @@ describe("TicketIndexItem", () => {
     let btn = screen.getByRole("button");
     fireEvent.click(btn);
     expect(removeTicket).toHaveBeenCalledTimes(1)
-    expect(removeTicket).toHaveBeenCalledWith(1)
+    expect(removeTicket).toHaveBeenCalledWith(ticket)
 
   });
 });
