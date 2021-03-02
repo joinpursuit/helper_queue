@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, wait, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { createMemoryHistory } from "history";
-import NavBar from "../NavBar";
+import NavBar from "../navbar/NavBar";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -14,7 +14,7 @@ jest.mock("../auth/NavLogin.js", () => {
   return NavLogin;
 });
 
-jest.mock("../RequestHelp.js", () => {
+jest.mock("../requests/RequestHelp.js", () => {
   const RequestHelp = () => <div data-testid="requestButton">Request Help</div>;
   return RequestHelp;
 });
@@ -76,9 +76,9 @@ test("/jobtracker renders correct items", () => {
     </Provider>
   );
   let nav = screen.getByRole("navigation");
-  let home = screen.getByRole("link");
+  let home = screen.getByText("Home");
   expect(nav.children).toHaveLength(3);
-  expect(home).toHaveTextContent("Home");
+  expect(home).toBeInTheDocument();
 
   expect(screen.getByText("Log Out")).toBeInTheDocument();
   expect(screen.getByText("+ Add Job")).toBeInTheDocument();
