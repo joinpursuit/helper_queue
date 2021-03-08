@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import "@testing-library/jest-dom/extend-expect";
-import Timer from '../widgets/Timer';
+import Timer from '../Timer';
 
 it('should render the text select time', () => {
     render(<Timer />);

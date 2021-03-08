@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen, wait, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import "../tickets/TicketIndexItem";
-import TicketIndexItem from "../tickets/TicketIndexItem";
+import "../TicketIndexItem";
+import TicketIndexItem from "../TicketIndexItem";
 
 const ticket = {
   email: "test@test.com",

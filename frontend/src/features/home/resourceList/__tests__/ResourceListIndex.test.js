@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import "@testing-library/jest-dom/extend-expect";
-import ResourceListIndex from '../home/resourceList/ResourceListIndex';
+import ResourceListIndex from '../ResourceListIndex';
 
 const json = {
     "header": "Test Header",
