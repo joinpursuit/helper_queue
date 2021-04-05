@@ -2,24 +2,24 @@ import React from "react";
 import { render, screen, wait, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { createMemoryHistory } from "history";
-import NavBar from "../navbar/NavBar";
-import { AuthContext } from "../../providers/AuthProvider";
+import NavBar from "../NavBar";
+import { AuthContext } from "../../../providers/AuthProvider";
 import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "../../store";
-import * as firebaseFunctions from "../../util/firebaseFunctions";
+import store from "../../../store";
+import * as firebaseFunctions from "../../../util/firebaseFunctions";
 
-jest.mock("../auth/NavLogin.js", () => {
+jest.mock("../../auth/NavLogin.js", () => {
   const NavLogin = () => <div data-testid="navLogin">Login In</div>;
   return NavLogin;
 });
 
-jest.mock("../requests/RequestHelp.js", () => {
+jest.mock("../../requests/RequestHelp.js", () => {
   const RequestHelp = () => <div data-testid="requestButton">Request Help</div>;
   return RequestHelp;
 });
 
-jest.mock("../../util/firebaseFunctions");
+jest.mock("../../../util/firebaseFunctions");
 
 test("home page of non user shows <NavLogin />", () => {
   const history = createMemoryHistory();

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react';
 import "@testing-library/jest-dom/extend-expect";
-import Home from '../home/Home';
+import Home from '../Home';
 
 it('should render a header of helpful resources and links', () => {
     render(<Home />)
