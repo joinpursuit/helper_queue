@@ -24,14 +24,15 @@
     "redux-logger": "^3.0.6",
     "socket.io": "^2.4.0",
     "socket.io-client": "^2.3.0",
-    "suneditor-react": "^2.13.2"
+    "suneditor-react": "^2.16.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:debug": "react-scripts --inspect-brk test --runInBand --no-cache",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:e2e": "node_modules/.bin/cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
