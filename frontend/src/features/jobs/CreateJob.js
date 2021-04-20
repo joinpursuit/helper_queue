@@ -23,15 +23,15 @@ const formats = {
       "removeFormat",
       "list"
     ],
-    "/"[ // Line break
-      ("fontColor",
+     [// Line break
+      "fontColor",
       "hiliteColor",
       "outdent",
       "indent",
       "align",
       "horizontalRule",
       "list",
-      "table")
+      "table"
     ],
     ["link", "fullScreen", "showBlocks", "preview"],
   ],
