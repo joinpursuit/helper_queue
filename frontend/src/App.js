@@ -4,6 +4,7 @@ import NavBar from "./features/navbar/NavBar";
 import AuthProvider from "./providers/AuthProvider";
 import { AuthRoute, ProtectedRoute, AdminRoute } from "./util/auth_routes";
 import SignUp from "./features/auth/SignUp";
+import ClassEnrollment from './features/auth/ClassEnrollement/ClassEnrollement';
 import Login from "./features/auth/Login";
 import { Route } from "react-router-dom";
 import Student from "./features/views/Student";
@@ -49,6 +50,9 @@ function App() {
                 <AuthRoute path="/login">
                   <Login />
                 </AuthRoute>
+                <AdminRoute exact path="/classenrollment">
+                  <ClassEnrollment />
+                </AdminRoute>
                 <AdminRoute path="/admin">
                   <Admin />
                 </AdminRoute>
