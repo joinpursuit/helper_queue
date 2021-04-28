@@ -96,6 +96,7 @@ describe("Student Makes A Help Request", ()  => {
         
     it("Logs an admin out", () => { 
         cy.contains("Log Out").click()
+        cy.contains("Login")
     })
 
 })
