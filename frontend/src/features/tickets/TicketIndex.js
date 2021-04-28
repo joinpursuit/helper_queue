@@ -128,9 +128,7 @@ export default function TicketIndex() {
                     removeTicket={adminRemoveTicket}
                   />
                 );
-              } else {
-                return null;
-              }
+              } 
             })}
           </ol>
         </>
@@ -141,44 +139,25 @@ export default function TicketIndex() {
   };
 
   const showCheckBoxes = () => {
+    const classList = [
+      { classTitle: sixOne, setClass: setSixOne, labelText: "6.1" },
+      { classTitle: sixTwo, setClass: setSixTwo, labelText: "6.2" },
+      { classTitle: sixThree, setClass: setSixThree, labelText: "6.3" },
+      { classTitle: sixFour, setClass: setSixFour, labelText: "6.4" },
+      { classTitle: sevenOne, setClass: setSevenOne, labelText: "7.1" },
+      { classTitle: sevenTwo, setClass: setSevenTwo, labelText: "7.2" },
+    ];
     return (
       <form className="classListContainer">
-        <Checkbox
-          classStyle={sixOne ? "checked" : "notChecked"}
-          labelText={"6.1"}
-          checked={sixOne}
-          handleChange={(e) => setSixOne((p) => !p)}
+      {classList.map(({classTitle, setClass, labelText }) => {
+        return <Checkbox 
+          classStyle={classTitle ? "checked" : "notChecked"}
+          labelText={labelText}
+          checked={classTitle}
+          handleChange={() => setClass(p => !p)}
         />
-        <Checkbox
-          classStyle={sixTwo ? "checked" : "notChecked"}
-          labelText={"6.2"}
-          checked={sixTwo}
-          handleChange={(e) => setSixTwo((p) => !p)}
-        />
-        <Checkbox
-          classStyle={sixThree ? "checked" : "notChecked"}
-          labelText={"6.3"}
-          checked={sixThree}
-          handleChange={(e) => setSixThree((p) => !p)}
-        />
-        <Checkbox
-          classStyle={sixFour ? "checked" : "notChecked"}
-          labelText={"6.4"}
-          checked={sixFour}
-          handleChange={(e) => setSixFour((p) => !p)}
-        />
-        <Checkbox
-          classStyle={sevenOne ? "checked" : "notChecked"}
-          labelText={"7.1"}
-          checked={sevenOne}
-          handleChange={(e) => setSevenOne((p) => !p)}
-        />
-        <Checkbox
-          classStyle={sevenTwo ? "checked" : "notChecked"}
-          labelText={"7.2"}
-          checked={sevenTwo}
-          handleChange={(e) => setSevenTwo((p) => !p)}
-        />
+      })}
+       
       </form>
     );
   };
