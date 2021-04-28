@@ -1,39 +1,29 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SocketContext } from '../../providers/SocketProvider';
-import { NetworkContext } from '../../providers/NetworkProvider';
+import { SocketContext } from "../../providers/SocketProvider";
+import { NetworkContext } from "../../providers/NetworkProvider";
 import {
   selectTickets,
   fetchOpenTickets,
   destroyTicket,
   receiveTicket,
-  removeTicket
+  removeTicket,
 } from "./ticketsSlice";
 import TicketIndexItem from "./TicketIndexItem";
+import Checkbox from "../../UtilComponents/Checkbox";
 import alertSound from "../../assets/that-was-quick.mp3";
 import "./TicketIndex.css";
 
 export default function TicketIndex() {
-  let initialFour = window.localStorage.getItem("sixFour");
-  let initialThree = window.localStorage.getItem("sixThree");
-  let initialTwo = window.localStorage.getItem("sixTwo");
-  let initialOne = window.localStorage.getItem("sixOne");
+
 
   let initialSevenOne = window.localStorage.getItem("sevenOne");
   let initialSevenTwo = window.localStorage.getItem("sevenTwo");
 
-  const [sixFour, setSixFour] = useState(
-    initialFour === "true" || initialFour === null
-  );
-  const [sixThree, setSixThree] = useState(
-    initialThree === "true" || initialThree === null
-  );
-  const [sixTwo, setSixTwo] = useState(
-    initialTwo === "true" || initialTwo === null
-  );
-  const [sixOne, setSixOne] = useState(
-    initialOne === "true" || initialOne === null
-  );
+  let initialEightOne = window.localStorage.getItem("eightOne");
+  let initialEightTwo = window.localStorage.getItem("eightTwo");
+
+
   const [sevenOne, setSevenOne] = useState(
     initialSevenOne === "true" || initialSevenOne === null
   );
@@ -41,31 +31,36 @@ export default function TicketIndex() {
     initialSevenTwo === "true" || initialSevenTwo === null
   );
 
+  const [eightOne, setEightOne] = useState(
+    initialEightOne === "true" || initialEightOne === null
+  );
+  const [eightTwo, setEightTwo] = useState(
+    initialEightTwo === "true" || initialEightTwo === null
+  );
+
+
+
 
   useEffect(() => {
-    window.localStorage.setItem("sixFour", sixFour);
-    window.localStorage.setItem("sixThree", sixThree);
-    window.localStorage.setItem("sixTwo", sixTwo);
-    window.localStorage.setItem("sixOne", sixOne);
+
     window.localStorage.setItem("sevenOne", sevenOne);
     window.localStorage.setItem("sevenTwo", sevenTwo);
+    window.localStorage.setItem("eightOne", eightOne);
+    window.localStorage.setItem("eightTwo", eightTwo);
     return () => {
-      window.localStorage.setItem("sixFour", sixFour);
-      window.localStorage.setItem("sixThree", sixThree);
-      window.localStorage.setItem("sixTwo", sixTwo);
-      window.localStorage.setItem("sixOne", sixOne);
+
       window.localStorage.setItem("sevenOne", sevenOne);
       window.localStorage.setItem("sevenTwo", sevenTwo);
+      window.localStorage.setItem("eightOne", eightOne);
+      window.localStorage.setItem("eightTwo", eightTwo);
     };
-  }, [sixOne, sixTwo, sixThree, sixFour, sevenOne, sevenTwo]);
+  }, [sevenOne, sevenTwo, eightOne, eightTwo]);
 
   const legend = {
-    "7.2": sevenTwo,
-    "7.1": sevenOne,
-    "6.4": sixFour,
-    "6.3": sixThree,
-    "6.2": sixTwo,
-    "6.1": sixOne,
+    8.2: eightTwo,
+    8.1: eightOne,
+    7.2: sevenTwo,
+    7.1: sevenOne
   };
 
   const socket = useContext(SocketContext);
@@ -73,22 +68,21 @@ export default function TicketIndex() {
   const tickets = useSelector(selectTickets);
   const dispatch = useDispatch();
 
-  
   useEffect(() => {
     dispatch(fetchOpenTickets());
   }, [network]);
-  
+
   useEffect(() => {
     const cancelRequest = (user) => {
       dispatch(removeTicket(user.email));
-    }
+    };
     socket.on("cancelRequest", cancelRequest);
     return () => socket.off("cancelRequest", cancelRequest);
   });
   useEffect(() => {
     const updateTickets = (email) => {
       dispatch(removeTicket(email));
-    }
+    };
     socket.on("updateTickets", updateTickets);
     return () => socket.off("updateTickets", updateTickets);
   });
@@ -101,38 +95,33 @@ export default function TicketIndex() {
         audio.play();
       }
       ticket.created_at = Date.now();
-      dispatch(receiveTicket(ticket))
+      dispatch(receiveTicket(ticket));
     };
     socket.on("newTicket", playSound);
     return () => socket.off("newTicket", playSound);
-  }, [sixOne, sixTwo, sixThree, sixFour]);
+  }, [sevenOne, sevenTwo, eightOne, eightTwo]);
 
   const adminRemoveTicket = async (ticket) => {
     await dispatch(destroyTicket(ticket));
     socket.emit("adminRemoveTicket", ticket);
   };
 
-
   const showTickets = () => {
     if (tickets.length) {
       return (
-        <>
-          <ol>
-            {tickets.map((ticket) => {
-              if (legend[ticket.class] !== false) {
-                return (
-                  <TicketIndexItem
-                    key={ticket.id}
-                    ticket={ticket}
-                    removeTicket={adminRemoveTicket}
-                  />
-                );
-              } else {
-                return null;
-              }
-            })}
-          </ol>
-        </>
+        <ol>
+          {tickets.map((ticket) => {
+            if (legend[ticket.class] !== false) {
+              return (
+                <TicketIndexItem
+                  key={ticket.id}
+                  ticket={ticket}
+                  removeTicket={adminRemoveTicket}
+                />
+              );
+            }
+          })}
+        </ol>
       );
     } else {
       return <div>No Students Waiting</div>;
@@ -140,56 +129,24 @@ export default function TicketIndex() {
   };
 
   const showCheckBoxes = () => {
+    const classList = [
+      { classTitle: sevenOne, setClass: setSevenOne, labelText: "7.1" },
+      { classTitle: sevenTwo, setClass: setSevenTwo, labelText: "7.2" },
+      { classTitle: eightOne, setClass: setEightOne, labelText: "8.1" },
+      { classTitle: eightTwo, setClass: setEightTwo, labelText: "8.2" },
+    ];
     return (
       <form className="classListContainer">
-        <label className={sixOne ? "checked" : "notChecked"}>
-          6.1
-          <input
-            type="checkbox"
-            checked={sixOne}
-            onChange={(e) => setSixOne((prevSixOne) => !prevSixOne)}
-          />
-        </label>
-        <label className={sixTwo ? "checked" : "notChecked"}>
-          6.2
-          <input
-            type="checkbox"
-            checked={sixTwo}
-            onChange={(e) => setSixTwo((prevSixTwo) => !prevSixTwo)}
-          />
-        </label>
-        <label className={sixThree ? "checked" : "notChecked"}>
-          6.3
-          <input
-            type="checkbox"
-            checked={sixThree}
-            onChange={(e) => setSixThree((prevSixThree) => !prevSixThree)}
-          />
-        </label>
-        <label className={sixFour ? "checked" : "notChecked"}>
-          6.4
-          <input
-            type="checkbox"
-            checked={sixFour}
-            onChange={(e) => setSixFour((prevSixFour) => !prevSixFour)}
-          />
-        </label>
-        <label className={sevenOne ? "checked" : "notChecked"}>
-          7.1
-          <input
-            type="checkbox"
-            checked={sevenOne}
-            onChange={(e) => setSevenOne((prevSevenOne) => !prevSevenOne)}
-          />
-        </label>
-        <label className={sevenTwo ? "checked" : "notChecked"}>
-          7.2
-          <input
-            type="checkbox"
-            checked={sevenTwo}
-            onChange={(e) => setSevenTwo((prevSevenTwo) => !prevSevenTwo)}
-          />
-        </label>
+        {classList.map(({ classTitle, setClass, labelText }) => {
+          return (
+            <Checkbox
+              classStyle={classTitle ? "checked" : "notChecked"}
+              labelText={labelText}
+              checked={classTitle}
+              handleChange={() => setClass((p) => !p)}
+            />
+          );
+        })}
       </form>
     );
   };

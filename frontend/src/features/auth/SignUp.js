@@ -22,6 +22,8 @@ const VALID_CLASSES = [
   "6.4",
   "7.1",
   "7.2",
+  "8.1",
+  "8.2"
 ].reverse();
 
 export default function SignUp() {
