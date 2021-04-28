@@ -10,6 +10,7 @@ import {
   removeTicket
 } from "./ticketsSlice";
 import TicketIndexItem from "./TicketIndexItem";
+import Checkbox from '../../UtilComponents/Checkbox';
 import alertSound from "../../assets/that-was-quick.mp3";
 import "./TicketIndex.css";
 
@@ -142,54 +143,42 @@ export default function TicketIndex() {
   const showCheckBoxes = () => {
     return (
       <form className="classListContainer">
-        <label className={sixOne ? "checked" : "notChecked"}>
-          6.1
-          <input
-            type="checkbox"
-            checked={sixOne}
-            onChange={(e) => setSixOne((prevSixOne) => !prevSixOne)}
-          />
-        </label>
-        <label className={sixTwo ? "checked" : "notChecked"}>
-          6.2
-          <input
-            type="checkbox"
-            checked={sixTwo}
-            onChange={(e) => setSixTwo((prevSixTwo) => !prevSixTwo)}
-          />
-        </label>
-        <label className={sixThree ? "checked" : "notChecked"}>
-          6.3
-          <input
-            type="checkbox"
-            checked={sixThree}
-            onChange={(e) => setSixThree((prevSixThree) => !prevSixThree)}
-          />
-        </label>
-        <label className={sixFour ? "checked" : "notChecked"}>
-          6.4
-          <input
-            type="checkbox"
-            checked={sixFour}
-            onChange={(e) => setSixFour((prevSixFour) => !prevSixFour)}
-          />
-        </label>
-        <label className={sevenOne ? "checked" : "notChecked"}>
-          7.1
-          <input
-            type="checkbox"
-            checked={sevenOne}
-            onChange={(e) => setSevenOne((prevSevenOne) => !prevSevenOne)}
-          />
-        </label>
-        <label className={sevenTwo ? "checked" : "notChecked"}>
-          7.2
-          <input
-            type="checkbox"
-            checked={sevenTwo}
-            onChange={(e) => setSevenTwo((prevSevenTwo) => !prevSevenTwo)}
-          />
-        </label>
+        <Checkbox
+          classStyle={sixOne ? "checked" : "notChecked"}
+          labelText={"6.1"}
+          checked={sixOne}
+          handleChange={(e) => setSixOne((p) => !p)}
+        />
+        <Checkbox
+          classStyle={sixTwo ? "checked" : "notChecked"}
+          labelText={"6.2"}
+          checked={sixTwo}
+          handleChange={(e) => setSixTwo((p) => !p)}
+        />
+        <Checkbox
+          classStyle={sixThree ? "checked" : "notChecked"}
+          labelText={"6.3"}
+          checked={sixThree}
+          handleChange={(e) => setSixThree((p) => !p)}
+        />
+        <Checkbox
+          classStyle={sixFour ? "checked" : "notChecked"}
+          labelText={"6.4"}
+          checked={sixFour}
+          handleChange={(e) => setSixFour((p) => !p)}
+        />
+        <Checkbox
+          classStyle={sevenOne ? "checked" : "notChecked"}
+          labelText={"7.1"}
+          checked={sevenOne}
+          handleChange={(e) => setSevenOne((p) => !p)}
+        />
+        <Checkbox
+          classStyle={sevenTwo ? "checked" : "notChecked"}
+          labelText={"7.2"}
+          checked={sevenTwo}
+          handleChange={(e) => setSevenTwo((p) => !p)}
+        />
       </form>
     );
   };
