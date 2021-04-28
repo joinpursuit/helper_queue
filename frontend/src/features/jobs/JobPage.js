@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import CreateJob from "./CreateJob";
-import FilterOptions from '../filter/filterOptions';
+import FilterOptions from '../filter/FilterOptions';
 import { useSelector, useDispatch } from 'react-redux'
 import { setJobFormShow, setSelectedJob } from "../modal/modalSlice";
 import Pagination from "../pagination/Pagination";
