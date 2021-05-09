@@ -1,34 +1,15 @@
 import React, { useState } from "react";
-import axios from 'axios';
-import { apiURL } from '../../../util/apiURL';
-import { signUp } from "../../../util/firebaseFunctions";
+import { useDispatch } from "react-redux";
+import { enrollClass } from "../authSlice";
+
 export default function ClassEnrollment() {
   const [studentEmails, setStudentEmails] = useState("");
   const [cohortNumber, setCohortNumber] = useState("");
-    const API = apiURL();
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let emails = studentEmails.split("\n");
-    emails = emails.filter(email => email.slice(-11) === "pursuit.org")
-    try {
-      const newUsers = await Promise.all(
-        emails.map((email) => {
-          return signUp(email, "password");
-        })
-      );
-      await Promise.all(
-        newUsers.map((res) => {
-          axios.post(`${API}/api/users`, {
-            id: res.user.uid,
-            email: res.user.email.toLowerCase(),
-            class: cohortNumber.trim(),
-          });
-        })
-      );
-    } catch (error) {
-      debugger;
-    }
+    dispatch(enrollClass({ studentEmails, cohortNumber }));
   };
   return (
     <section className="adminContainer">

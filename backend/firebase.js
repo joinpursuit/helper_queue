@@ -15,7 +15,7 @@ const serviceAccount = {
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://helper-queue-73489.firebaseio.com",
+  databaseURL: "https://helper-queue-dev.firebaseio.com",
 });
 
 module.exports = admin;
