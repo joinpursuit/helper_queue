@@ -21,7 +21,7 @@ const enrollClass = async (req, res, next) => {
         return admin.auth().createUser({
           email,
           emailVerified: false,
-          password: "password",
+          password: Math.random().toString(36).slice(-8),
           disabled: false,
         });
       })
