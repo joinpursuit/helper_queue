@@ -28,7 +28,7 @@ export const enrollClass = (classList) => async (dispatch, getState) => {
    });
    return res.data; 
   } catch (err) {
-    console.log(err);
+    throw Error(err)
   }
 };
 
