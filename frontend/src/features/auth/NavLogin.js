@@ -43,11 +43,8 @@ export default function NavLogin() {
         <button type="submit">Login</button>
       </form>
       <div className="navHelpLinks">
-        <CustomLink to="/signup" className="navSwitchAuth">
-          Need to sign up?
-        </CustomLink>
         <CustomLink to="/forgotpassword" className="navSwitchAuth">
-          Forgot Password
+          Reset Password / Forgot Password
         </CustomLink>
       </div>
     </div>
