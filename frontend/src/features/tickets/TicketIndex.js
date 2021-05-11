@@ -137,9 +137,10 @@ export default function TicketIndex() {
     ];
     return (
       <form className="classListContainer">
-        {classList.map(({ classTitle, setClass, labelText }) => {
+        {classList.map(({ classTitle, setClass, labelText }, i) => {
           return (
             <Checkbox
+              key={i}
               classStyle={classTitle ? "checked" : "notChecked"}
               labelText={labelText}
               checked={classTitle}

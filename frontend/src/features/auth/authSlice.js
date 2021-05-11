@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getFirebaseIdToken } from '../../util/firebaseFunctions';
+import axios from "axios";
+import { apiURL } from "../../util/apiURL";
+
+const API = apiURL();
 
 export const getNewFirebaseIdToken = () => async (dispatch) => {
   try {
@@ -9,6 +13,25 @@ export const getNewFirebaseIdToken = () => async (dispatch) => {
     console.log(err)
   }
 };
+
+export const enrollClass = (classList) => async (dispatch, getState) => {
+  try {
+    await dispatch(getNewFirebaseIdToken());
+    const token = getState().auth.token;
+   const res = await axios({
+     method: "post",
+     url: `${API}/api/enrollclass`,
+     headers: {
+       AuthToken: token,
+     },
+     data: classList,
+   });
+   return res.data; 
+  } catch (err) {
+    throw Error(err)
+  }
+};
+
 
 
 

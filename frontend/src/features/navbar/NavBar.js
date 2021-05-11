@@ -117,6 +117,7 @@ export default function NavBar() {
           </NavLink>
           <NavLink to="/admin">Student Queue</NavLink>
           <NavLink to="/pairs">Pairs</NavLink>
+          <NavLink to="/classenrollment">Enroll Class</NavLink>
           <div>
             <button className="logoutButton" onClick={majorUpdate}>
               Major Update
@@ -149,8 +150,8 @@ export default function NavBar() {
     } else if (location.pathname === "/login") {
       return (
         <nav>
-          <NavLink className="signUpAndLogin" to={"/signup"}>
-            Sign Up
+          <NavLink className="signUpAndLogin" to={"/"}>
+            Home
           </NavLink>
         </nav>
       );

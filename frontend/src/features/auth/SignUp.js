@@ -23,13 +23,13 @@ const VALID_CLASSES = [
   "7.1",
   "7.2",
   "8.1",
-  "8.2"
+  "8.2",
 ].reverse();
 
 export default function SignUp() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("admin@admin.com");
   const [password, setPassword] = useState("");
-  const [classTitle, setClassTitle] = useState("");
+  const [classTitle, setClassTitle] = useState("staff");
   const [error, setError] = useState("");
   const history = useHistory();
   const API = apiURL();
@@ -59,12 +59,7 @@ export default function SignUp() {
       )}
       <form onSubmit={handleSubmit} className="authForm">
         <div className="inputContainer">
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            value={email}
-            required
-          />
+          <input readOnly placeholder="Email" value={email} required />
           <input
             type="password"
             onChange={(e) => setPassword(e.target.value)}
@@ -74,7 +69,7 @@ export default function SignUp() {
             required
           />
           <select
-            onChange={(e) => setClassTitle(e.target.value)}
+            readOnly
             value={classTitle}
             placeholder="Class Num Exp: 6.4"
             required

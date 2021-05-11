@@ -44,11 +44,9 @@ export default function Login() {
         <button type="submit">Login</button>
       </form>
       <div className="formLinks">
-      <Link to="/signup" className="switchAuth">
-        Need to sign up?
-      </Link>
+
         <Link to="/forgotpassword" className="switchAuth">
-          Forgot Password?
+          Reset Password / Forgot Password?
         </Link>
       </div>
     </div>
