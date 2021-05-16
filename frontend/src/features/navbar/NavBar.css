@@ -3,18 +3,22 @@ nav {
   justify-content: flex-end;
   align-items: center;
   background: #4242ea;
-  height: 75px;
+  height: 50px;
 }
 
-.logoutButton {
-  height: 35px;
+.logoutButton, .updateButton {
+  height: 24px;
   min-width: 100px;
   border-radius: 5px;
   border: 2px solid white;
-  font-size: 20px;
+  font-size: 16px;
   font-family: sans-serif;
   font-weight: bold;
   transition: all 0.2s ease-in-out;
+}
+
+.updateButton{
+  margin: 0 10px;
 }
 
 .logoutButton:hover {
@@ -46,15 +50,21 @@ nav {
 }
 
 .navAdmin {
-  width: 100%;
+  width: 900px;
+  min-width: 700px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 1000px) {
+  .navAdmin { width: 750px; }
 }
 
 .navAdmin a {
   color: white;
-  font-size: 25px;
+  font-size: 18px;
   text-decoration: none;
 }
 
