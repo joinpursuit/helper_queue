@@ -21,7 +21,7 @@ nav {
   margin: 0 10px;
 }
 
-.logoutButton:hover {
+.logoutButton:hover, .updateButton:hover {
   background: lightgray;
   border: 2px solid lightgrey;
   cursor: pointer;
@@ -118,6 +118,7 @@ nav {
   display: flex;
   width: 25%;
   justify-content: space-between;
+  align-items: center;
 }
 
 .addJob {

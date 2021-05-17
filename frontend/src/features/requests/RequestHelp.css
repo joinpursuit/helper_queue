@@ -3,13 +3,13 @@
 }
 
 .request {
-    height: 35px;
-    min-width: 170px;
+    height: 30px;
+    min-width: 110px;
     border-radius: 5px;
     background-color: #EBFF00;
     color: #4242EA;
     border: 2px solid #4242EA;
-    font-size: 20px;
+    font-size: 16px;
     font-family: sans-serif;
     font-weight: bold;
     transition: all 0.2s ease-in-out;
