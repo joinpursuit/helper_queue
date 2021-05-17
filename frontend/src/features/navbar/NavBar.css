@@ -21,7 +21,9 @@ nav {
   margin: 0 10px;
 }
 
+
 .logoutButton:hover, .updateButton:hover {
+
   background: lightgray;
   border: 2px solid lightgrey;
   cursor: pointer;
