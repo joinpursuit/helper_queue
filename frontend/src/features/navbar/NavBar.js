@@ -119,10 +119,10 @@ export default function NavBar() {
           <NavLink to="/pairs">Pairs</NavLink>
           <NavLink to="/classenrollment">Enroll Class</NavLink>
           <div>
-            <button className="logoutButton" onClick={majorUpdate}>
+            <button className="updateButton" onClick={majorUpdate}>
               Major Update
             </button>
-            <button className="logoutButton" onClick={minorUpdate}>
+            <button className="updateButton" onClick={minorUpdate}>
               Minor Update
             </button>
           </div>
