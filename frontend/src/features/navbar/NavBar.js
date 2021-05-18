@@ -16,6 +16,8 @@ import { logoutUser as userLogOut } from "../auth/authSlice";
 import Search from "../search/Search";
 import { SocketContext } from "../../providers/SocketProvider";
 
+const classList = ["7.1", "7.2", "8.1", "8.2"]
+
 export default function NavBar() {
   const { currentUser } = useContext(AuthContext);
   const socket = useContext(SocketContext);
@@ -41,10 +43,9 @@ export default function NavBar() {
       return (
         <nav className={"homeNav"}>
           <NavLink to={"/jobtracker"}>Job Tracker</NavLink>
-          {/* <NavLink to={"/stats/jobtracker"}>Job Stats</NavLink> */}
           <div className="rightSide">
             <div>
-              <RequestHelp />
+              {classList.includes(currentUser.class) && <RequestHelp />}
             </div>
             <button className="logoutButton" onClick={logoutUser}>
               Log Out

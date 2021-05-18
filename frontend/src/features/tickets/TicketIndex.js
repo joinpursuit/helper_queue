@@ -111,7 +111,7 @@ export default function TicketIndex() {
       return (
         <ol>
           {tickets.map((ticket) => {
-            if (legend[ticket.class] !== false) {
+            if (legend[ticket.class]) {
               return (
                 <TicketIndexItem
                   key={ticket.id}
