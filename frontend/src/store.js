@@ -10,6 +10,11 @@ import requestsReducer from "./features/requests/requestsSlice";
 import pairsReducer from "./features/pairs/pairsSlice";
 import logger from 'redux-logger'
 
+const middleware =
+  process.env.NODE_ENV === "development"
+    ? [logger, ...getDefaultMiddleware()]
+    : [...getDefaultMiddleware()];
+
 export default configureStore({
   reducer: {
     jobs: jobsReducer,
@@ -22,6 +27,6 @@ export default configureStore({
     request: requestsReducer,
     pairs: pairsReducer
   },
-  middleware: [logger,...getDefaultMiddleware()],
+  middleware,
   devTools: true,
 });

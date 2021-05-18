@@ -31,7 +31,7 @@ They jobs are fully filterable by the jobs current status and ordered by most re
     REACT_APP_APPID=xxxx:xxx:Xxxxx:Xxxxx
     ```
 
-    For each key in the object, uppercase it and prefix it with `REACT_APP_`. Otherwise it will be ignored by create-react-app. Also change the `:` to `=` and get rid of the comma at the end of the line. 
+    For each key in the object, uppercase it and prefix it with `REACT_APP_` and suffix `_DEV`. Otherwise it will be ignored by create-react-app. Also change the `:` to `=` and get rid of the comma at the end of the line. 
 
     Basically, what was this line:
 
@@ -42,7 +42,7 @@ They jobs are fully filterable by the jobs current status and ordered by most re
     Becomes this line:
 
     ```
-    REACT_APP_APIKEY="982342lkjsdfksdh23SKhfsnk-CX8E"
+    REACT_APP_APIKEY_DEV="982342lkjsdfksdh23SKhfsnk-CX8E"
     ```
 
     * Click `continue to console` when done copy-pasting and rewriting.

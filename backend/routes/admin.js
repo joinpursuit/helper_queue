@@ -1,5 +1,5 @@
 const admin = require("express").Router();
-const {checkAdminId} = require('../middleware/admin_auth');
+const { spreadSheetAdminID } = require("../middleware/admin_auth");
 
 const {
   getAllJobs,
@@ -9,7 +9,7 @@ const {
   getAllJobsAndStatusNoWishList,
 } = require("../queries/admin");
 
-admin.use(checkAdminId);
+admin.use(spreadSheetAdminID);
 admin.get("/alljobs", getAllJobs);
 admin.get("/alljobs/:class", getAllJobsForClass);
 admin.get("/alljobsandtimelines", getAllJobsAndStatusNoWishList);

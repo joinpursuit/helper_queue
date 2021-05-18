@@ -11,6 +11,7 @@ const jobsRouter = require("./routes/jobs");
 const jobsStatusTimelinesRouter = require("./routes/jobs_status_timelines");
 const adminRouter = require("./routes/admin");
 const pairsRouter = require("./routes/pairs");
+const classEnrollmentRouter = require("./routes/class_enrollment");
 
 const PORT = process.env.PORT;
 
@@ -65,6 +66,7 @@ app.use("/api/jobs", jobsRouter);
 app.use("/api/jobs_status_timelines", jobsStatusTimelinesRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/pairs", pairsRouter);
+app.use("/api/enrollclass", classEnrollmentRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);
