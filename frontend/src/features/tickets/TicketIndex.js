@@ -109,19 +109,27 @@ export default function TicketIndex() {
   const showTickets = () => {
     if (tickets.length) {
       return (
-        <ol>
-          {tickets.map((ticket) => {
-            if (legend[ticket.class]) {
-              return (
-                <TicketIndexItem
-                  key={ticket.id}
-                  ticket={ticket}
-                  removeTicket={adminRemoveTicket}
-                />
-              );
-            }
-          })}
-        </ol>
+        <table className="ticketTable">
+          <tbody>
+            <tr>
+              <th>User</th>
+              <th>Issue</th>
+              <th>Action</th>
+              <th>Time</th>
+            </tr>
+            {tickets.map((ticket) => {
+              if (legend[ticket.class]) {
+                return (
+                  <TicketIndexItem
+                    key={ticket.id}
+                    ticket={ticket}
+                    removeTicket={adminRemoveTicket}
+                  />
+                );
+              }
+            })}
+          </tbody>
+        </table>
       );
     } else {
       return <div>No Students Waiting</div>;

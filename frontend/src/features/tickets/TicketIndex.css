@@ -80,3 +80,10 @@ time {
 .classListContainer {
     margin: 10px;
 }
+
+.ticketTable{
+    width:100%;
+}
+.ticketTable, .ticketTable th, .ticketTable td{
+    border: 1px solid lightgray;
+}

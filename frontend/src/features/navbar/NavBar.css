@@ -118,7 +118,6 @@ nav {
 
 .homeNav .rightSide {
   display: flex;
-  width: 25%;
   justify-content: space-between;
   align-items: center;
 }

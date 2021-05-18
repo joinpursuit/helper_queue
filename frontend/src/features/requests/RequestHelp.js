@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AuthContext } from "../../providers/AuthProvider";
 import { SocketContext } from "../../providers/SocketProvider";
@@ -17,6 +17,7 @@ export default function RequestHelp() {
   const openTicket = useSelector(selectRequest);
   const socket = useContext(SocketContext);;
   const network = useContext(NetworkContext);;
+  const [ requestInput, setRequestInput ] = useState("");
   const dispatch = useDispatch();
 
   const fetchRequest = () => {
@@ -38,8 +39,9 @@ export default function RequestHelp() {
 
   const makeRequest = async () => {
     try {
-      await dispatch(createRequest());
+      await dispatch(createRequest(requestInput));
       currentUser.socket_id = socket.id
+      currentUser.body = requestInput;
       socket.emit("openRequest", currentUser);
     } catch (error) {}
   };
@@ -54,6 +56,9 @@ export default function RequestHelp() {
 
   return (
     <div className="requestContainer">
+      { !openTicket &&
+        <input value={requestInput} placeholder="How can we help?" onChange={(e)=>setRequestInput(e.target.value)} />
+      }
       <button
         onClick={openTicket ? cancelRequest : makeRequest}
         className={openTicket ? "cancelRequest request" : "makeRequest request"}

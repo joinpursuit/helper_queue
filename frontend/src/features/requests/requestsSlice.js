@@ -28,7 +28,7 @@ export const fetchOpenRequest = () => async (dispatch, getState) => {
   }
 };
 
-export const createRequest = () => async (dispatch, getState) => {
+export const createRequest = (requestData) => async (dispatch, getState) => {
   try {
     await dispatch(getNewFirebaseIdToken());
     const token = getState().auth.token;
@@ -40,7 +40,7 @@ export const createRequest = () => async (dispatch, getState) => {
         AuthToken: token,
       },
       data: {
-        body: "",
+        body: requestData,
       },
     });
     dispatch(updateRequest(res.data.ticket));
