@@ -1,5 +1,5 @@
 
--- \c helper_queue;
+\c helper_queue;
 
 CREATE TABLE jobs
 (

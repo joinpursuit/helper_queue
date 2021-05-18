@@ -1,4 +1,4 @@
--- \c helper_queue;
+\c helper_queue;
 DROP TABLE IF EXISTS pairs; 
 
 CREATE TABLE pairs

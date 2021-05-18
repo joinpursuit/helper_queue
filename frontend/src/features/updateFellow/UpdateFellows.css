@@ -1,0 +1,51 @@
+.updateFellowLabel {
+    font-size: 25px;
+    font-weight: bold;
+    background: darkblue;
+    border-radius: 7px;
+    color: white;
+    display: inline-block;
+    width: 400px;
+}
+
+#updateFellowHeader {
+    font-weight: bold;
+    font-size: 35px;
+    padding: 20px;
+}
+
+#updateFellowDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+#updateFellowButton {    
+    padding: 3px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+#updateFellowButton:hover {
+    cursor: pointer;
+    background-color: #EBFF00;
+    color: #4242EA;
+}
+
+.updateFellowInput {
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 200px;
+}
+
+.updateFellowLabelWrap {
+    background-color: #4242EA;
+    padding: 20px;
+    border-radius: 7px;
+    height: min-content;
+    width: 400px;
+    margin-top: 10px;
+    margin: auto;
+}

@@ -1,4 +1,4 @@
--- \c helper_queue;
+\c helper_queue;
 
 ALTER TABLE jobs
 ADD last_modified TIMESTAMP WITH TIME ZONE;
