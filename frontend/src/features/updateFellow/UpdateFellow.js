@@ -14,9 +14,6 @@ const UpdateFellow = () => {
     const [email, setEmail] = useState("");
     const [newClass, setNewClass] = useState("")
 
-    // const email = useInput("");
-    // const newClass = useInput("")
-
     const dispatch = useDispatch()
 
     const handleEmailInput = (e) => {
