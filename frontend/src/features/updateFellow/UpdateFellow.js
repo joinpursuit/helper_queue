@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { updateFellow } from './updateFellowSlice'
 import { useDispatch } from "react-redux";
-import "./UpdateFellows.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "./UpdateFellows.css"
 
 
 
@@ -48,19 +48,17 @@ const UpdateFellow = () => {
             <h1 id="updateFellowHeader">Update Fellow</h1>
             <form onSubmit={handleSubmit}>
                 <div className="updateFellowLabelWrap">
-                    <label className="updateFellowLabel">Fellow's Email
-                        {" "}
+                    <div className="updateFellowInfo">
+                        <label className="updateFellowLabel">Fellow's Email</label>
                         <input className="updateFellowInput" type="text" placeholder="fellow@pursuit.org" value={email} onChange={handleEmailInput}/>
-                    </label>
+                    </div>
                 </div>
-                <br></br>
                 <div className="updateFellowLabelWrap">
-                    <label className="updateFellowLabel">New Class
-                        {" "}
+                    <div className="updateFellowInfo">
+                        <label className="updateFellowLabel">New Class</label>
                         <input className="updateFellowInput" type="text" placeholder="7.2" value={newClass} onChange={handleNewClassInput}/>
-                    </label>
+                    </div>
                 </div>
-                <br></br>
                 <button id="updateFellowButton">
                     Update Fellow
                 </button>

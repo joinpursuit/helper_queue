@@ -69,7 +69,7 @@ function App() {
                 <AdminRoute exact path="/pairs/edit/:id">
                   <EditPairList />
                 </AdminRoute>
-                <AdminRoute exact path="/updateFellow">
+                <AdminRoute exact path="/updatefellow">
                   <UpdateFellow />
                 </AdminRoute>
                 <ProtectedRoute path="/jobtracker">

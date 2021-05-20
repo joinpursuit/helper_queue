@@ -1,11 +1,13 @@
-.updateFellowLabel {
+.updateFellowInfo {
     font-size: 25px;
     font-weight: bold;
     background: darkblue;
     border-radius: 7px;
     color: white;
-    display: inline-block;
+    display: flex;
     width: 400px;
+    margin: auto;
+    align-items: center;
 }
 
 #updateFellowHeader {
@@ -19,7 +21,8 @@
     flex-direction: column;
 }
 
-#updateFellowButton {    
+#updateFellowButton {   
+    margin-top: 15px; 
     padding: 3px;
     border-radius: 5px;
     margin-left: 10px;
@@ -35,17 +38,24 @@
 
 .updateFellowInput {
     margin: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 200px;
+    margin-left: 5px;
 }
 
 .updateFellowLabelWrap {
     background-color: #4242EA;
-    padding: 20px;
+    padding: 10px;
     border-radius: 7px;
     height: min-content;
     width: 400px;
-    margin-top: 10px;
     margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.updateFellowLabel {
+    height: fit-content;
+    padding-left: 5px;
 }

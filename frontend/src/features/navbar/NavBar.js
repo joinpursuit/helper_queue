@@ -118,7 +118,7 @@ export default function NavBar() {
           </NavLink>
           <NavLink to="/admin">Student Queue</NavLink>
           <NavLink to="/pairs">Pairs</NavLink>
-          <NavLink to="/updateFellow">Update Fellow</NavLink>
+          <NavLink to="/updatefellow">Update Fellow</NavLink>
           <NavLink to="/classenrollment">Enroll Class</NavLink>
           <div>
             <button className="updateButton" onClick={majorUpdate}>

@@ -28,7 +28,6 @@ const fetchCurrentUser = async (req, res, next) => {
   }
 }
 const updateUsersClass = async (req, res, next) => {
-  console.log(req.body, req.headers)
   try {
     const user = await db.one(
       'UPDATE users SET class=${class} WHERE email=${email} RETURNING *', {class: req.body.newClass, email: req.body.email}
@@ -38,7 +37,6 @@ const updateUsersClass = async (req, res, next) => {
       message: "User's class updated"
     })
   } catch(err){
-    console.log("ERROR", err)
     next(err)
   }
 }
