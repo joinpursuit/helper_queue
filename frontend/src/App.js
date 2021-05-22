@@ -22,6 +22,7 @@ import Pairs from './features/pairs/Pairs';
 import CreatePairList from "./features/pairs/CreatePairList";
 import EditPairList from "./features/pairs/EditPairList";
 import ShowPairList from "./features/pairs/ShowPairList";
+import UpdateFellow from "./features/updateFellow/UpdateFellow"
 
 function App() {
   return (
@@ -67,6 +68,9 @@ function App() {
                 </AdminRoute>
                 <AdminRoute exact path="/pairs/edit/:id">
                   <EditPairList />
+                </AdminRoute>
+                <AdminRoute exact path="/updatefellow">
+                  <UpdateFellow />
                 </AdminRoute>
                 <ProtectedRoute path="/jobtracker">
                   <JobPage />

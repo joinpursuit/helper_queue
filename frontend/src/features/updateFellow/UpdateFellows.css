@@ -1,0 +1,64 @@
+.updateFellowInfo {
+    font-size: 25px;
+    font-weight: bold;
+    background: darkblue;
+    border-radius: 7px;
+    color: white;
+    display: flex;
+    width: 400px;
+    margin: auto;
+    align-items: center;
+}
+
+#updateFellowHeader {
+    font-weight: bold;
+    font-size: 35px;
+    padding: 20px;
+}
+
+#updateFellowDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+#updateFellowButton {   
+    margin-top: 15px; 
+    padding: 3px;
+    border-radius: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+#updateFellowButton:hover {
+    cursor: pointer;
+    background-color: #EBFF00;
+    color: #4242EA;
+}
+
+.updateFellowInput {
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 200px;
+    margin-left: 5px;
+    padding: 3px;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.updateFellowLabelWrap {
+    background-color: #4242EA;
+    padding: 10px;
+    border-radius: 7px;
+    height: min-content;
+    width: 400px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.updateFellowLabel {
+    height: fit-content;
+    padding-left: 5px;
+}
