@@ -2,7 +2,7 @@ const db = require("../db/index");
 
 const createTicket = async (req, res, next) => {
   req.body.owner_id = req.user.id
- 
+
   try {
     await db.none("UPDATE tickets SET complete = true WHERE owner_id = $1", req.user.id)
     const ticket = await db.one(
@@ -30,14 +30,14 @@ const findOpenTicket = async (req, res, next) => {
   }
 }
 
-const deleteOpenTicket = async (req, res, next) => {
+const markAsComplete = async (req, res, next) => {
 
   try {
     let owner = await db.one(
       "SELECT id FROM users WHERE email = $1  ",
       req.params.id
     );
-    await db.none("DELETE FROM tickets WHERE owner_id = $1", owner.id)
+    await db.none("UPDATE tickets SET complete = true WHERE owner_id = $1", owner.id);
     res.json({
       message: "success"
     })
@@ -52,7 +52,7 @@ const getAllOpenTickets = async (req, res, next) => {
       status: 401, 
       message: "Admin Access Only"
     })
-    const tickets = await db.any("SELECT tickets.id, tickets.created_at, users.email, users.class FROM tickets JOIN users ON users.id = tickets.owner_id WHERE complete = false ORDER BY created_at")
+    const tickets = await db.any("SELECT tickets.id, tickets.body, tickets.created_at, users.email, users.class FROM tickets JOIN users ON users.id = tickets.owner_id WHERE complete = false ORDER BY created_at")
     res.json({
       tickets, 
       message: "ALL OPEN TICKETS!"
@@ -63,4 +63,21 @@ const getAllOpenTickets = async (req, res, next) => {
   }
 }
 
-module.exports = { createTicket, findOpenTicket, deleteOpenTicket, getAllOpenTickets };
+const getAllTickets = async (req, res, next) => {
+  try {
+    if(req.user.email !== "admin@admin.com") throw Error({
+      status: 401, 
+      message: "Admin Access Only"
+    })
+    const tickets = await db.any("SELECT tickets.*, users.* FROM tickets JOIN users ON users.id = tickets.owner_id ORDER BY created_at")
+    res.json({
+      tickets, 
+      message: "ALL TICKETS!"
+    })
+  } catch (err) {
+    console.log("ERROR IN GETTING ALL TICKETS")
+    next(err);
+  }
+}
+
+module.exports = { createTicket, findOpenTicket, markAsComplete, getAllTickets, getAllOpenTickets };
