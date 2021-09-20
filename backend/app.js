@@ -13,6 +13,8 @@ const adminRouter = require("./routes/admin");
 const pairsRouter = require("./routes/pairs");
 const classEnrollmentRouter = require("./routes/class_enrollment");
 
+require('./middleware/auth').passportAuth();
+
 const PORT = process.env.PORT;
 
 const server = app.listen(PORT, () => {
