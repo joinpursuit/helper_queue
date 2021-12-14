@@ -19,9 +19,10 @@ export default function TicketIndex() {
 
   let initialSevenOne = window.localStorage.getItem("sevenOne");
   let initialSevenTwo = window.localStorage.getItem("sevenTwo");
-
+  
   let initialEightOne = window.localStorage.getItem("eightOne");
   let initialEightTwo = window.localStorage.getItem("eightTwo");
+  let initialEightFour = window.localStorage.getItem("eightFour");
 
 
   const [sevenOne, setSevenOne] = useState(
@@ -36,6 +37,9 @@ export default function TicketIndex() {
   );
   const [eightTwo, setEightTwo] = useState(
     initialEightTwo === "true" || initialEightTwo === null
+  );  
+   const [eightFour, setEightFour] = useState(
+    initialEightFour=== "true" || initialEightFour === null
   );
 
 
@@ -47,16 +51,19 @@ export default function TicketIndex() {
     window.localStorage.setItem("sevenTwo", sevenTwo);
     window.localStorage.setItem("eightOne", eightOne);
     window.localStorage.setItem("eightTwo", eightTwo);
+    window.localStorage.setItem("eightFour", eightFour);
     return () => {
 
       window.localStorage.setItem("sevenOne", sevenOne);
       window.localStorage.setItem("sevenTwo", sevenTwo);
       window.localStorage.setItem("eightOne", eightOne);
       window.localStorage.setItem("eightTwo", eightTwo);
+       window.localStorage.setItem("eightFour", eightFour);
     };
-  }, [sevenOne, sevenTwo, eightOne, eightTwo]);
+  }, [sevenOne, sevenTwo, eightOne, eightTwo, eightFour]);
 
   const legend = {
+    8.4: eightFour
     8.2: eightTwo,
     8.1: eightOne,
     7.2: sevenTwo,
@@ -134,6 +141,7 @@ export default function TicketIndex() {
       { classTitle: sevenTwo, setClass: setSevenTwo, labelText: "7.2" },
       { classTitle: eightOne, setClass: setEightOne, labelText: "8.1" },
       { classTitle: eightTwo, setClass: setEightTwo, labelText: "8.2" },
+      { classTitle: eightFour, setClass: setEightFour, labelText: "8.2" }
     ];
     return (
       <form className="classListContainer">
